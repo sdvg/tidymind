@@ -1,15 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/Home'
+import Library from '@/components/Library/Library'
+import Document from '@/components/Document/Document'
+import '@/assets/global.css'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: `history`,
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: `/`,
+      name: `home`,
+      component: Home
+    },
+    {
+      path: `/library`,
+      name: `library`,
+      component: Library,
+      children: [
+        {
+          path: `:id`,
+          name: `library.document`,
+          component: Document
+        }
+      ]
     }
   ]
 })
