@@ -6,7 +6,7 @@
 
   .sidebar {
     width: 300px;
-    background: #3f51b5;
+    background: var(--color-accent);
   }
 </style>
 

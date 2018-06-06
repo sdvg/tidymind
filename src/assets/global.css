@@ -18,3 +18,7 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
+:root {
+  --color-accent: hsla(340, 82%, 40%, 1);
+}

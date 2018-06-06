@@ -17,7 +17,7 @@
   }
 
   .title:focus {
-    border-color: #3f51b5;
+    border-color: var(--color-accent);
   }
 
   .content {
