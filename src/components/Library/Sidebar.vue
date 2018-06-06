@@ -1,5 +1,8 @@
 <style>
   .Sidebar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background: var(--color-accent);
   }
 </style>
@@ -8,14 +11,19 @@
   <aside class="Sidebar">
     <p v-if="isLoading">Loading...</p>
 
-    <documents-list
+    <DocumentsList
       v-if="documents"
       :documents="documents"
     />
+
+    <div class="actions">
+      <Button title="New" />
+    </div>
   </aside>
 </template>
 
 <script>
+import Button from '../Button'
 import DocumentsList from './DocumentsList'
 import { createNamespacedHelpers } from 'vuex'
 
@@ -23,7 +31,8 @@ const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
 
 export default {
   components: {
-    'documents-list': DocumentsList
+    Button,
+    DocumentsList
   },
   mounted () {
     this.fetchAndSubscribe()

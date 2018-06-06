@@ -10,7 +10,7 @@
     outline: none;
     border: none;
     border-bottom: 2px solid transparent;
-    color: #404040;
+    color: var(--color-text);
     transition: 150ms border-color;
     font-size: 32px;
     padding: 0 8px;
@@ -28,6 +28,7 @@
     resize: none;
     border: none;
     outline: none;
+    color: var(--color-text);
   }
 
   .meta-info {

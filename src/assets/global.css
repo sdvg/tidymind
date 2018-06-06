@@ -21,4 +21,5 @@ body {
 
 :root {
   --color-accent: hsla(340, 82%, 40%, 1);
+  --color-text: #404040;
 }

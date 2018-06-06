@@ -20,7 +20,7 @@
 <template>
   <ul>
     <li
-      v-for="document in orderedDocuments"
+      v-for="document in sortedDocuments"
       :key="document._id"
     >
       <router-link :to="{ name: 'library.document', params: { id: document._id } }">
@@ -37,7 +37,7 @@ import { sortBy } from 'lodash'
 export default {
   props: [`documents`],
   computed: {
-    orderedDocuments () {
+    sortedDocuments () {
       return sortBy(this.documents, `title`)
     }
   }
