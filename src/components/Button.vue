@@ -21,6 +21,7 @@
     :class="{
       primary: theme === themes.PRIMARY
     }"
+    @click="$emit(`onClick`)"
   >
     <slot>
       {{ title }}
