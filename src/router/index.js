@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Library from '@/components/Library/Library'
 import Document from '@/components/Document/Document'
-import '@/assets/global.css'
 
 Vue.use(Router)
 

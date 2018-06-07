@@ -17,7 +17,10 @@
     />
 
     <div class="actions">
-      <Button title="New" />
+      <Button
+        title="New"
+        @onClick="createDocument"
+      />
     </div>
   </aside>
 </template>
@@ -37,7 +40,10 @@ export default {
   mounted () {
     this.fetchAndSubscribe()
   },
-  methods: mapActions([`fetchAndSubscribe`]),
+  methods: mapActions([
+    `fetchAndSubscribe`,
+    `createDocument`
+  ]),
   computed: {
     ...mapGetters([`documents`]),
     isLoading () {

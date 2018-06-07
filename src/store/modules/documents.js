@@ -2,6 +2,7 @@ import {
   getAllDocuments,
   putDocument
 } from '@/lib/dataStoreClient'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -16,6 +17,9 @@ export default {
       state.documents = state.documents.map(comparisonDocument => {
         return comparisonDocument._id === newDocument._id ? newDocument : comparisonDocument
       })
+    },
+    addDocument (state, newDocument) {
+      state.documents.push(newDocument)
     }
   },
   actions: {
@@ -34,6 +38,17 @@ export default {
 
     async updateDocument ({ commit }, document) {
       commit(`updateDocument`, await putDocument(document))
+    },
+
+    async createDocument ({ commit }) {
+      const newDocument = await putDocument({ title: ``, content: `` })
+
+      commit(`addDocument`, newDocument)
+
+      router.push({
+        name: `library.document`,
+        params: { id: newDocument._id }
+      })
     }
   },
   getters: {
