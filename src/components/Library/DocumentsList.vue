@@ -38,7 +38,7 @@ export default {
   props: [`documents`],
   computed: {
     sortedDocuments () {
-      return sortBy(this.documents, `title`)
+      return sortBy(this.documents, document => document.title.toLowerCase())
     }
   }
 }
