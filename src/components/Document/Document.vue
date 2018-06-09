@@ -31,9 +31,10 @@
     color: var(--color-text);
   }
 
-  .meta-info {
+  .footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font: 11px monospace;
   }
 </style>
@@ -58,13 +59,19 @@
         @keyup="handleContentChange"
       ></textarea>
 
-      <p class="meta-info">
+      <footer class="footer">
         <span>created: {{ document.createdAt }}</span>
         <span v-if="document.updatedAt">
           last change: {{ document.updatedAt }}
         </span>
         <span>revision: {{ document._rev}}</span>
-      </p>
+        <div class="actions">
+          <Button
+            title="delete"
+            @onClick="removeDocument(document)"
+          />
+        </div>
+      </footer>
     </template>
   </div>
 </template>
@@ -72,12 +79,17 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 import { debounce } from 'lodash'
+import Button from '@/components/Button'
 
 const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
 
 export default {
+  components: { Button },
   methods: {
-    ...mapActions([`updateDocument`]),
+    ...mapActions([
+      `updateDocument`,
+      `removeDocument`
+    ]),
     persistChange (field, newValue) {
       this.updateDocument({
         ...this.document,

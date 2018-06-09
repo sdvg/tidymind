@@ -27,6 +27,8 @@ export const putDocument = async document => {
   }
 }
 
+export const removeDocument = document => db.remove(document)
+
 export const getDocument = documentId => db.get(documentId)
 
 export const getAllDocuments = async () => {

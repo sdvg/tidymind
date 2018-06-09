@@ -2,7 +2,7 @@
   button {
     border: none;
     background: transparent;
-    font: inherit;
+    font: sans-serif;
     cursor: pointer;
     padding: 4px 8px;
     font-size: 12px;

@@ -1,6 +1,7 @@
 import {
   getAllDocuments,
-  putDocument
+  putDocument,
+  removeDocument
 } from '@/lib/dataStoreClient'
 import router from '@/router'
 
@@ -49,6 +50,11 @@ export default {
         name: `library.document`,
         params: { id: newDocument._id }
       })
+    },
+
+    removeDocument ({ commit }, document) {
+      removeDocument(document)
+      router.push({ name: `library` })
     }
   },
   getters: {
