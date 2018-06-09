@@ -59,6 +59,7 @@ export default {
   },
   getters: {
     documents: state => state.documents,
-    getDocument: state => id => state.documents && state.documents.find(document => document._id === id)
+    getDocument: state => id => state.documents && state.documents.find(document => document._id === id),
+    documentsLoaded: state => state.documents !== null
   }
 }

@@ -42,7 +42,12 @@
 <template>
   <div class="Document">
     <template v-if="!document">
-      Loading...
+      <template v-if="documentsLoaded">
+        Document not found
+      </template>
+      <template v-else>
+        Loading&hellip;
+      </template>
     </template>
 
     <template v-if="document">
@@ -104,7 +109,10 @@ export default {
     }, 500)
   },
   computed: {
-    ...mapGetters([`getDocument`]),
+    ...mapGetters([
+      `getDocument`,
+      `documentsLoaded`
+    ]),
     document () {
       return this.getDocument(this.$route.params.id)
     }
