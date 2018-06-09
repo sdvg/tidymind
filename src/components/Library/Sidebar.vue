@@ -37,13 +37,7 @@ export default {
     Button,
     DocumentsList
   },
-  mounted () {
-    this.fetchAndSubscribe()
-  },
-  methods: mapActions([
-    `fetchAndSubscribe`,
-    `createDocument`
-  ]),
+  methods: mapActions([`createDocument`]),
   computed: {
     ...mapGetters([`documents`]),
     isLoading () {
