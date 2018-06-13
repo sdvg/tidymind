@@ -15,6 +15,10 @@
     background: #d6d6d6;
     color: #3f51b5;
   }
+
+  .document.is-unnamed {
+    font-style: italic;
+  }
 </style>
 
 <template>
@@ -33,11 +37,12 @@
       >
         <router-link
           class="document"
+          :class="{ 'is-unnamed': !document.title }"
           :style="{ '--depth': depth + 1 }"
           :to="{ name: 'library.document', params: { id: document._id } }"
         >
           <template v-if="document.title">{{ document.title }}</template>
-          <i v-else>Unnamed document</i>
+          <template v-else>Unnamed document</template>
         </router-link>
       </li>
     </ol>
