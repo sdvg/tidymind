@@ -3,6 +3,7 @@ import {
   putDocument,
   removeDocument
 } from '@/lib/dataStoreClient'
+import { find, filter } from 'lodash'
 import router from '@/router'
 
 export default {
@@ -59,7 +60,8 @@ export default {
   },
   getters: {
     documents: state => state.documents,
-    getDocument: state => id => state.documents && state.documents.find(document => document._id === id),
-    documentsLoaded: state => state.documents !== null
+    documentsLoaded: state => state.documents !== null,
+    getDocument: state => documentId => state.documents && find(state.documents, { _id: documentId }),
+    getDocumentsForCategory: state => categoryId => state.documents && filter(state.documents, { category: categoryId })
   }
 }

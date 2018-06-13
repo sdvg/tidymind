@@ -1,45 +1,22 @@
-<style scoped>
-  ul {
-    list-style: none;
-    margin-top: 8px;
-  }
-
-  a {
-    display: block;
-    padding: 4px 8px;
-    color: #d6d6d6;
-    text-decoration: none;
-  }
-
-  a:hover {
-    background: #d6d6d6;
-    color: #3f51b5;
-  }
-</style>
-
 <template>
-  <ul>
-    <li
-      v-for="document in sortedDocuments"
-      :key="document._id"
-    >
-      <router-link :to="{ name: 'library.document', params: { id: document._id } }">
-        <template v-if="document.title">{{ document.title }}</template>
-        <i v-else>Unnamed document</i>
-      </router-link>
-    </li>
-  </ul>
+  <ol>
+    <Category
+      v-for="category of categoryTree"
+      :key="category._id"
+      :category="category"
+      :depth="0"
+    />
+  </ol>
 </template>
 
 <script>
-import { sortBy } from 'lodash'
+import { createNamespacedHelpers } from 'vuex'
+import Category from './Category'
+
+const { mapGetters } = createNamespacedHelpers(`categories`)
 
 export default {
-  props: [`documents`],
-  computed: {
-    sortedDocuments () {
-      return sortBy(this.documents, document => document.title.toLowerCase())
-    }
-  }
+  components: { Category },
+  computed: mapGetters([`categoryTree`])
 }
 </script>

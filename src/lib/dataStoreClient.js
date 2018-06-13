@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === `development`) {
 }
 
 export const TYPE_DOCUMENT = `document`
+export const TYPE_CATEGORY = `category`
 
 export const putDocument = async document => {
   const currentDateString = new Date().toJSON()
@@ -35,4 +36,10 @@ export const getAllDocuments = async () => {
   const allDocuments = await db.allDocs({ include_docs: true })
 
   return allDocuments.rows.map(row => row.doc).filter(document => document.type === TYPE_DOCUMENT)
+}
+
+export const getAllCategories = async () => {
+  const allDocuments = await db.allDocs({ include_docs: true })
+
+  return allDocuments.rows.map(row => row.doc).filter(document => document.type === TYPE_CATEGORY)
 }

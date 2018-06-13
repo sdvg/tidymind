@@ -21,13 +21,18 @@
 import Sidebar from './Sidebar'
 import { createNamespacedHelpers } from 'vuex'
 
-const { mapActions } = createNamespacedHelpers(`documents`)
+const { mapActions: mapDocumentActions } = createNamespacedHelpers(`documents`)
+const { mapActions: mapCategoriesActions } = createNamespacedHelpers(`categories`)
 
 export default {
   components: { Sidebar },
-  methods: mapActions([`fetchAndSubscribe`]),
+  methods: {
+    ...mapDocumentActions({ fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
+    ...mapCategoriesActions({ fetchAndSubscribeCategories: `fetchAndSubscribe` })
+  },
   mounted () {
-    this.fetchAndSubscribe()
+    this.fetchAndSubscribeCategories()
+    this.fetchAndSubscribeDocuments()
   }
 }
 </script>

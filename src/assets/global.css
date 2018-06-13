@@ -1,3 +1,9 @@
+:root {
+  --color-accent: hsla(340, 82%, 40%, 1);
+  --color-text: #404040;
+  --font-size: 14px;
+}
+
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -36,7 +42,7 @@
 *::before,
 *::after {
   box-sizing: inherit;
-  font: 14px Roboto, sans-serif;
+  font: var(--font-size) Roboto, sans-serif;
 }
 
 html {
@@ -48,7 +54,8 @@ body {
   overflow: hidden;
 }
 
-:root {
-  --color-accent: hsla(340, 82%, 40%, 1);
-  --color-text: #404040;
+ol,
+li {
+  list-style: none;
 }
+

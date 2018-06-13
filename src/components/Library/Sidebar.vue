@@ -5,15 +5,20 @@
     flex-direction: column;
     background: var(--color-accent);
   }
+
+  .documentList {
+    margin: 8px 0;
+    overflow: auto;
+  }
 </style>
 
 <template>
   <aside class="Sidebar">
-    <p v-if="isLoading">Loading...</p>
+    <p v-if="!documentsLoaded">Loading...</p>
 
     <DocumentsList
-      v-if="documents"
-      :documents="documents"
+      class="documentList"
+      v-if="documentsLoaded"
     />
 
     <div class="actions">
@@ -38,11 +43,6 @@ export default {
     DocumentsList
   },
   methods: mapActions([`createDocument`]),
-  computed: {
-    ...mapGetters([`documents`]),
-    isLoading () {
-      return this.documents === null
-    }
-  }
+  computed: mapGetters([`documentsLoaded`])
 }
 </script>
