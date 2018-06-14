@@ -21,7 +21,7 @@
       v-if="documentsLoaded"
     />
 
-    <div class="actions">
+    <div>
       <Button
         title="New"
         @onClick="createDocument"
