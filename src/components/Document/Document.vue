@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    padding: 8px;
   }
 
   .title {
@@ -13,6 +12,7 @@
     color: var(--color-text);
     transition: 150ms border-color;
     font-size: 32px;
+    margin: 8px;
     padding: 0 8px;
   }
 
@@ -23,6 +23,7 @@
   .content {
     width: 100%;
     flex-grow: 1;
+    margin: 8px;
     padding: 8px;
     font-size: 14px;
     resize: none;
@@ -35,7 +36,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font: 11px monospace;
+    background: var(--color-gray);
+    padding: 2px 8px;
   }
 </style>
 
@@ -65,12 +67,14 @@
       ></textarea>
 
       <footer class="footer">
-        <span>created: {{ document.createdAt }}</span>
-        <span v-if="document.updatedAt">
-          last change: {{ document.updatedAt }}
-        </span>
-        <span>revision: {{ document._rev}}</span>
-        <div class="actions">
+        <div>
+          <span>created: {{ document.createdAt | date }}</span>
+          <span v-if="document.updatedAt">
+            last change: {{ document.updatedAt | date }}
+          </span>
+        </div>
+
+        <div>
           <Button
             title="delete"
             @onClick="removeDocument(document)"
