@@ -19,7 +19,7 @@ export default {
   },
   getters: {
     categoryTree: ({ categories: inputCategories }) => {
-      const categories = cloneDeep(inputCategories)
+      const categories = inputCategories ? cloneDeep(inputCategories) : []
       const tree = []
 
       categories.forEach(category => {
