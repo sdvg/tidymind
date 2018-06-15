@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import moment from 'moment'
 
-Vue.filter(`date`, value => {
+export const dateFilter = value => {
   const momentObject = moment(value)
 
   if (value && momentObject.isValid()) {
@@ -11,4 +11,6 @@ Vue.filter(`date`, value => {
 
     return value
   }
-})
+}
+
+Vue.filter(`date`, dateFilter)
