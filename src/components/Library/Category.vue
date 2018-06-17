@@ -1,6 +1,7 @@
 <style scoped>
   .category,
-  .document {
+  .document,
+  .empty-note {
     display: flex;
     align-items: center;
     padding: 4px calc(8px + var(--depth) * 16px);
@@ -21,11 +22,20 @@
     font-style: italic;
   }
 
+  .empty-note {
+    font-style: italic;
+    color: #b5b5b5;
+  }
+
   .category-icon,
   .document-icon {
     width: 10px;
     height: 10px;
     margin-right: 6px;
+  }
+
+  .is-expanded .category-icon {
+    transform: rotate(90deg);
   }
 </style>
 
@@ -33,43 +43,55 @@
   <li>
     <button
       class="category"
+      :class="{ 'is-expanded': isExpanded }"
       :style="{ '--depth': depth }"
+      @click="toggleExpanded"
     >
       <IconBase class="category-icon">
-        <IconChevronDown />
+        <IconChevronRight />
       </IconBase>
       {{ category.title }}
     </button>
 
-    <ol>
-      <li
-        v-for="document in sortedDocuments"
-        :key="document._id"
-      >
-        <router-link
-          class="document"
-          :class="{ 'is-unnamed': !document.title }"
-          :style="{ '--depth': depth + 1 }"
-          :to="{ name: 'library.document', params: { id: document._id } }"
+    <template v-if="isExpanded">
+      <ol>
+        <li
+          v-for="document in sortedDocuments"
+          :key="document._id"
         >
-          <IconBase class="document-icon">
-            <IconFileText />
-          </IconBase>
+          <router-link
+            class="document"
+            :class="{ 'is-unnamed': !document.title }"
+            :style="{ '--depth': depth + 1 }"
+            :to="{ name: 'library.document', params: { id: document._id } }"
+          >
+            <IconBase class="document-icon">
+              <IconFileText />
+            </IconBase>
 
-          <template v-if="document.title">{{ document.title }}</template>
-          <template v-else>Unnamed document</template>
-        </router-link>
-      </li>
-    </ol>
+            <template v-if="document.title">{{ document.title }}</template>
+            <template v-else>Unnamed document</template>
+          </router-link>
+        </li>
+      </ol>
 
-    <ol v-if="category.children">
-      <Category
-        v-for="childCategory of category.children"
-        :key="childCategory._id"
-        :category="childCategory"
-        :depth="depth + 1"
-      />
-    </ol>
+      <ol v-if="category.children">
+        <Category
+          v-for="childCategory of category.children"
+          :key="childCategory._id"
+          :category="childCategory"
+          :depth="depth + 1"
+        />
+      </ol>
+
+      <div
+        v-if="isEmpty"
+        class="empty-note"
+        :style="{ '--depth': depth + 1 }"
+      >
+        empty
+      </div>
+    </template>
   </li>
 </template>
 
@@ -77,19 +99,29 @@
 import { mapGetters } from 'vuex'
 import { sortBy } from 'lodash'
 import IconBase from '@/components/icons/IconBase'
-import IconChevronDown from '@/components/icons/IconChevronDown'
+import IconChevronRight from '@/components/icons/IconChevronRight'
 import IconFileText from '@/components/icons/IconFileText'
 
 export default {
   components: {
     Category: () => import(`./Category`),
     IconBase,
-    IconChevronDown,
+    IconChevronRight,
     IconFileText
   },
   props: {
     category: Object,
     depth: Number
+  },
+  data () {
+    return {
+      isExpanded: this.depth === 0
+    }
+  },
+  methods: {
+    toggleExpanded () {
+      this.isExpanded = !this.isExpanded
+    }
   },
   computed: {
     ...mapGetters(`documents`, [`getDocumentsForCategory`]),
@@ -98,6 +130,9 @@ export default {
     },
     sortedDocuments () {
       return sortBy(this.documents, document => document.title.toLowerCase())
+    },
+    isEmpty () {
+      return !this.category.children && this.documents.length === 0
     }
   }
 }
