@@ -118,7 +118,7 @@ export default {
       `documentsLoaded`
     ]),
     document () {
-      return this.getDocument(this.$route.params.id)
+      return this.getDocument(this.$route.params.documentId)
     }
   }
 }

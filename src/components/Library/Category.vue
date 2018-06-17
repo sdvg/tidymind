@@ -29,6 +29,11 @@
     font-style: italic;
   }
 
+  .document.is-open {
+    background: #1f1f1f;
+    color: #d6d6d6;
+  }
+
   .empty-note {
     font-style: italic;
     color: #b5b5b5;
@@ -68,9 +73,12 @@
         >
           <router-link
             class="document"
-            :class="{ 'is-unnamed': !document.title }"
+            :class="{
+              'is-open': isDocumentOpen(document),
+              'is-unnamed': isDocumentUnnamed(document)
+            }"
             :style="{ '--depth': depth + 1 }"
-            :to="{ name: 'library.document', params: { id: document._id } }"
+            :to="{ name: 'library.document', params: { documentId: document._id } }"
           >
             <IconBase class="document-icon">
               <IconFileText />
@@ -128,6 +136,12 @@ export default {
   methods: {
     toggleExpanded () {
       this.isExpanded = !this.isExpanded
+    },
+    isDocumentOpen (document) {
+      return this.$route.params.documentId === document._id
+    },
+    isDocumentUnnamed (document) {
+      return !document.title
     }
   },
   computed: {

@@ -20,7 +20,7 @@ export default new Router({
       component: Library,
       children: [
         {
-          path: `:id`,
+          path: `:documentId`,
           name: `library.document`,
           component: Document
         }
