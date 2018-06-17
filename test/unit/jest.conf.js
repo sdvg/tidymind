@@ -23,7 +23,7 @@ module.exports = {
   collectCoverageFrom: [
     `src/**/*.{js,vue}`,
     `!src/main.js`,
-    `!src/router/index.js`,
+    `!src/router.js`,
     `!**/node_modules/**`
   ]
 }
