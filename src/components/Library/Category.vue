@@ -1,7 +1,8 @@
 <style scoped>
   .category,
   .document {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 4px calc(8px + var(--depth) * 16px);
     color: #d6d6d6;
     text-decoration: none;
@@ -19,6 +20,13 @@
   .document.is-unnamed {
     font-style: italic;
   }
+
+  .category-icon,
+  .document-icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+  }
 </style>
 
 <template>
@@ -27,7 +35,10 @@
       class="category"
       :style="{ '--depth': depth }"
     >
-      {{ category.title }} ▼
+      <IconBase class="category-icon">
+        <IconChevronDown />
+      </IconBase>
+      {{ category.title }}
     </button>
 
     <ol>
@@ -41,6 +52,10 @@
           :style="{ '--depth': depth + 1 }"
           :to="{ name: 'library.document', params: { id: document._id } }"
         >
+          <IconBase class="document-icon">
+            <IconFileText />
+          </IconBase>
+
           <template v-if="document.title">{{ document.title }}</template>
           <template v-else>Unnamed document</template>
         </router-link>
@@ -61,9 +76,17 @@
 <script>
 import { mapGetters } from 'vuex'
 import { sortBy } from 'lodash'
+import IconBase from '@/components/icons/IconBase'
+import IconChevronDown from '@/components/icons/IconChevronDown'
+import IconFileText from '@/components/icons/IconFileText'
 
 export default {
-  components: { Category: () => import(`./Category`) },
+  components: {
+    Category: () => import(`./Category`),
+    IconBase,
+    IconChevronDown,
+    IconFileText
+  },
   props: {
     category: Object,
     depth: Number
