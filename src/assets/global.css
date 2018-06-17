@@ -12,7 +12,7 @@
   src:
     local('Roboto'),
     local('Roboto-Regular'),
-    url('./roboto-v18-latin-regular.woff2') format('woff2');
+    url('./fonts/roboto-v18-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -22,16 +22,25 @@
   src:
     local('Roboto'),
     local('Roboto-Regular'),
-    url('./roboto-v18-latin-italic.woff2') format('woff2');
+    url('./fonts/roboto-v18-latin-italic.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Roboto';
-  font-weight: bold;
+  font-weight: 500;
   src:
     local('Roboto'),
-    local('Roboto-Regular'),
-    url('./roboto-v18-latin-700.woff2') format('woff2');
+    local('Roboto-Medium'),
+    url('./fonts/roboto-v18-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src:
+    local('Roboto'),
+    local('Roboto-Bold'),
+    url('./fonts/roboto-v18-latin-700.woff2') format('woff2');
 }
 
 * {
