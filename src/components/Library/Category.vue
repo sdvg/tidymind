@@ -12,7 +12,14 @@
     font-size: var(--font-size);
   }
 
-  .category:hover,
+  .category {
+    font-weight: 500;
+  }
+
+  .category:hover {
+    color: #1f1f1f;
+  }
+
   .document:hover {
     background: #d6d6d6;
     color: #3f51b5;
