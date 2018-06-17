@@ -10,19 +10,22 @@
     width: 100%;
     text-align: left;
     font-size: var(--font-size);
+    outline: none;
   }
 
   .category {
     font-weight: 500;
   }
 
-  .category:hover {
+  .category:hover,
+  .category:focus {
     color: #1f1f1f;
   }
 
-  .document:hover {
-    background: #d6d6d6;
-    color: #3f51b5;
+  .document:hover,
+  .document:focus {
+    background: #d6d6d6 !important;
+    color: #3f51b5 !important;
   }
 
   .document.is-unnamed {
