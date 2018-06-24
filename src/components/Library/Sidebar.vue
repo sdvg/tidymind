@@ -14,11 +14,11 @@
 
 <template>
   <aside class="Sidebar">
-    <p v-if="!documentsLoaded">Loading...</p>
+    <p v-if="!isDataLoaded">Loading...</p>
 
     <DocumentsList
       class="documentList"
-      v-if="documentsLoaded"
+      v-if="isDataLoaded"
     />
 
     <div>
@@ -33,16 +33,30 @@
 <script>
 import Button from '../Button'
 import DocumentsList from './DocumentsList'
-import { createNamespacedHelpers } from 'vuex'
-
-const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
     Button,
     DocumentsList
   },
-  methods: mapActions([`createDocument`]),
-  computed: mapGetters([`documentsLoaded`])
+  methods: {
+    ...mapActions(`documents`, [`createDocument`]),
+    ...mapActions(`categories`, [`expandCategoriesForDocumentId`])
+  },
+  computed: {
+    ...mapGetters(`documents`, [`documentsLoaded`]),
+    ...mapGetters(`categories`, [`categoriesLoaded`]),
+    isDataLoaded () {
+      return this.documentsLoaded && this.categoriesLoaded
+    }
+  },
+  watch: {
+    isDataLoaded (isLoaded) {
+      if (isLoaded && this.$route.params.documentId) {
+        this.expandCategoriesForDocumentId(this.$route.params.documentId)
+      }
+    }
+  }
 }
 </script>

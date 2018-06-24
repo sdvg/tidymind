@@ -60,7 +60,7 @@
       class="category"
       :class="{ 'is-expanded': isExpanded }"
       :style="{ '--depth': depth }"
-      @click="toggleExpanded"
+      @click="toggleCategoryExpansion(category._id)"
     >
       <IconBase class="category-icon">
         <IconChevronRight />
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { sortBy } from 'lodash'
 import IconBase from '@/components/icons/IconBase'
 import IconChevronRight from '@/components/icons/IconChevronRight'
@@ -131,15 +131,8 @@ export default {
     category: Object,
     depth: Number
   },
-  data () {
-    return {
-      isExpanded: this.depth === 0
-    }
-  },
   methods: {
-    toggleExpanded () {
-      this.isExpanded = !this.isExpanded
-    },
+    ...mapActions(`categories`, [`toggleCategoryExpansion`]),
     isDocumentOpen (document) {
       return this.$route.params.documentId === document._id
     },
@@ -149,6 +142,7 @@ export default {
   },
   computed: {
     ...mapGetters(`documents`, [`getDocumentsForCategory`]),
+    ...mapGetters(`categories`, [`isCategoryExpanded`]),
     documents () {
       return this.getDocumentsForCategory(this.category._id)
     },
@@ -157,6 +151,9 @@ export default {
     },
     isEmpty () {
       return !this.category.children && this.documents.length === 0
+    },
+    isExpanded () {
+      return this.isCategoryExpanded(this.category._id)
     }
   }
 }
