@@ -35,7 +35,10 @@ const themes = {
 
 export default {
   props: {
-    type: String,
+    type: {
+      type: String,
+      default: `button`
+    },
     title: {
       type: String,
       default: ``
