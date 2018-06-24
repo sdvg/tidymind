@@ -2,6 +2,8 @@
 
 import { dateFilter } from './date'
 
+global.console.warn = jest.fn() // avoid 'invalid date' warnings
+
 describe(`date filter`, () => {
   it(`formats a date`, () => {
     const formattedDate = dateFilter(new Date(2018, 2, 6, 9, 30))
