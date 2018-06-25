@@ -68,48 +68,52 @@
       {{ category.title }}
     </button>
 
-    <template v-if="isExpanded">
-      <ol>
-        <li
-          v-for="document in sortedDocuments"
-          :key="document._id"
-        >
-          <router-link
-            class="document"
-            :class="{
-              'is-open': isDocumentOpen(document),
-              'is-unnamed': isDocumentUnnamed(document)
-            }"
-            :style="{ '--depth': depth + 1 }"
-            :to="{ name: 'library.document', params: { documentId: document._id } }"
-          >
-            <IconBase class="document-icon">
-              <IconFileText />
-            </IconBase>
-
-            <template v-if="document.title">{{ document.title }}</template>
-            <template v-else>Unnamed document</template>
-          </router-link>
-        </li>
-      </ol>
-
-      <ol v-if="category.children">
-        <Category
-          v-for="childCategory of category.children"
-          :key="childCategory._id"
-          :category="childCategory"
-          :depth="depth + 1"
-        />
-      </ol>
-
+    <ExpandTransition>
       <div
-        v-if="isEmpty"
-        class="empty-note"
-        :style="{ '--depth': depth + 1 }"
+        v-if="isExpanded"
       >
-        empty
+        <ol>
+          <li
+            v-for="document in sortedDocuments"
+            :key="document._id"
+          >
+            <router-link
+              class="document"
+              :class="{
+                'is-open': isDocumentOpen(document),
+                'is-unnamed': isDocumentUnnamed(document)
+              }"
+              :style="{ '--depth': depth + 1 }"
+              :to="{ name: 'library.document', params: { documentId: document._id } }"
+            >
+              <IconBase class="document-icon">
+                <IconFileText />
+              </IconBase>
+
+              <template v-if="document.title">{{ document.title }}</template>
+              <template v-else>Unnamed document</template>
+            </router-link>
+          </li>
+        </ol>
+
+        <ol v-if="category.children">
+          <Category
+            v-for="childCategory of category.children"
+            :key="childCategory._id"
+            :category="childCategory"
+            :depth="depth + 1"
+          />
+        </ol>
+
+        <div
+          v-if="isEmpty"
+          class="empty-note"
+          :style="{ '--depth': depth + 1 }"
+        >
+          empty
+        </div>
       </div>
-    </template>
+    </ExpandTransition>
   </li>
 </template>
 
@@ -119,13 +123,15 @@ import { sortBy } from 'lodash'
 import IconBase from '@/components/icons/IconBase'
 import IconChevronRight from '@/components/icons/IconChevronRight'
 import IconFileText from '@/components/icons/IconFileText'
+import ExpandTransition from '@/components/ExpandTransition'
 
 export default {
   components: {
     Category: () => import(`./Category`),
     IconBase,
     IconChevronRight,
-    IconFileText
+    IconFileText,
+    ExpandTransition
   },
   props: {
     category: Object,
