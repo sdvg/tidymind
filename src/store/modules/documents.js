@@ -22,6 +22,9 @@ export default {
     },
     addDocument (state, newDocument) {
       state.documents.push(newDocument)
+    },
+    removeDocument (state, documentToRemove) {
+      state.documents = state.documents.filter(document => document._id !== documentToRemove)
     }
   },
   actions: {
@@ -55,6 +58,7 @@ export default {
 
     removeDocument ({ commit }, document) {
       removeDocument(document)
+      commit(`removeDocument`, document._id)
       router.push({ name: `library` })
     }
   },
