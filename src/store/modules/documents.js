@@ -45,15 +45,16 @@ export default {
       commit(`updateDocument`, await putDocument(document))
     },
 
-    async createDocument ({ commit }) {
-      const newDocument = await putDocument({ title: ``, content: `` })
+    async createDocument ({ commit, getters, rootGetters }, categoryId) {
+      const newDocument = await putDocument({
+        title: ``,
+        content: ``,
+        category: categoryId
+      })
 
       commit(`addDocument`, newDocument)
 
-      router.push({
-        name: `library.document`,
-        params: { id: newDocument._id }
-      })
+      return newDocument
     },
 
     removeDocument ({ commit }, document) {

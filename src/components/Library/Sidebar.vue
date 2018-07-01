@@ -22,22 +22,19 @@
     />
 
     <div>
-      <Button
-        title="New"
-        @onClick="createDocument"
-      />
+      <CreateDocumentButton />
     </div>
   </aside>
 </template>
 
 <script>
-import Button from '../Button'
+import CreateDocumentButton from './CreateDocumentButton'
 import DocumentsList from './DocumentsList'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    Button,
+    CreateDocumentButton,
     DocumentsList
   },
   methods: {

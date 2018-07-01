@@ -1,5 +1,5 @@
 import { getAllCategories } from '@/lib/dataStoreClient'
-import { cloneDeep, find, without } from 'lodash'
+import { cloneDeep, find, get, without } from 'lodash'
 
 export default {
   namespaced: true,
@@ -68,6 +68,7 @@ export default {
 
       return tree
     },
-    isCategoryExpanded: state => categoryId => state.expandedCategories.includes(categoryId)
+    isCategoryExpanded: state => categoryId => state.expandedCategories.includes(categoryId),
+    firstCategory: state => get(state, `categories[0]`, null)
   }
 }
