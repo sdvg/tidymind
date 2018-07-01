@@ -1,8 +1,5 @@
-<style>
-  button {
-    border: none;
-    background: transparent;
-    cursor: pointer;
+<style scoped>
+  .button {
     padding: 4px 8px;
     font-size: 12px;
   }
@@ -18,6 +15,7 @@
     :type="type"
     :title="title"
     :class="{
+      button: true,
       primary: theme === themes.PRIMARY
     }"
     @click="$emit(`onClick`)"

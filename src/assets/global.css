@@ -69,3 +69,8 @@ li {
   list-style: none;
 }
 
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
