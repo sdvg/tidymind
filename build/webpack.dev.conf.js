@@ -64,7 +64,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new CopyWebpackPlugin([{
+      context: path.resolve(__dirname, '../node_modules/tinymce/skins/lightgray'),
+      from: './**/*',
+      to: './tinymce/skin',
+    }]),
   ]
 })
 

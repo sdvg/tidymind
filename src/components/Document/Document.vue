@@ -20,16 +20,9 @@
     border-color: var(--color-accent);
   }
 
-  .content {
-    width: 100%;
+  .editors {
+    display: flex;
     flex-grow: 1;
-    margin: 8px;
-    padding: 8px;
-    font-size: 14px;
-    resize: none;
-    border: none;
-    outline: none;
-    color: var(--color-text);
   }
 
   .footer {
@@ -60,11 +53,15 @@
         @keyup="handleTitleChange"
       >
 
-      <textarea
-        class="content"
-        :value="document.content"
-        @keyup="handleContentChange"
-      ></textarea>
+      <div
+        class="editors"
+        :key="document._id"
+      >
+        <RichTextEditor
+          :document="document"
+          @contentChanged="handleContentChange"
+        />
+      </div>
 
       <footer class="footer">
         <div>
@@ -89,11 +86,12 @@
 import { createNamespacedHelpers } from 'vuex'
 import { debounce } from 'lodash'
 import Button from '@/components/Button'
+import RichTextEditor from '@/components/editors/RichTextEditor'
 
 const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
 
 export default {
-  components: { Button },
+  components: { Button, RichTextEditor },
   methods: {
     ...mapActions([
       `updateDocument`,
@@ -108,8 +106,8 @@ export default {
     handleTitleChange: debounce(function (event) {
       this.persistChange(`title`, event.target.value)
     }, 500),
-    handleContentChange: debounce(function (event) {
-      this.persistChange(`content`, event.target.value)
+    handleContentChange: debounce(function (content) {
+      this.persistChange(`content`, content)
     }, 500)
   },
   computed: {

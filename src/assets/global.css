@@ -52,7 +52,7 @@
 *::before,
 *::after {
   box-sizing: inherit;
-  font: var(--font-size) Roboto, sans-serif;
+  font: inherit;
 }
 
 html {
@@ -62,6 +62,7 @@ html {
 body {
   height: 100vh;
   overflow: hidden;
+  font: var(--font-size) Roboto, sans-serif;
 }
 
 ol,
