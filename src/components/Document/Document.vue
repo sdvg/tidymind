@@ -95,12 +95,12 @@ export default {
   methods: {
     ...mapActions([
       `updateDocument`,
-      `removeDocument`
+      `removeDocument`,
     ]),
     persistChange (field, newValue) {
       this.updateDocument({
         ...this.document,
-        [field]: newValue
+        [field]: newValue,
       })
     },
     handleTitleChange: debounce(function (event) {
@@ -108,16 +108,16 @@ export default {
     }, 500),
     handleContentChange: debounce(function (content) {
       this.persistChange(`content`, content)
-    }, 500)
+    }, 500),
   },
   computed: {
     ...mapGetters([
       `getDocument`,
-      `documentsLoaded`
+      `documentsLoaded`,
     ]),
     document () {
       return this.getDocument(this.$route.params.documentId)
-    }
-  }
+    },
+  },
 }
 </script>

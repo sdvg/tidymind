@@ -17,6 +17,6 @@ const { mapGetters } = createNamespacedHelpers(`categories`)
 
 export default {
   components: { Category },
-  computed: mapGetters([`categoryTree`])
+  computed: mapGetters([`categoryTree`]),
 }
 </script>

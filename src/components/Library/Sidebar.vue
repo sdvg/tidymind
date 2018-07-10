@@ -35,25 +35,25 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     CreateDocumentButton,
-    DocumentsList
+    DocumentsList,
   },
   methods: {
     ...mapActions(`documents`, [`createDocument`]),
-    ...mapActions(`categories`, [`expandCategoriesForDocumentId`])
+    ...mapActions(`categories`, [`expandCategoriesForDocumentId`]),
   },
   computed: {
     ...mapGetters(`documents`, [`documentsLoaded`]),
     ...mapGetters(`categories`, [`categoriesLoaded`]),
     isDataLoaded () {
       return this.documentsLoaded && this.categoriesLoaded
-    }
+    },
   },
   watch: {
     isDataLoaded (isLoaded) {
       if (isLoaded && this.$route.params.documentId) {
         this.expandCategoriesForDocumentId(this.$route.params.documentId)
       }
-    }
-  }
+    },
+  },
 }
 </script>

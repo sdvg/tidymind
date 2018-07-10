@@ -1,7 +1,7 @@
 import {
   getAllDocuments,
   putDocument,
-  removeDocument
+  removeDocument,
 } from '@/lib/dataStoreClient'
 import { find, filter } from 'lodash'
 import router from '@/router'
@@ -9,7 +9,7 @@ import router from '@/router'
 export default {
   namespaced: true,
   state: {
-    documents: null
+    documents: null,
   },
   mutations: {
     setDocuments (state, documents) {
@@ -25,7 +25,7 @@ export default {
     },
     removeDocument (state, documentToRemove) {
       state.documents = state.documents.filter(document => document._id !== documentToRemove)
-    }
+    },
   },
   actions: {
     async fetchAndSubscribe ({ commit }) {
@@ -49,7 +49,7 @@ export default {
       const newDocument = await putDocument({
         title: ``,
         content: ``,
-        category: categoryId
+        category: categoryId,
       })
 
       commit(`addDocument`, newDocument)
@@ -61,12 +61,12 @@ export default {
       removeDocument(document)
       commit(`removeDocument`, document._id)
       router.push({ name: `library` })
-    }
+    },
   },
   getters: {
     documents: state => state.documents,
     documentsLoaded: state => state.documents !== null,
     getDocument: state => documentId => state.documents && find(state.documents, { _id: documentId }),
-    getDocumentsForCategory: state => categoryId => state.documents && filter(state.documents, { category: categoryId })
-  }
+    getDocumentsForCategory: state => categoryId => state.documents && filter(state.documents, { category: categoryId }),
+  },
 }

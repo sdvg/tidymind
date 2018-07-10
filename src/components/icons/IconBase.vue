@@ -15,8 +15,8 @@ export default {
   props: {
     viewBox: {
       type: String,
-      default: `0 0 1792 1792`
-    }
-  }
+      default: `0 0 1792 1792`,
+    },
+  },
 }
 </script>

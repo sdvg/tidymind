@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     categories: null,
-    expandedCategories: []
+    expandedCategories: [],
   },
   mutations: {
     setCategories (state, categories) {
@@ -16,7 +16,7 @@ export default {
     },
     collapseCategory (state, categoryId) {
       state.expandedCategories = without(state.expandedCategories, categoryId)
-    }
+    },
   },
   actions: {
     async fetchAndSubscribe ({ commit }) {
@@ -47,7 +47,7 @@ export default {
       } else {
         commit(`expandCategory`, categoryId)
       }
-    }
+    },
   },
   getters: {
     categoriesLoaded: state => state.categories !== null,
@@ -69,6 +69,6 @@ export default {
       return tree
     },
     isCategoryExpanded: state => categoryId => state.expandedCategories.includes(categoryId),
-    firstCategory: state => get(state, `categories[0]`, null)
-  }
+    firstCategory: state => get(state, `categories[0]`, null),
+  },
 }

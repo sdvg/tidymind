@@ -17,14 +17,14 @@ export const putDocument = async document => {
     _id: document._id || uuid(),
     type: TYPE_DOCUMENT,
     createdAt: document.createdAt || currentDateString,
-    updatedAt: currentDateString
+    updatedAt: currentDateString,
   }
 
   const update = await db.put(updatedDocument)
 
   return {
     ...updatedDocument,
-    _rev: update.rev
+    _rev: update.rev,
   }
 }
 

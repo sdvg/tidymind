@@ -60,7 +60,7 @@ export default {
       setTimeout(() => {
         element.style.height = 0
       })
-    }
-  }
+    },
+  },
 }
 </script>

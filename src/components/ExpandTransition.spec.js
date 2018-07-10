@@ -7,8 +7,8 @@ describe(`ExpandTransition`, () => {
   it(`renders the slot`, () => {
     const wrapper = shallowMount(ExpandTransition, {
       slots: {
-        default: `<p>Some content</p>`
-      }
+        default: `<p>Some content</p>`,
+      },
     })
 
     expect(wrapper.text()).toBe(`Some content`)

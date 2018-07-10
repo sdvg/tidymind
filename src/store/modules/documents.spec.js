@@ -1,10 +1,10 @@
 /* eslint-env jest */
 
 import documentsModule from './documents'
-import { putDocument } from '@/lib/dataStoreClient';
+import { putDocument } from '@/lib/dataStoreClient'
 
 jest.mock(`@/lib/dataStoreClient`, () => ({
-  putDocument: jest.fn(document => ({ ...document, _id: `1` }))
+  putDocument: jest.fn(document => ({ ...document, _id: `1` })),
 }))
 
 const { actions } = documentsModule
@@ -22,7 +22,7 @@ describe(`documents store module`, () => {
         expect(putDocument).toHaveBeenCalledWith({
           title: ``,
           content: ``,
-          category: `1`
+          category: `1`,
         })
       })
 
@@ -35,7 +35,7 @@ describe(`documents store module`, () => {
           _id: `1`,
           title: ``,
           content: ``,
-          category: `1`
+          category: `1`,
         })
       })
 
@@ -46,7 +46,7 @@ describe(`documents store module`, () => {
           _id: `1`,
           category: `1`,
           title: ``,
-          content: ``
+          content: ``,
         })
       })
     })

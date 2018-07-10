@@ -28,27 +28,27 @@
 
 <script>
 const themes = {
-  PRIMARY: `primary`
+  PRIMARY: `primary`,
 }
 
 export default {
   props: {
     type: {
       type: String,
-      default: `button`
+      default: `button`,
     },
     title: {
       type: String,
-      default: ``
+      default: ``,
     },
     theme: {
       type: String,
       default: `primary`,
-      validator: value => Object.values(themes).includes(value)
-    }
+      validator: value => Object.values(themes).includes(value),
+    },
   },
   data () {
     return { themes }
-  }
+  },
 }
 </script>

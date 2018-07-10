@@ -12,7 +12,7 @@ export default new Router({
     {
       path: `/`,
       name: `home`,
-      component: Home
+      component: Home,
     },
     {
       path: `/library`,
@@ -22,9 +22,9 @@ export default new Router({
         {
           path: `:documentId`,
           name: `library.document`,
-          component: Document
-        }
-      ]
-    }
-  ]
+          component: Document,
+        },
+      ],
+    },
+  ],
 })

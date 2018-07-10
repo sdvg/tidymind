@@ -44,7 +44,7 @@ import 'tinymce/skins/lightgray/content.min.css'
 
 export default {
   props: {
-    document: Object
+    document: Object,
   },
   mounted () {
     tinymce.init({
@@ -58,8 +58,8 @@ export default {
         editor.on(`keyup`, () => {
           this.$emit(`contentChanged`, editor.getContent())
         })
-      }
+      },
     })
-  }
+  },
 }
 </script>

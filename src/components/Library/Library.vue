@@ -25,11 +25,11 @@ export default {
   components: { Sidebar },
   methods: {
     ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
-    ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` })
+    ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),
   },
   mounted () {
     this.fetchAndSubscribeCategories()
     this.fetchAndSubscribeDocuments()
-  }
+  },
 }
 </script>

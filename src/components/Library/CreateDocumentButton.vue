@@ -30,13 +30,13 @@ export default {
 
       this.$router.push({
         name: `library.document`,
-        params: { documentId: newDocument._id }
+        params: { documentId: newDocument._id },
       })
-    }
+    },
   },
   computed: {
     ...mapGetters(`documents`, [`getDocument`]),
-    ...mapGetters(`categories`, [`firstCategory`])
-  }
+    ...mapGetters(`categories`, [`firstCategory`]),
+  },
 }
 </script>

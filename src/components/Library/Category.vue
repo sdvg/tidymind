@@ -131,11 +131,11 @@ export default {
     IconBase,
     IconChevronRight,
     IconFileText,
-    ExpandTransition
+    ExpandTransition,
   },
   props: {
     category: Object,
-    depth: Number
+    depth: Number,
   },
   methods: {
     ...mapActions(`categories`, [`toggleCategoryExpansion`]),
@@ -144,7 +144,7 @@ export default {
     },
     isDocumentUnnamed (document) {
       return !document.title
-    }
+    },
   },
   computed: {
     ...mapGetters(`documents`, [`getDocumentsForCategory`]),
@@ -160,7 +160,7 @@ export default {
     },
     isExpanded () {
       return this.isCategoryExpanded(this.category._id)
-    }
-  }
+    },
+  },
 }
 </script>

@@ -18,7 +18,7 @@ describe(`CreateDocumentButton`, () => {
 
     wrapper.setMethods({
       createDocument: jest.fn(),
-      getCategoryId: () => `1`
+      getCategoryId: () => `1`,
     })
 
     const button = wrapper.find(Button)
@@ -31,20 +31,20 @@ describe(`CreateDocumentButton`, () => {
   it(`redirects to the new document`, async () => {
     const wrapper = shallowMount(CreateDocumentButton, {
       mocks: {
-        $router: { push: jest.fn() }
-      }
+        $router: { push: jest.fn() },
+      },
     })
 
     wrapper.setMethods({
       createDocument: jest.fn(() => ({ _id: `1` })),
-      getCategoryId: () => `1`
+      getCategoryId: () => `1`,
     })
 
     await wrapper.vm.handleCreateDocument()
 
     expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
       name: `library.document`,
-      params: { documentId: `1` }
+      params: { documentId: `1` },
     })
   })
 
@@ -52,14 +52,14 @@ describe(`CreateDocumentButton`, () => {
     it(`returns the current documents category id`, () => {
       const wrapper = shallowMount(CreateDocumentButton, {
         computed: {
-          getDocument: () => () => ({ _id: `d1`, category: `c1` })
+          getDocument: () => () => ({ _id: `d1`, category: `c1` }),
         },
         mocks: {
           $route: {
             name: `library.document`,
-            params: { documentId: `d1` }
-          }
-        }
+            params: { documentId: `d1` },
+          },
+        },
       })
 
       expect(wrapper.vm.getCategoryId()).toBe(`c1`)
@@ -69,14 +69,14 @@ describe(`CreateDocumentButton`, () => {
       const wrapper = shallowMount(CreateDocumentButton, {
         computed: {
           getDocument: () => () => null,
-          firstCategory: () => ({ _id: `1` })
+          firstCategory: () => ({ _id: `1` }),
         },
         mocks: {
           $route: {
             name: `library`,
-            params: {}
-          }
-        }
+            params: {},
+          },
+        },
       })
 
       expect(wrapper.vm.getCategoryId()).toBe(`1`)

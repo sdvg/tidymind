@@ -19,8 +19,8 @@ describe(`Button`, () => {
   it(`can have a custom type attribute`, () => {
     const wrapper = shallowMount(Button, {
       propsData: {
-        type: `submit`
-      }
+        type: `submit`,
+      },
     })
 
     expect(wrapper.attributes().type).toBe(`submit`)
@@ -29,8 +29,8 @@ describe(`Button`, () => {
   it(`can have a title attribute`, () => {
     const wrapper = shallowMount(Button, {
       propsData: {
-        title: `Click me!`
-      }
+        title: `Click me!`,
+      },
     })
 
     expect(wrapper.attributes().title).toBe(`Click me!`)
@@ -39,8 +39,8 @@ describe(`Button`, () => {
   it(`renders the title as content when no slot is defined`, () => {
     const wrapper = shallowMount(Button, {
       propsData: {
-        title: `Click me!`
-      }
+        title: `Click me!`,
+      },
     })
 
     expect(wrapper.text()).toBe(`Click me!`)
@@ -49,8 +49,8 @@ describe(`Button`, () => {
   it(`renders the slot as content`, () => {
     const wrapper = shallowMount(Button, {
       slots: {
-        default: `Click me!`
-      }
+        default: `Click me!`,
+      },
     })
 
     expect(wrapper.text()).toBe(`Click me!`)
@@ -65,8 +65,8 @@ describe(`Button`, () => {
   it(`allows only whitelisted themes`, () => {
     shallowMount(Button, {
       propsData: {
-        theme: `doesnt-exist`
-      }
+        theme: `doesnt-exist`,
+      },
     })
 
     expect(consoleErrorSpy).toBeCalled()

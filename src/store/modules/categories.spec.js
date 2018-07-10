@@ -13,19 +13,19 @@ describe(`categories store module`, () => {
         categories: [
           {
             _id: `1`,
-            parent: null
+            parent: null,
           },
           {
             _id: `2`,
-            parent: `1`
-          }
-        ]
+            parent: `1`,
+          },
+        ],
       }
 
       const rootGetters = {
         'documents/getDocumentsForCategory': categoryId => {
           return categoryId === `2` ? [{ _id: `1` }] : null
-        }
+        },
       }
 
       const documentId = `1`
@@ -59,8 +59,8 @@ describe(`categories store module`, () => {
         categories: [
           { _id: `2`, parent: `1` },
           { _id: `1`, parent: null },
-          { _id: `3`, parent: `2` }
-        ]
+          { _id: `3`, parent: `2` },
+        ],
       }
       const result = getters.categoryTree(state)
 
@@ -75,12 +75,12 @@ describe(`categories store module`, () => {
               children: [
                 {
                   _id: `3`,
-                  parent: `2`
-                }
-              ]
-            }
-          ]
-        }
+                  parent: `2`,
+                },
+              ],
+            },
+          ],
+        },
       ]
 
       expect(result).toEqual(expectedResult)
@@ -90,8 +90,8 @@ describe(`categories store module`, () => {
       const state = {
         categories: [
           { _id: `1`, parent: null },
-          { _id: `2`, parent: `1` }
-        ]
+          { _id: `2`, parent: `1` },
+        ],
       }
       getters.categoryTree(state)
 
@@ -102,9 +102,9 @@ describe(`categories store module`, () => {
       const state = {
         categories: [
           { _id: `1` },
-          { _id: `2` }
+          { _id: `2` },
         ],
-        expandedCategories: [`1`]
+        expandedCategories: [`1`],
       }
 
       expect(getters.isCategoryExpanded(state)(`1`)).toBe(true)
