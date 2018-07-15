@@ -4,7 +4,6 @@ import {
   removeDocument,
 } from '@/lib/dataStoreClient'
 import { find, filter } from 'lodash'
-import router from '@/router'
 
 export default {
   namespaced: true,
@@ -57,10 +56,10 @@ export default {
       return newDocument
     },
 
-    removeDocument ({ commit }, document) {
-      removeDocument(document)
-      commit(`removeDocument`, document._id)
-      router.push({ name: `library` })
+    async removeDocument ({ commit }, document) {
+      await removeDocument(document)
+
+      return commit(`removeDocument`, document._id)
     },
   },
   getters: {

@@ -74,7 +74,7 @@
         <div>
           <Button
             title="delete"
-            @onClick="removeDocument(document)"
+            @onClick="remove(document)"
           />
         </div>
       </footer>
@@ -109,6 +109,10 @@ export default {
     handleContentChange: debounce(function (content) {
       this.persistChange(`content`, content)
     }, 500),
+    async remove () {
+      await this.removeDocument(this.document)
+      this.$router.push({ name: `library` })
+    },
   },
   computed: {
     ...mapGetters([
