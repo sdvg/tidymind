@@ -61,5 +61,8 @@ export default {
       },
     })
   },
+  destroyed () {
+    tinymce.remove()
+  },
 }
 </script>
