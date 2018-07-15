@@ -38,6 +38,7 @@ describe(`CreateDocumentButton`, () => {
     wrapper.setMethods({
       createDocument: jest.fn(() => ({ _id: `1` })),
       getCategoryId: () => `1`,
+      expandCategory: () => {},
     })
 
     await wrapper.vm.handleCreateDocument()

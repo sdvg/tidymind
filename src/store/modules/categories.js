@@ -12,7 +12,9 @@ export default {
       state.categories = categories
     },
     expandCategory (state, categoryId) {
-      state.expandedCategories.push(categoryId)
+      if (!state.expandedCategories.includes(categoryId)) {
+        state.expandedCategories.push(categoryId)
+      }
     },
     collapseCategory (state, categoryId) {
       state.expandedCategories = without(state.expandedCategories, categoryId)

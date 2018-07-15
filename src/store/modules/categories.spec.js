@@ -7,6 +7,41 @@ jest.mock(`@/lib/dataStoreClient`, () => ({}))
 const { actions, getters } = categoriesModule
 
 describe(`categories store module`, () => {
+  describe(`mutations`, () => {
+    it(`setCategories`, () => {
+      const state = { categories: null }
+
+      categoriesModule.mutations.setCategories(state, [1, 2])
+
+      expect(state.categories).toEqual([1, 2])
+    })
+
+    it(`expandCategory`, () => {
+      const state = { expandedCategories: [] }
+
+      categoriesModule.mutations.expandCategory(state, 1)
+
+      expect(state.expandedCategories).toEqual([1])
+    })
+
+    it(`expands a category only once`, () => {
+      const state = { expandedCategories: [] }
+
+      categoriesModule.mutations.expandCategory(state, 1)
+      categoriesModule.mutations.expandCategory(state, 1)
+
+      expect(state.expandedCategories).toEqual([1])
+    })
+
+    it(`collapseCategory`, () => {
+      const state = { expandedCategories: [1] }
+
+      categoriesModule.mutations.collapseCategory(state, 1)
+
+      expect(state.expandedCategories).toEqual([])
+    })
+  });
+
   describe(`actions`, () => {
     it(`expandCategoriesForDocumentId`, () => {
       const state = {

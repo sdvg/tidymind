@@ -6,13 +6,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 import Button from '../Button'
 
 export default {
   components: { Button },
   methods: {
     ...mapActions(`documents`, [`createDocument`]),
+    ...mapMutations(`categories`, [`expandCategory`]),
 
     getCategoryId () {
       const currentDocument = this.getDocument(this.$route.params.documentId)
@@ -27,6 +28,8 @@ export default {
     async handleCreateDocument () {
       const categoryId = this.getCategoryId()
       const newDocument = await this.createDocument(categoryId)
+
+      this.expandCategory(categoryId)
 
       this.$router.push({
         name: `library.document`,
