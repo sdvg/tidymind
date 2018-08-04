@@ -42,8 +42,15 @@
     color: #b5b5b5;
   }
 
+  .label {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   .category-icon,
   .document-icon {
+    flex-shrink: 0;
     width: 10px;
     height: 10px;
     margin-right: 6px;
@@ -65,7 +72,7 @@
       <IconBase class="category-icon">
         <IconChevronRight />
       </IconBase>
-      {{ category.title }}
+      <span class="label">{{ category.title }}</span>
     </button>
 
     <ExpandTransition>
@@ -90,8 +97,10 @@
                 <IconFileText />
               </IconBase>
 
-              <template v-if="document.title">{{ document.title }}</template>
-              <template v-else>Unnamed document</template>
+              <span class="label">
+                <template v-if="document.title">{{ document.title }}</template>
+                <template v-else>Unnamed document</template>
+              </span>
             </router-link>
           </li>
         </ol>
