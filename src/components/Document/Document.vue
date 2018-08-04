@@ -65,9 +65,9 @@
 
       <footer class="footer">
         <div>
-          <span>created: {{ document.createdAt | date }}</span>
-          <span v-if="document.updatedAt">
-            last change: {{ document.updatedAt | date }}
+          <span>created: {{ document.hoodie.createdAt | date }}</span>
+          <span v-if="document.hoodie.updatedAt">
+            last change: {{ document.hoodie.updatedAt | date }}
           </span>
         </div>
 

@@ -1,45 +1,29 @@
+import Hoodie from '@hoodie/client'
 import PouchDB from 'pouchdb-browser'
-import uuid from 'uuid/v4'
 
-const db = new PouchDB(`localfornow`)
+const hoodie = new Hoodie({
+  url: `localfornow`,
+  PouchDB,
+})
+
+const documentStore = hoodie.store.withIdPrefix(`document`)
+const categoryStore = hoodie.store.withIdPrefix(`category`)
 
 if (process.env.NODE_ENV === `development`) {
-  window.db = db
+  window.hoodie = hoodie
 }
 
 export const TYPE_DOCUMENT = `document`
 export const TYPE_CATEGORY = `category`
 
-export const putDocument = async document => {
-  const currentDateString = new Date().toJSON()
-  const updatedDocument = {
-    ...document,
-    _id: document._id || uuid(),
-    type: TYPE_DOCUMENT,
-    createdAt: document.createdAt || currentDateString,
-    updatedAt: currentDateString,
-  }
+export const addDocument = document => documentStore.add(document)
 
-  const update = await db.put(updatedDocument)
+export const updateDocument = document => documentStore.update(document)
 
-  return {
-    ...updatedDocument,
-    _rev: update.rev,
-  }
-}
+export const removeDocument = document => documentStore.remove(document)
 
-export const removeDocument = document => db.remove(document)
+export const getDocument = documentId => documentStore.find(documentId)
 
-export const getDocument = documentId => db.get(documentId)
+export const getAllDocuments = () => documentStore.findAll()
 
-export const getAllDocuments = async () => {
-  const allDocuments = await db.allDocs({ include_docs: true })
-
-  return allDocuments.rows.map(row => row.doc).filter(document => document.type === TYPE_DOCUMENT)
-}
-
-export const getAllCategories = async () => {
-  const allDocuments = await db.allDocs({ include_docs: true })
-
-  return allDocuments.rows.map(row => row.doc).filter(document => document.type === TYPE_CATEGORY)
-}
+export const getAllCategories = () => categoryStore.findAll()

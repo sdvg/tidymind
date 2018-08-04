@@ -1,6 +1,7 @@
 import {
   getAllDocuments,
-  putDocument,
+  addDocument,
+  updateDocument,
   removeDocument,
 } from '@/lib/dataStoreClient'
 import { find, filter } from 'lodash'
@@ -41,11 +42,11 @@ export default {
     },
 
     async updateDocument ({ commit }, document) {
-      commit(`updateDocument`, await putDocument(document))
+      commit(`updateDocument`, await updateDocument(document))
     },
 
     async createDocument ({ commit, getters, rootGetters }, categoryId) {
-      const newDocument = await putDocument({
+      const newDocument = await addDocument({
         title: ``,
         content: ``,
         category: categoryId,

@@ -1,25 +1,25 @@
 /* eslint-env jest */
 
 import documentsModule from './documents'
-import { putDocument } from '@/lib/dataStoreClient'
+import { addDocument, updateDocument } from '@/lib/dataStoreClient'
 
 jest.mock(`@/lib/dataStoreClient`, () => ({
-  putDocument: jest.fn(document => ({ ...document, _id: `1` })),
+  addDocument: jest.fn(document => ({ ...document, _id: `1` })),
 }))
 
 const { actions } = documentsModule
 
 describe(`documents store module`, () => {
   beforeEach(() => {
-    putDocument.mockClear()
+    addDocument.mockClear()
   })
 
   describe(`actions`, () => {
     describe(`createDocument`, () => {
-      it(`calls putDocument`, async () => {
+      it(`calls addDocument`, async () => {
         actions.createDocument({ commit: jest.fn() }, `1`)
 
-        expect(putDocument).toHaveBeenCalledWith({
+        expect(addDocument).toHaveBeenCalledWith({
           title: ``,
           content: ``,
           category: `1`,
