@@ -1,17 +1,7 @@
-import Hoodie from '@hoodie/client'
-import PouchDB from 'pouchdb-browser'
-
-const hoodie = new Hoodie({
-  url: `localfornow`,
-  PouchDB,
-})
+import hoodie from './hoodie'
 
 const documentStore = hoodie.store.withIdPrefix(`document`)
 const categoryStore = hoodie.store.withIdPrefix(`category`)
-
-if (process.env.NODE_ENV === `development`) {
-  window.hoodie = hoodie
-}
 
 export const TYPE_DOCUMENT = `document`
 export const TYPE_CATEGORY = `category`

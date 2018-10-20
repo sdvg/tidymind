@@ -11,16 +11,19 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "hoodie": "hoodie --port=8081"
   },
   "dependencies": {
     "@hoodie/client": "^10.1.1",
+    "hoodie": "^28.2.6",
     "lodash": "^4.17.5",
     "moment": "^2.22.2",
     "pouchdb-browser": "^6.4.3",
     "tinymce": "^4.7.13",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

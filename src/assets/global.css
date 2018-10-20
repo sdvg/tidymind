@@ -1,8 +1,24 @@
 :root {
+  --color-primary: #005bff;
   --color-accent: hsla(340, 82%, 40%, 1);
+  --color-accent-dark: hsla(340, 82%, 35%, 1);
   --color-text: #404040;
   --color-gray: #acacac;
+  --color-error: #d9534f;
+
+  --space: 16px;
+  --space-s: 14px;
+  --space-xs: 12px;
+  --space-xxs: 10px;
+  --space-xxxs: 8px;
+  --space-xxxxs: 6px;
+  --space-xxxxxs: 4px;
+  --space-xxxxxxs: 2px;
+
+  --font-size-s: 12px;
   --font-size: 14px;
+  --font-size-l: 16px;
+  --font-size-xl: 18px;
 }
 
 @font-face {
