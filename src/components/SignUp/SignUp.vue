@@ -1,4 +1,5 @@
 <script>
+import router from '../../router'
 import Button from '@/components/Button'
 import ErrorMessage from '@/components/ErrorMessage'
 import Form from '@/components/formControls/Form'
@@ -82,7 +83,8 @@ export default {
       try {
         await hoodie.account.signUp(credentials)
         await hoodie.account.signIn(credentials)
-        // @todo redirect to lib
+
+        router.push(`library`)
       } catch (error) {
         this.handleError(error)
       } finally {
