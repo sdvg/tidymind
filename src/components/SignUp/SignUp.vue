@@ -1,5 +1,6 @@
 <script>
 import Button from '@/components/Button'
+import ErrorMessage from '@/components/ErrorMessage'
 import Form from '@/components/formControls/Form'
 import hoodie from '@/lib/hoodie'
 import IconAngleLeft from '@/components/icons/IconAngleLeft'
@@ -11,11 +12,12 @@ import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
   mixins: [validationMixin],
   components: {
-    Form,
-    InputField,
     Button,
-    IconBase,
+    ErrorMessage,
+    Form,
     IconAngleLeft,
+    IconBase,
+    InputField,
   },
   data () {
     return {
@@ -23,6 +25,7 @@ export default {
       password: ``,
       repeatedPassword: ``,
       isRequestPending: false,
+      formErrorMessage: null,
     }
   },
   validations: {
@@ -69,6 +72,7 @@ export default {
           password: this.password,
         }
 
+        this.formErrorMessage = null
         this.isRequestPending = true
         this.signUpAndSignIn(credentials)
       }
@@ -77,7 +81,7 @@ export default {
     async signUpAndSignIn (credentials) {
       try {
         await hoodie.account.signUp(credentials)
-        hoodie.account.signIn(credentials)
+        await hoodie.account.signIn(credentials)
         // @todo redirect to lib
       } catch (error) {
         this.handleError(error)
@@ -87,8 +91,7 @@ export default {
     },
 
     handleError (error) {
-      debugger
-      console.log(error)
+      this.formErrorMessage = error.message
     },
   },
 }
@@ -96,8 +99,15 @@ export default {
 
 <template>
   <div class="SignUp">
-    <div>
+    <div class="content-container">
       <h1 class="headline">Create your account</h1>
+
+      <ErrorMessage
+        v-if="formErrorMessage"
+        class="error-message"
+      >
+        {{ formErrorMessage }}
+      </ErrorMessage>
 
       <Form
         class="form"
@@ -135,7 +145,7 @@ export default {
           theme="accent"
           type="submit"
           :isDisabled="isRequestPending"
-          :isLoading="true"
+          :isLoading="isRequestPending"
         >
           Sign up
         </Button>
@@ -163,14 +173,22 @@ export default {
     height: 100%;
   }
 
+  .content-container {
+    width: 360px;
+    max-width: 100%;
+    margin-top: var(--space);
+  }
+
   .headline {
     font-size: 30px;
     color: var(--color-accent);
   }
 
+  .error-message {
+    margin-top: var(--space);
+  }
+
   .form {
-    width: 360px;
-    max-width: 100%;
     margin-top: var(--space);
   }
 

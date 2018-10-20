@@ -3,8 +3,11 @@
   --color-accent: hsla(340, 82%, 40%, 1);
   --color-accent-dark: hsla(340, 82%, 35%, 1);
   --color-text: #404040;
+  --color-text-dark: #2c2c2c;
+  --color-text-light: #fdfdfd;
   --color-gray: #acacac;
   --color-error: #d9534f;
+  --color-error-dark: #ae0725;
 
   --space: 16px;
   --space-s: 14px;
