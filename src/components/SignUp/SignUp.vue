@@ -170,7 +170,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100%;
   }
 
   .content-container {
