@@ -1,5 +1,6 @@
 <style scoped>
   .button {
+    position: relative;
     padding: var(--space-xs);
     font-size: var(--font-size);
     text-transform: uppercase;
@@ -23,6 +24,15 @@
   .accent:not([disabled]):focus {
     background: var(--color-accent-dark);
   }
+
+  .spinner-wrapper {
+    position: absolute;
+    top: 50%;
+    left: var(--space-xs);
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+  }
 </style>
 
 <template>
@@ -31,12 +41,20 @@
     :title="title"
     :disabled="isDisabled"
     :class="{
-      button: true,
-      primary: theme === themes.PRIMARY,
-      accent: theme === themes.ACCENT,
+      'button': true,
+      'primary': theme === themes.PRIMARY,
+      'accent': theme === themes.ACCENT,
+      'is-loading': isLoading,
     }"
     @click="$emit(`onClick`)"
   >
+    <div
+      v-if="isLoading"
+      class="spinner-wrapper"
+    >
+      <Spinner />
+    </div>
+
     <slot>
       {{ title }}
     </slot>
@@ -44,12 +62,17 @@
 </template>
 
 <script>
+import Spinner from '../components/Spinner'
+
 const themes = {
   PRIMARY: `primary`,
   ACCENT: `accent`,
 }
 
 export default {
+  components: {
+    Spinner,
+  },
   props: {
     type: {
       type: String,
@@ -64,10 +87,8 @@ export default {
       default: `primary`,
       validator: value => Object.values(themes).includes(value),
     },
-    isDisabled: {
-      type: Boolean,
-      default: false,
-    },
+    isDisabled: Boolean,
+    isLoading: Boolean,
   },
   data () {
     return { themes }

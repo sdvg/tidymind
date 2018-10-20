@@ -135,6 +135,7 @@ export default {
           theme="accent"
           type="submit"
           :isDisabled="isRequestPending"
+          :isLoading="true"
         >
           Sign up
         </Button>
