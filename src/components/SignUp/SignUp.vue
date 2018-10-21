@@ -7,6 +7,7 @@ import hoodie from '@/lib/hoodie'
 import IconAngleLeft from '@/components/icons/IconAngleLeft'
 import IconBase from '@/components/icons/IconBase'
 import InputField from '@/components/formControls/InputField'
+import { signInAndDeriveEncryptionKey } from '../../lib/account'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 
@@ -87,7 +88,7 @@ export default {
     async signUpAndSignIn (credentials) {
       try {
         await hoodie.account.signUp(credentials)
-        await hoodie.account.signIn(credentials)
+        await signInAndDeriveEncryptionKey(credentials)
 
         router.push({ name: `library` })
       } catch (error) {
