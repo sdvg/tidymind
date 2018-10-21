@@ -1,6 +1,9 @@
 <style scoped>
   .button {
     position: relative;
+  }
+
+  .button:not(.plain) {
     padding: var(--space-xs);
     font-size: var(--font-size);
     text-transform: uppercase;
@@ -44,6 +47,7 @@
       'button': true,
       'primary': theme === themes.PRIMARY,
       'accent': theme === themes.ACCENT,
+      'plain': theme === themes.PLAIN,
       'is-loading': isLoading,
     }"
     @click="$emit(`onClick`)"
@@ -67,6 +71,7 @@ import Spinner from '../components/Spinner'
 const themes = {
   PRIMARY: `primary`,
   ACCENT: `accent`,
+  PLAIN: `plain`,
 }
 
 export default {
