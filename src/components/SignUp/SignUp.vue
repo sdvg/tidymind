@@ -89,7 +89,7 @@ export default {
         await hoodie.account.signUp(credentials)
         await hoodie.account.signIn(credentials)
 
-        router.push(`library`)
+        router.push({ name: `library` })
       } catch (error) {
         this.handleError(error)
       } finally {
