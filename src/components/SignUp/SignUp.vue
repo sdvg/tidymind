@@ -20,6 +20,11 @@ export default {
     IconBase,
     InputField,
   },
+  async beforeRouteEnter (to, from, next) {
+    const isSignedIn = Boolean(await hoodie.account.get(`session`))
+
+    next(isSignedIn ? `library` : true)
+  },
   data () {
     return {
       username: ``,
