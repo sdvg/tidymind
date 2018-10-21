@@ -5,6 +5,10 @@
     flex-grow: 1;
   }
 
+  .noDocumentNotice {
+    padding: var(--space-xxxs);
+  }
+
   .title {
     outline: none;
     border: none;
@@ -36,14 +40,17 @@
 
 <template>
   <div class="Document">
-    <template v-if="!document">
+    <div
+      v-if="!document"
+      class="noDocumentNotice"
+    >
       <template v-if="documentsLoaded">
         Document not found
       </template>
       <template v-else>
         Loading&hellip;
       </template>
-    </template>
+    </div>
 
     <template v-if="document">
       <input
