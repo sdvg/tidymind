@@ -41,7 +41,11 @@ export default {
         }
       }
 
-      expandRecursive(state.categories.find(isDocumentInCategory))
+      const documentsCategory = state.categories.find(isDocumentInCategory)
+
+      if (documentsCategory) {
+        expandRecursive(documentsCategory)
+      }
     },
     toggleCategoryExpansion ({ commit, state, getters }, categoryId) {
       if (getters.isCategoryExpanded(categoryId)) {
