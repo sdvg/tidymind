@@ -1,19 +1,24 @@
 <style>
   .Sidebar {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     background: var(--color-accent);
   }
 
   .documentList {
-    margin: 8px 0;
+    margin: var(--space-xxxs) 0;
     overflow: auto;
+  }
+
+  .actions {
+    margin-top: auto;
   }
 </style>
 
 <template>
   <aside class="Sidebar">
+    <AccountStatus />
+
     <p v-if="!isDataLoaded">Loading...</p>
 
     <DocumentsList
@@ -21,7 +26,7 @@
       v-if="isDataLoaded"
     />
 
-    <div>
+    <div class="actions">
       <CreateDocumentButton />
     </div>
   </aside>
@@ -30,10 +35,12 @@
 <script>
 import CreateDocumentButton from './CreateDocumentButton'
 import DocumentsList from './DocumentsList'
+import AccountStatus from './AccountStatus'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
+    AccountStatus,
     CreateDocumentButton,
     DocumentsList,
   },

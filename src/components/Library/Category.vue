@@ -19,7 +19,7 @@
 
   .category:hover,
   .category:focus {
-    color: #1f1f1f;
+    color: var(--color-dark);
   }
 
   .document:hover,
@@ -33,7 +33,7 @@
   }
 
   .document.is-open {
-    background: #1f1f1f;
+    background: var(--color-dark);
     color: #d6d6d6;
   }
 
