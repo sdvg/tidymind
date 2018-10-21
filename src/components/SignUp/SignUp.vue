@@ -191,14 +191,8 @@ export default {
     color: var(--color-accent);
   }
 
-  .error-message {
-    margin-top: var(--space);
-  }
-
-  .form {
-    margin-top: var(--space);
-  }
-
+  .error-message,
+  .form,
   .button {
     margin-top: var(--space);
   }
