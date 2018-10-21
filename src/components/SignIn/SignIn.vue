@@ -1,39 +1,134 @@
 <script>
-import Form from '@/components/formControls/Form'
-import InputField from '@/components/formControls/InputField'
+import router from '../../router'
 import Button from '@/components/Button'
-import IconBase from '@/components/icons/IconBase'
+import ErrorMessage from '@/components/ErrorMessage'
+import Form from '@/components/formControls/Form'
+import hoodie from '@/lib/hoodie'
 import IconAngleLeft from '@/components/icons/IconAngleLeft'
+import IconBase from '@/components/icons/IconBase'
+import InputField from '@/components/formControls/InputField'
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
+  mixins: [validationMixin],
   components: {
-    Form,
-    InputField,
     Button,
-    IconBase,
+    ErrorMessage,
+    Form,
     IconAngleLeft,
+    IconBase,
+    InputField,
+  },
+  async beforeRouteEnter (to, from, next) {
+    const isSignedIn = Boolean(await hoodie.account.get(`session`))
+
+    next(isSignedIn ? `library` : true)
+  },
+  data () {
+    return {
+      username: ``,
+      password: ``,
+      isRequestPending: false,
+      formErrorMessage: null,
+    }
+  },
+  validations: {
+    username: { required },
+    password: { required },
+  },
+  methods: {
+    hasError (fieldName) {
+      const fieldValidation = this.$v[fieldName]
+
+      return fieldValidation.$dirty && fieldValidation.$invalid
+    },
+
+    getErrorMessage (fieldName) {
+      switch (fieldName) {
+        case `username`:
+          return `Please provide a username.`
+        case `password`:
+          return `Please provide a password.`
+        default:
+          return `Field is required.`
+      }
+    },
+
+    async handleSubmit () {
+      this.$v.$touch()
+
+      if (!this.$v.$invalid) {
+        const credentials = {
+          username: this.username,
+          password: this.password,
+        }
+
+        this.formErrorMessage = null
+        this.isRequestPending = true
+        this.signIn(credentials)
+      }
+    },
+
+    async signIn (credentials) {
+      try {
+        await hoodie.account.signIn(credentials)
+
+        router.push(`library`)
+      } catch (error) {
+        this.handleError(error)
+      } finally {
+        this.isRequestPending = false
+      }
+    },
+
+    handleError (error) {
+      this.formErrorMessage = error.message
+    },
   },
 }
 </script>
 
 <template>
-  <div class="SignUp">
-    <div class="div">
+  <div class="SignIn">
+    <div class="content-container">
       <h1 class="headline">Welcome back!</h1>
 
-      <Form class="form">
+      <ErrorMessage
+        v-if="formErrorMessage"
+        class="error-message"
+      >
+        {{ formErrorMessage }}
+      </ErrorMessage>
+
+      <Form
+        class="form"
+        @submit="handleSubmit"
+      >
         <InputField
           label="Username"
+          v-model="username"
+          @blur="$v.username.$touch()"
+          :attributes="{ autofocus: true }"
+          :hasError="hasError(`username`)"
+          :errorMessage="getErrorMessage(`username`)"
         />
 
         <InputField
           label="Password"
           type="password"
+          @blur="$v.password.$touch()"
+          v-model="password"
+          :hasError="hasError(`password`)"
+          :errorMessage="getErrorMessage(`password`)"
         />
 
         <Button
           class="button"
           theme="accent"
+          type="submit"
+          :isDisabled="isRequestPending"
+          :isLoading="isRequestPending"
         >
           Sign in
         </Button>
@@ -54,11 +149,17 @@ export default {
 </template>
 
 <style scoped>
-  .SignUp {
+  .SignIn {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    min-height: 100%;
+  }
+
+  .content-container {
+    width: 360px;
+    max-width: 100%;
+    margin-top: var(--space);
   }
 
   .headline {
@@ -66,12 +167,8 @@ export default {
     color: var(--color-accent);
   }
 
-  .form {
-    width: 360px;
-    max-width: 100%;
-    margin-top: var(--space);
-  }
-
+  .error-message,
+  .form,
   .button {
     margin-top: var(--space);
   }
