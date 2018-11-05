@@ -19,6 +19,7 @@
     "hoodie": "^28.2.6",
     "lodash": "^4.17.5",
     "moment": "^2.22.2",
+    "portal-vue": "^1.4.0",
     "pouchdb-browser": "^6.4.3",
     "tinymce": "^4.7.13",
     "unibabel": "^2.1.7",
