@@ -32,7 +32,8 @@
   }
 
   .result-item {
-    display: block;
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: left;
     padding: var(--space-xxxs) var(--space-xs);
@@ -44,6 +45,12 @@
   .result-item.is-active {
     background: var(--color-dark);
     color: #d6d6d6;
+  }
+
+  .result-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: var(--space-xxs);
   }
 </style>
 
@@ -86,6 +93,10 @@
             :to="{ name: 'library.document', params: { documentId: result._id } }"
             @click.native="expandCategoriesForDocumentId(result._id)"
           >
+            <IconBase class="result-icon">
+              <IconFileText />
+            </IconBase>
+
             {{ result.title }}
           </router-link>
 
@@ -95,6 +106,10 @@
             :class="{ 'is-active': index === focusedIndex }"
             @click="openCategory(result)"
           >
+            <IconBase class="result-icon">
+              <IconFolder />
+            </IconBase>
+
             {{ result.title }}
           </button>
         </li>
@@ -106,11 +121,17 @@
 <script>
 import Modal from '../Modal'
 import { mapState, mapActions } from 'vuex'
-import shortcuts from '../../mixins/shortcuts'
+import shortcuts from '@/mixins/shortcuts'
+import IconBase from '@/components/icons/IconBase'
+import IconFolder from '@/components/icons/IconFolder'
+import IconFileText from '@/components/icons/IconFileText'
 
 export default {
   mixins: [shortcuts],
   components: {
+    IconBase,
+    IconFolder,
+    IconFileText,
     Modal,
   },
   mounted () {
