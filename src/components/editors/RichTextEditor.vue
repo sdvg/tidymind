@@ -41,6 +41,7 @@ import tinymce from 'tinymce'
 import 'tinymce/themes/modern/theme'
 import 'tinymce/skins/lightgray/skin.min.css'
 import 'tinymce/skins/lightgray/content.min.css'
+import { handleKeydownEvent } from '../../mixins/shortcuts'
 
 export default {
   props: {
@@ -55,6 +56,7 @@ export default {
       resize: false,
       statusbar: false,
       init_instance_callback: editor => {
+        editor.on(`keydown`, handleKeydownEvent)
         editor.on(`keyup`, () => {
           this.$emit(`contentChanged`, editor.getContent())
         })

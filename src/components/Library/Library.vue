@@ -25,9 +25,11 @@
 <script>
 import Sidebar from './Sidebar'
 import SwitchPanel from './SwitchPanel'
+import shortcuts from '../../mixins/shortcuts'
 import { mapActions } from 'vuex'
 
 export default {
+  mixins: [shortcuts],
   components: {
     Sidebar,
     SwitchPanel,
@@ -50,18 +52,14 @@ export default {
   mounted () {
     this.fetchAndSubscribeCategories()
     this.fetchAndSubscribeDocuments()
-
-    document.addEventListener(`keydown`, event => {
-      if (event.which === 74 && event.metaKey) {
-        this.toggleSwitchPanel()
-      }
-      if (event.which === 27) {
-        this.closeSwitchPanel()
-      }
-    })
   },
-  destroyed () {
-    // @todo: unregister
+  shortcuts: {
+    esc () {
+      this.closeSwitchPanel()
+    },
+    switchPanel () {
+      this.toggleSwitchPanel()
+    },
   },
 }
 </script>
