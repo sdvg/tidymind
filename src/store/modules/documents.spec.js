@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import documentsModule from './documents'
-import { addDocument, updateDocument } from '@/lib/dataStoreClient'
+import { addDocument } from '@/lib/dataStoreClient'
 
 jest.mock(`@/lib/dataStoreClient`, () => ({
   addDocument: jest.fn(document => ({ ...document, _id: `1` })),

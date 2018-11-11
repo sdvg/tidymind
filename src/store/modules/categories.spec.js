@@ -40,7 +40,7 @@ describe(`categories store module`, () => {
 
       expect(state.expandedCategories).toEqual([])
     })
-  });
+  })
 
   describe(`actions`, () => {
     it(`expandCategoriesRecursively`, () => {

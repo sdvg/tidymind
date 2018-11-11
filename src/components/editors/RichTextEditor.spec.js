@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import tinymce from 'tinymce';
+import tinymce from 'tinymce'
 import RichTextEditor from './RichTextEditor'
 import { shallowMount } from '@vue/test-utils'
 
