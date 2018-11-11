@@ -136,8 +136,8 @@ export default {
     ...mapState(`documents`, [`documents`]),
     results () {
       return [
-        ...this.categories,
-        ...this.documents,
+        ...this.categories || [],
+        ...this.documents || [],
       ]
         .filter(entity => entity.title.trim() !== ``) // don't show entities without title
         .filter(entity => entity.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
