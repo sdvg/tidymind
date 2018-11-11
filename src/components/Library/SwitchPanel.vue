@@ -141,6 +141,11 @@ export default {
       ]
         .filter(entity => entity.title.trim() !== ``) // don't show entities without title
         .filter(entity => entity.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        .sort(({ title: titleA }, { title: titleB }) => {
+          if (titleA < titleB) return -1
+          else if (titleB > titleA) return 1
+          else return 0
+        })
         .slice(0, 15) // limit to 15 visible results
     },
     resultsLength () {
