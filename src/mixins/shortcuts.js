@@ -1,7 +1,11 @@
 import { without } from 'lodash'
 
 const KEYMAP = {
+  enter: 13,
   esc: 27,
+  space: 32,
+  up: 38,
+  down: 40,
   j: 74,
 }
 
@@ -18,11 +22,12 @@ const emitShortcut = (name, event) => {
 }
 
 const handleKeydownEvent = event => {
-  if (event.which === KEYMAP.j && event.metaKey) {
-    emitShortcut(`switchPanel`, event)
-  } else if (event.which === KEYMAP.esc) {
-    emitShortcut(`esc`, event)
-  }
+  if (event.which === KEYMAP.j && event.metaKey) emitShortcut(`switchPanel`, event)
+  else if (event.which === KEYMAP.enter) emitShortcut(`enter`, event)
+  else if (event.which === KEYMAP.esc) emitShortcut(`esc`, event)
+  else if (event.which === KEYMAP.space) emitShortcut(`space`, event)
+  else if (event.which === KEYMAP.up) emitShortcut(`up`, event)
+  else if (event.which === KEYMAP.down) emitShortcut(`down`, event)
 }
 
 document.addEventListener(`keydown`, handleKeydownEvent)

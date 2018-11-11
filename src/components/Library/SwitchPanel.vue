@@ -41,7 +41,7 @@
     font-size: var(--font-size-l);
   }
 
-  .result-item:hover {
+  .result-item.is-active {
     background: var(--color-dark);
     color: #d6d6d6;
   }
@@ -49,7 +49,10 @@
 
 <template>
   <Modal @closeModal="$emit(`closePanel`)">
-    <div class="SwitchPanel">
+    <div
+      class="SwitchPanel"
+      @mouseout="resetFocusedIndex"
+    >
       <div class="input-container">
         <input
           v-model="searchQuery"
@@ -71,13 +74,15 @@
         v-if="hasResults"
       >
         <li
-          v-for="result in results"
+          v-for="(result, index) in results"
           :key="result._id"
           @click="$emit(`closePanel`)"
+          @mouseover="focusedIndex = index"
         >
           <router-link
             v-if="result._id.startsWith(`document`)"
             class="result-item"
+            :class="{ 'is-active': index === focusedIndex }"
             :to="{ name: 'library.document', params: { documentId: result._id } }"
             @click.native="expandCategoriesForDocumentId(result._id)"
           >
@@ -87,6 +92,7 @@
           <button
             v-if="result._id.startsWith(`category`)"
             class="result-item"
+            :class="{ 'is-active': index === focusedIndex }"
             @click="openCategory(result)"
           >
             {{ result.title }}
@@ -100,8 +106,10 @@
 <script>
 import Modal from '../Modal'
 import { mapState, mapActions } from 'vuex'
+import shortcuts from '../../mixins/shortcuts'
 
 export default {
+  mixins: [shortcuts],
   components: {
     Modal,
   },
@@ -115,7 +123,13 @@ export default {
   data () {
     return {
       searchQuery: ``,
+      focusedIndex: null,
     }
+  },
+  watch: {
+    searchQuery () {
+      this.resetFocusedIndex()
+    },
   },
   computed: {
     ...mapState(`categories`, [`categories`]),
@@ -129,6 +143,9 @@ export default {
         .filter(entity => entity.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
         .slice(0, 15) // limit to 15 visible results
     },
+    resultsLength () {
+      return this.results.length
+    },
     hasResults () {
       return Boolean(this.results.length)
     },
@@ -138,6 +155,45 @@ export default {
       openCategory: `expandCategoriesRecursively`,
       expandCategoriesForDocumentId: `expandCategoriesForDocumentId`,
     }),
+    resetFocusedIndex () {
+      this.focusedIndex = this.searchQuery.length ? 0 : null
+    },
+    openFocusedResult () {
+      const focusedResult = this.results[this.focusedIndex]
+
+      if (focusedResult._id.startsWith(`category`)) {
+        this.openCategory(focusedResult)
+      } else if (focusedResult._id.startsWith(`document`)) {
+        this.$router.push({
+          name: `library.document`,
+          params: { documentId: focusedResult._id },
+        })
+      }
+
+      this.$emit(`closePanel`)
+    },
+  },
+  shortcuts: {
+    down () {
+      if (this.focusedIndex === null || this.focusedIndex === this.resultsLength - 1) {
+        this.focusedIndex = 0
+      } else {
+        this.focusedIndex = this.focusedIndex + 1
+      }
+    },
+    up () {
+      if (this.focusedIndex === null || this.focusedIndex === 0) {
+        this.focusedIndex = this.resultsLength - 1
+      } else {
+        this.focusedIndex = this.focusedIndex - 1
+      }
+    },
+    enter () {
+      this.openFocusedResult()
+    },
+    space () {
+      this.openFocusedResult()
+    },
   },
 }
 </script>
