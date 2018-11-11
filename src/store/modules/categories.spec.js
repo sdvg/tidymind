@@ -43,6 +43,31 @@ describe(`categories store module`, () => {
   });
 
   describe(`actions`, () => {
+    it(`expandCategoriesRecursively`, () => {
+      const state = {
+        categories: [
+          {
+            _id: `1`,
+            parent: null,
+          },
+          {
+            _id: `2`,
+            parent: `1`,
+          },
+        ],
+      }
+
+      const commit = jest.fn()
+
+      actions.expandCategoriesRecursively({ commit, state }, {
+        _id: `2`,
+        parent: `1`,
+      })
+
+      expect(commit).toHaveBeenCalledWith(`expandCategory`, `2`)
+      expect(commit).toHaveBeenCalledWith(`expandCategory`, `1`)
+    })
+
     it(`expandCategoriesForDocumentId`, () => {
       const state = {
         categories: [
@@ -65,12 +90,14 @@ describe(`categories store module`, () => {
 
       const documentId = `1`
 
-      const commit = jasmine.createSpy()
+      const dispatch = jasmine.createSpy()
 
-      actions.expandCategoriesForDocumentId({ commit, state, rootGetters }, documentId)
+      actions.expandCategoriesForDocumentId({ dispatch, state, rootGetters }, documentId)
 
-      expect(commit).toHaveBeenCalledWith(`expandCategory`, `1`)
-      expect(commit).toHaveBeenCalledWith(`expandCategory`, `2`)
+      expect(dispatch).toHaveBeenCalledWith(`expandCategoriesRecursively`, {
+        _id: `2`,
+        parent: `1`,
+      })
     })
   })
 

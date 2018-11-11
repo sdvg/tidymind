@@ -25,14 +25,7 @@ export default {
       // @todo subscribe to changes
       commit(`setCategories`, await getAllCategories())
     },
-    expandCategoriesForDocumentId ({ commit, state, rootGetters }, documentId) {
-      const getDocumentsForCategory = rootGetters[`documents/getDocumentsForCategory`]
-      const isDocumentInCategory = category => {
-        const documentsInCategory = getDocumentsForCategory(category._id)
-
-        return documentsInCategory && documentsInCategory.map(document => document._id).includes(documentId)
-      }
-
+    expandCategoriesRecursively ({ commit, state }, category) {
       const expandRecursive = category => {
         commit(`expandCategory`, category._id)
 
@@ -41,10 +34,20 @@ export default {
         }
       }
 
+      expandRecursive(category)
+    },
+    expandCategoriesForDocumentId ({ commit, dispatch, state, rootGetters }, documentId) {
+      const getDocumentsForCategory = rootGetters[`documents/getDocumentsForCategory`]
+      const isDocumentInCategory = category => {
+        const documentsInCategory = getDocumentsForCategory(category._id)
+
+        return documentsInCategory && documentsInCategory.map(document => document._id).includes(documentId)
+      }
+
       const documentsCategory = state.categories.find(isDocumentInCategory)
 
       if (documentsCategory) {
-        expandRecursive(documentsCategory)
+        dispatch(`expandCategoriesRecursively`, documentsCategory)
       }
     },
     toggleCategoryExpansion ({ commit, state, getters }, categoryId) {

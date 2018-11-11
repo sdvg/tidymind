@@ -78,6 +78,7 @@
             v-if="result._id.startsWith(`document`)"
             class="result-item"
             :to="{ name: 'library.document', params: { documentId: result._id } }"
+            @click.native="expandCategoriesForDocumentId(result._id)"
           >
             {{ result.title }}
           </router-link>
@@ -85,6 +86,7 @@
           <button
             v-if="result._id.startsWith(`category`)"
             class="result-item"
+            @click="openCategory(result)"
           >
             {{ result.title }}
           </button>
@@ -96,7 +98,7 @@
 
 <script>
 import Modal from '../Modal'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -129,6 +131,12 @@ export default {
     hasResults () {
       return Boolean(this.results.length)
     },
+  },
+  methods: {
+    ...mapActions(`categories`, {
+      openCategory: `expandCategoriesRecursively`,
+      expandCategoriesForDocumentId: `expandCategoriesForDocumentId`,
+    }),
   },
 }
 </script>
