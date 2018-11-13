@@ -61,6 +61,8 @@ export default {
           this.$emit(`contentChanged`, editor.getContent())
         })
       },
+    }).then(editors => {
+      editors[0].focus()
     })
   },
   destroyed () {
