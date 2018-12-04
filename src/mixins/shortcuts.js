@@ -1,4 +1,4 @@
-import { without } from 'lodash'
+import { find, without } from 'lodash'
 
 const KEYMAP = {
   enter: 13,
@@ -7,6 +7,19 @@ const KEYMAP = {
   up: 38,
   down: 40,
   j: 74,
+}
+
+const shortcuts = {
+  singleKey: [
+    { name: `enter`, key: KEYMAP.enter },
+    { name: `esc`, key: KEYMAP.esc },
+    { name: `space`, key: KEYMAP.space },
+    { name: `up`, key: KEYMAP.up },
+    { name: `down`, key: KEYMAP.down },
+  ],
+  withMeta: [
+    { name: `switchPanel`, key: KEYMAP.j },
+  ],
 }
 
 let instances = []
@@ -22,12 +35,19 @@ const emitShortcut = (name, event) => {
 }
 
 const handleKeydownEvent = event => {
-  if (event.which === KEYMAP.j && event.metaKey) emitShortcut(`switchPanel`, event)
-  else if (event.which === KEYMAP.enter) emitShortcut(`enter`, event)
-  else if (event.which === KEYMAP.esc) emitShortcut(`esc`, event)
-  else if (event.which === KEYMAP.space) emitShortcut(`space`, event)
-  else if (event.which === KEYMAP.up) emitShortcut(`up`, event)
-  else if (event.which === KEYMAP.down) emitShortcut(`down`, event)
+  const findAndEmit = (shortcutsCategory, event) => {
+    const shortcut = find(shortcutsCategory, { key: event.which })
+
+    if (shortcut) {
+      emitShortcut(shortcut.name, event)
+    }
+  }
+
+  if (event.metaKey && !event.altKey) {
+    findAndEmit(shortcuts.withMeta, event)
+  } else if (!event.altKey) {
+    findAndEmit(shortcuts.singleKey, event)
+  }
 }
 
 document.addEventListener(`keydown`, handleKeydownEvent)
