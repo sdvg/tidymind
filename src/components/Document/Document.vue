@@ -34,7 +34,7 @@
     justify-content: space-between;
     align-items: center;
     background: var(--color-gray);
-    padding: 2px 8px;
+    padding: var(--space-xxxxxs) var(--space-xxxs);
   }
 </style>
 
@@ -80,7 +80,7 @@
 
         <div>
           <Button
-            title="delete"
+            title="Delete"
             @onClick="remove(document)"
           />
         </div>

@@ -3,23 +3,26 @@
     position: relative;
   }
 
-  .button:not(.plain) {
-    padding: var(--space-xs);
-    font-size: var(--font-size);
-    text-transform: uppercase;
-  }
-
   .button[disabled] {
     opacity: .6;
     cursor: not-allowed;
   }
 
   .primary {
-    background: lightblue;
-    color: #1d1d1d;
+    font-size: var(--font-size-s);
+    padding: var(--space-xxxxxs) var(--space-xxs);
+    background: var(--color-dark);
+    color: var(--color-gray);
+    border-radius: 3px;
+  }
+  .primary:hover {
+    background: var(--color-text-dark);
   }
 
   .accent {
+    padding: var(--space-xs);
+    font-size: var(--font-size);
+    text-transform: uppercase;
     background: var(--color-accent);
     color: #fff;
   }

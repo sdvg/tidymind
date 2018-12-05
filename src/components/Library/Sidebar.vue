@@ -12,6 +12,7 @@
 
   .actions {
     margin-top: auto;
+    padding: var(--space-xxxxxs) var(--space-xxxs);
   }
 </style>
 
