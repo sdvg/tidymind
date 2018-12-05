@@ -3,6 +3,7 @@ import {
   addDocument,
   updateDocument,
   removeDocument,
+  documentStore,
 } from '@/lib/dataStoreClient'
 import { find, filter } from 'lodash'
 
@@ -30,13 +31,10 @@ export default {
   actions: {
     async fetchAndSubscribe ({ commit }) {
       const fetch = async () => {
-        const documents = await getAllDocuments()
-
-        commit(`setDocuments`, documents)
+        commit(`setDocuments`, await getAllDocuments())
       }
 
-      // @todo
-      // documentStore.on('change', fetch)
+      documentStore.on(`change`, fetch)
 
       fetch()
     },

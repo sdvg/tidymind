@@ -1,4 +1,7 @@
-import { getAllCategories } from '@/lib/dataStoreClient'
+import {
+  getAllCategories,
+  categoryStore,
+} from '@/lib/dataStoreClient'
 import { cloneDeep, find, get, without } from 'lodash'
 
 export default {
@@ -22,8 +25,13 @@ export default {
   },
   actions: {
     async fetchAndSubscribe ({ commit }) {
-      // @todo subscribe to changes
-      commit(`setCategories`, await getAllCategories())
+      const fetch = async () => {
+        commit(`setCategories`, await getAllCategories())
+      }
+
+      categoryStore.on(`change`, fetch)
+
+      fetch()
     },
     expandCategoriesRecursively ({ commit, state }, category) {
       const expandRecursive = category => {

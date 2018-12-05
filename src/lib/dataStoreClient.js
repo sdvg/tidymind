@@ -3,8 +3,8 @@ import hoodie from './hoodie'
 const TYPE_DOCUMENT = `document`
 const TYPE_CATEGORY = `category`
 
-const documentStore = hoodie.store.withIdPrefix(TYPE_DOCUMENT)
-const categoryStore = hoodie.store.withIdPrefix(TYPE_CATEGORY)
+export const documentStore = hoodie.store.withIdPrefix(TYPE_DOCUMENT)
+export const categoryStore = hoodie.store.withIdPrefix(TYPE_CATEGORY)
 
 export const addDocument = document => documentStore.add(document)
 
