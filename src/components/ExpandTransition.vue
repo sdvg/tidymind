@@ -40,15 +40,20 @@ export default {
       element.style.visibility = `hidden`
       element.style.height = `auto`
 
-      const height = getComputedStyle(element).height
-
-      element.style.width = null
-      element.style.position = null
-      element.style.visibility = null
-      element.style.height = 0
-
       setTimeout(() => {
-        element.style.height = height
+        const height = getComputedStyle(element).height
+
+        element.style.width = null
+        element.style.position = null
+        element.style.visibility = null
+        element.style.height = 0
+
+        /* Force repaint */
+        getComputedStyle(element).height // eslint-disable-line no-unused-expressions
+
+        requestAnimationFrame(() => {
+          element.style.height = height
+        })
       })
     },
     afterEnter (element) {
@@ -57,7 +62,10 @@ export default {
     leave (element) {
       element.style.height = getComputedStyle(element).height
 
-      setTimeout(() => {
+      /* Force repaint */
+      getComputedStyle(element).height // eslint-disable-line no-unused-expressions
+
+      requestAnimationFrame(() => {
         element.style.height = 0
       })
     },
