@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   .mce-tinymce {
     display: flex;
     flex-direction: column;

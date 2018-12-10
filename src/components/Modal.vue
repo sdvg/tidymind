@@ -12,7 +12,7 @@
   </portal>
 </template>
 
-<style>
+<style scoped>
   .Modal {
     display: flex;
     justify-content: center;

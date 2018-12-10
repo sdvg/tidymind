@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .App {
     height: 100%;
     position: relative;
