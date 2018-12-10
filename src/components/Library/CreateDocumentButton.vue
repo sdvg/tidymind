@@ -1,8 +1,7 @@
 <template>
-  <Button
-    title="New"
-    @onClick="handleCreateDocument"
-  />
+  <div @click="handleCreateDocument">
+    <slot />
+  </div>
 </template>
 
 <script>

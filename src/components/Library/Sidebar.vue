@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   .Sidebar {
     display: flex;
     flex-direction: column;
@@ -7,12 +7,6 @@
 
   .documentList {
     margin: var(--space-xxxs) 0;
-    overflow: auto;
-  }
-
-  .actions {
-    margin-top: auto;
-    padding: var(--space-xxxxxs) var(--space-xxxs);
   }
 </style>
 
@@ -26,15 +20,10 @@
       class="documentList"
       v-if="isDataLoaded"
     />
-
-    <div class="actions">
-      <CreateDocumentButton />
-    </div>
   </aside>
 </template>
 
 <script>
-import CreateDocumentButton from './CreateDocumentButton'
 import DocumentsList from './DocumentsList'
 import AccountStatus from './AccountStatus'
 import { mapActions, mapGetters } from 'vuex'
@@ -42,7 +31,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     AccountStatus,
-    CreateDocumentButton,
     DocumentsList,
   },
   methods: {

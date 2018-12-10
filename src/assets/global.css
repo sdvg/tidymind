@@ -25,6 +25,8 @@
   --font-size-xl: 18px;
   --font-size-xxl: 20px;
   --font-size-xxxl: 22px;
+
+  --z-index-base: 1;
 }
 
 @font-face {
