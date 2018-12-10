@@ -61,5 +61,6 @@ export default {
     margin-top: -8px;
     background: var(--color-dark);
     border-radius: 3px;
+    box-shadow: 0 0 3px 0 var(--color-text-dark);
   }
 </style>
