@@ -24,6 +24,7 @@
     left: 0;
     background: rgba(0, 0, 0, .75);
     overflow: auto;
+    z-index: var(--z-index-modal);
   }
 
   .modal-close-background {

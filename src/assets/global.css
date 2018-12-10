@@ -27,6 +27,7 @@
   --font-size-xxxl: 22px;
 
   --z-index-base: 1;
+  --z-index-modal: 10;
 }
 
 @font-face {

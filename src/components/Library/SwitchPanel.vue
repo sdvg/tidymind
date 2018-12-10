@@ -56,70 +56,73 @@
 
 <template>
   <Modal @closeModal="$emit(`closePanel`)">
-    <div
-      class="SwitchPanel"
-      @mouseout="resetFocusedIndex"
-    >
-      <div class="input-container">
-        <input
-          v-model="searchQuery"
-          class="input"
-          placeholder="Switch to…"
-          ref="input"
+    <ModalContent>
+      <div
+        class="SwitchPanel"
+        @mouseout="resetFocusedIndex"
+      >
+        <div class="input-container">
+          <input
+            v-model="searchQuery"
+            class="input"
+            placeholder="Switch to…"
+            ref="input"
+          >
+        </div>
+
+        <p
+          class="no-results"
+          v-if="!hasResults"
         >
+          No results 😕
+        </p>
+
+        <ol
+          class="results"
+          v-if="hasResults"
+        >
+          <li
+            v-for="(result, index) in results"
+            :key="result._id"
+            @click="$emit(`closePanel`)"
+            @mouseover="focusedIndex = index"
+          >
+            <router-link
+              v-if="result._id.startsWith(`document`)"
+              class="result-item"
+              :class="{ 'is-active': index === focusedIndex }"
+              :to="{ name: 'library.document', params: { documentId: result._id } }"
+              @click.native="expandCategoriesForDocumentId(result._id)"
+            >
+              <IconBase class="result-icon">
+                <IconFileText />
+              </IconBase>
+
+              {{ result.title }}
+            </router-link>
+
+            <button
+              v-if="result._id.startsWith(`category`)"
+              class="result-item"
+              :class="{ 'is-active': index === focusedIndex }"
+              @click="openCategory(result)"
+            >
+              <IconBase class="result-icon">
+                <IconFolder />
+              </IconBase>
+
+              {{ result.title }}
+            </button>
+          </li>
+        </ol>
       </div>
-
-      <p
-        class="no-results"
-        v-if="!hasResults"
-      >
-        No results 😕
-      </p>
-
-      <ol
-        class="results"
-        v-if="hasResults"
-      >
-        <li
-          v-for="(result, index) in results"
-          :key="result._id"
-          @click="$emit(`closePanel`)"
-          @mouseover="focusedIndex = index"
-        >
-          <router-link
-            v-if="result._id.startsWith(`document`)"
-            class="result-item"
-            :class="{ 'is-active': index === focusedIndex }"
-            :to="{ name: 'library.document', params: { documentId: result._id } }"
-            @click.native="expandCategoriesForDocumentId(result._id)"
-          >
-            <IconBase class="result-icon">
-              <IconFileText />
-            </IconBase>
-
-            {{ result.title }}
-          </router-link>
-
-          <button
-            v-if="result._id.startsWith(`category`)"
-            class="result-item"
-            :class="{ 'is-active': index === focusedIndex }"
-            @click="openCategory(result)"
-          >
-            <IconBase class="result-icon">
-              <IconFolder />
-            </IconBase>
-
-            {{ result.title }}
-          </button>
-        </li>
-      </ol>
-    </div>
+    </ModalContent>
   </Modal>
 </template>
 
 <script>
 import Modal from '../Modal'
+import ModalContent from '../ModalContent'
 import { mapState, mapActions } from 'vuex'
 import shortcuts from '@/mixins/shortcuts'
 import IconBase from '@/components/icons/IconBase'
@@ -133,6 +136,7 @@ export default {
     IconFolder,
     IconFileText,
     Modal,
+    ModalContent,
   },
   mounted () {
     setTimeout(() => {
