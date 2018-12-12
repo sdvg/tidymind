@@ -25,10 +25,23 @@
     text-transform: uppercase;
     background: var(--color-accent);
     color: #fff;
+    border-radius: 3px;
   }
   .accent:not([disabled]):hover,
   .accent:not([disabled]):focus {
     background: var(--color-accent-dark);
+  }
+
+  .secondary {
+    padding: var(--space-xs);
+    font-size: var(--font-size);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .secondary:hover {
+    background: var(--color-gray-lighter);
   }
 
   .spinner-wrapper {
@@ -49,6 +62,7 @@
     :class="{
       'button': true,
       'primary': theme === themes.PRIMARY,
+      'secondary': theme === themes.SECONDARY,
       'accent': theme === themes.ACCENT,
       'plain': theme === themes.PLAIN,
       'is-loading': isLoading,
@@ -73,6 +87,7 @@ import Spinner from '../components/Spinner'
 
 const themes = {
   PRIMARY: `primary`,
+  SECONDARY: `secondary`,
   ACCENT: `accent`,
   PLAIN: `plain`,
 }
