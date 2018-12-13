@@ -30,10 +30,12 @@ export default {
     </button>
 
     <div
+      class="actions-wrapper"
       v-if="isOpen"
-      class="actions"
     >
-      <slot />
+      <div class="actions">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -54,11 +56,21 @@ export default {
     color: var(--color-text-light);
   }
 
-  .actions {
+  .actions-wrapper {
+    /* add some padding for increased clicking/hover area */
+    --surrounding-left: 16px;
+    --surrounding-top: 10px;
+
     position: absolute;
     top: 100%;
     left: 100%;
-    margin-top: -8px;
+    margin-top: calc(-8px - var(--surrounding-top));
+    padding-top: var(--surrounding-top);
+    margin-left: calc(var(--surrounding-left) * -1);
+    padding-left: var(--surrounding-left);
+  }
+
+  .actions {
     background: var(--color-dark);
     border-radius: 3px;
     box-shadow: 0 0 3px 0 var(--color-text-dark);
