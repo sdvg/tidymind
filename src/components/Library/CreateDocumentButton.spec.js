@@ -2,32 +2,8 @@
 
 import { shallowMount } from '@vue/test-utils'
 import CreateDocumentButton from './CreateDocumentButton'
-import Button from '@/components/Button'
 
 describe(`CreateDocumentButton`, () => {
-  it(`renders the "New" button`, () => {
-    const wrapper = shallowMount(CreateDocumentButton)
-    const button = wrapper.find(Button)
-
-    expect(button.exists()).toBe(true)
-    expect(button.props().title).toBe(`New`)
-  })
-
-  it(`calls createDocument on click`, () => {
-    const wrapper = shallowMount(CreateDocumentButton)
-
-    wrapper.setMethods({
-      createDocument: jest.fn(),
-      getCategoryId: () => `1`,
-    })
-
-    const button = wrapper.find(Button)
-
-    button.vm.$emit(`onClick`)
-
-    expect(wrapper.vm.createDocument).toHaveBeenCalledWith(`1`)
-  })
-
   it(`redirects to the new document`, async () => {
     const wrapper = shallowMount(CreateDocumentButton, {
       mocks: {
