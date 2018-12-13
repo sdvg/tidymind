@@ -19,20 +19,24 @@
       v-if="hasSwitchPanel"
       @closePanel="closeSwitchPanel"
     />
+
+    <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
   </div>
 </template>
 
 <script>
 import Sidebar from './Sidebar'
 import SwitchPanel from './SwitchPanel'
+import CreateCategoryModal from './CreateCategoryModal'
 import shortcuts from '../../mixins/shortcuts'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   mixins: [shortcuts],
   components: {
     Sidebar,
     SwitchPanel,
+    CreateCategoryModal,
   },
   methods: {
     ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
@@ -49,14 +53,14 @@ export default {
       hasSwitchPanel: false,
     }
   },
+  computed: {
+    ...mapState(`library`, [`isCreateCategoryModalOpen`]),
+  },
   mounted () {
     this.fetchAndSubscribeCategories()
     this.fetchAndSubscribeDocuments()
   },
   shortcuts: {
-    esc () {
-      this.closeSwitchPanel()
-    },
     switchPanel () {
       this.toggleSwitchPanel()
     },

@@ -17,3 +17,5 @@ export const getDocument = documentId => documentStore.find(documentId)
 export const getAllDocuments = () => documentStore.findAll()
 
 export const getAllCategories = () => categoryStore.findAll()
+
+export const addCategory = category => categoryStore.add(category)

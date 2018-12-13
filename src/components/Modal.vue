@@ -1,9 +1,27 @@
+<script>
+import shortcuts from '../mixins/shortcuts'
+
+export default {
+  mixins: [shortcuts],
+  methods: {
+    closeModal () {
+      this.$emit(`closeModal`)
+    },
+  },
+  shortcuts: {
+    esc () {
+      this.closeModal()
+    },
+  },
+}
+</script>
+
 <template>
   <portal to="modals">
     <div class="Modal">
       <div
         class="modal-close-background"
-        @click="$emit(`closeModal`)"
+        @click="closeModal"
       ></div>
       <div class="modal-content">
         <slot />

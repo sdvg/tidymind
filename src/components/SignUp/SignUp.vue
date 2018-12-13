@@ -150,7 +150,7 @@ export default {
 
         <Button
           class="button"
-          theme="accent"
+          theme="accent-full"
           type="submit"
           :isDisabled="isRequestPending"
           :isLoading="isRequestPending"

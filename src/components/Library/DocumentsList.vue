@@ -43,7 +43,7 @@
             </KebabMenuAction>
           </CreateDocumentButton>
 
-          <KebabMenuAction>New category</KebabMenuAction>
+          <KebabMenuAction @click.native="openCreateCategoryModal">New category</KebabMenuAction>
         </KebabMenu>
       </div>
     </div>
@@ -60,13 +60,11 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Category from './Category'
 import CreateDocumentButton from './CreateDocumentButton'
 import KebabMenu from '../KebabMenu/KebabMenu'
 import KebabMenuAction from '../KebabMenu/KebabMenuAction'
-
-const { mapGetters } = createNamespacedHelpers(`categories`)
 
 export default {
   components: {
@@ -75,6 +73,7 @@ export default {
     KebabMenu,
     KebabMenuAction,
   },
-  computed: mapGetters([`categoryTree`]),
+  computed: mapGetters(`categories`, [`categoryTree`]),
+  methods: mapMutations(`library`, [`openCreateCategoryModal`]),
 }
 </script>

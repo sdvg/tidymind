@@ -19,7 +19,8 @@
     background: var(--color-text-dark);
   }
 
-  .accent {
+  .accent,
+  .accent-full {
     padding: var(--space-xs);
     font-size: var(--font-size);
     text-transform: uppercase;
@@ -28,8 +29,18 @@
     border-radius: 3px;
   }
   .accent:not([disabled]):hover,
-  .accent:not([disabled]):focus {
+  .accent:not([disabled]):focus,
+  .accent-full:not([disabled]):hover,
+  .accent-full:not([disabled]):focus,{
     background: var(--color-accent-dark);
+  }
+
+  .accent {
+    transition: 100ms padding-left;
+  }
+
+  .accent.is-loading {
+    padding-left: 35px;
   }
 
   .secondary {
@@ -64,6 +75,7 @@
       'primary': theme === themes.PRIMARY,
       'secondary': theme === themes.SECONDARY,
       'accent': theme === themes.ACCENT,
+      'accent-full': theme === themes.ACCENT_FULL,
       'plain': theme === themes.PLAIN,
       'is-loading': isLoading,
     }"
@@ -89,6 +101,7 @@ const themes = {
   PRIMARY: `primary`,
   SECONDARY: `secondary`,
   ACCENT: `accent`,
+  ACCENT_FULL: `accent-full`,
   PLAIN: `plain`,
 }
 

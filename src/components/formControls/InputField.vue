@@ -3,6 +3,7 @@ export default {
   props: {
     label: String,
     type: String,
+    hideLabel: Boolean,
     hasError: Boolean,
     errorMessage: String,
     value: String,
@@ -13,6 +14,15 @@ export default {
       },
     },
   },
+  methods: {
+
+    /**
+     * @public
+     */
+    focusInput () {
+      this.$refs.inputElement.focus()
+    },
+  },
 }
 </script>
 
@@ -21,13 +31,19 @@ export default {
     :class="{ 'has-error': hasError }"
     class="InputField"
   >
-    <span class="label">{{ label }}</span>
+    <span
+      class="label"
+      :class="{ 'visually-hidden': hideLabel }"
+    >
+      {{ label }}
+    </span>
 
     <input
       :type="type"
       class="input"
       :value="value"
       v-bind="attributes"
+      ref="inputElement"
       @input="$emit(`input`, $event.target.value)"
       @blur="$emit(`blur`, $event)"
     >
@@ -54,7 +70,6 @@ export default {
 
   .input {
     border: 2px solid var(--color-gray);
-    margin-top: var(--space-xxxxxs);
     font-size: var(--font-size-l);
     padding: var(--space-xxxxxs);
   }
