@@ -1,51 +1,38 @@
 <script>
 import EllipsisV from '../icons/EllipsisV'
 import IconBase from '../icons/IconBase'
+import Tooltip from '../Tooltip'
 
 export default {
   components: {
     IconBase,
     EllipsisV,
-  },
-  data () {
-    return {
-      isOpen: false,
-    }
+    Tooltip,
   },
 }
 </script>
 
 <template>
-  <div
-    class="KebabMenu"
-    @mouseleave="isOpen = false"
-  >
-    <button
+  <Tooltip>
+    <div
       class="button"
-      @mouseover="isOpen = true"
+      slot="trigger"
     >
       <IconBase class="icon">
         <EllipsisV />
       </IconBase>
-    </button>
+    </div>
 
     <div
-      class="actions-wrapper"
-      v-if="isOpen"
+      class="actions"
+      slot="content"
     >
-      <div class="actions">
-        <slot />
-      </div>
+      <slot />
     </div>
-  </div>
+  </Tooltip>
 </template>
 
 <style scoped>
-  .KebabMenu {
-    position: relative;
-    z-index: var(--z-index-base);
-  }
-
   .button {
     display: flex;
     align-items: center;
@@ -54,20 +41,6 @@ export default {
   .icon {
     width: 18px;
     color: var(--color-text-light);
-  }
-
-  .actions-wrapper {
-    /* add some padding for increased clicking/hover area */
-    --surrounding-left: 16px;
-    --surrounding-top: 10px;
-
-    position: absolute;
-    top: 100%;
-    left: 100%;
-    margin-top: calc(-8px - var(--surrounding-top));
-    padding-top: var(--surrounding-top);
-    margin-left: calc(var(--surrounding-left) * -1);
-    padding-left: var(--surrounding-left);
   }
 
   .actions {
