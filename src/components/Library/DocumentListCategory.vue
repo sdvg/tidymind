@@ -5,7 +5,6 @@
   }
 
   .category,
-  .document,
   .empty-note {
     display: flex;
     align-items: center;
@@ -27,34 +26,12 @@
     color: var(--color-dark);
   }
 
-  .document:hover,
-  .document:focus {
-    background: #d6d6d6 !important;
-    color: #3f51b5 !important;
-  }
-
-  .document.is-unnamed {
-    font-style: italic;
-  }
-
-  .document.is-open {
-    background: var(--color-dark);
-    color: #d6d6d6;
-  }
-
   .empty-note {
     font-style: italic;
     color: #b5b5b5;
   }
 
-  .label {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .category-icon,
-  .document-icon {
+  .category-icon {
     flex-shrink: 0;
     width: 10px;
     height: 10px;
@@ -115,29 +92,12 @@
         v-if="isExpanded"
       >
         <ol>
-          <li
+          <DocumentListDocument
             v-for="document in sortedDocuments"
             :key="document._id"
-          >
-            <router-link
-              class="document"
-              :class="{
-                'is-open': isDocumentOpen(document),
-                'is-unnamed': isDocumentUnnamed(document)
-              }"
-              :style="{ '--depth': depth + 1 }"
-              :to="{ name: 'library.document', params: { documentId: document._id } }"
-            >
-              <IconBase class="document-icon">
-                <IconFileText />
-              </IconBase>
-
-              <span class="label">
-                <template v-if="document.title">{{ document.title }}</template>
-                <template v-else>Unnamed document</template>
-              </span>
-            </router-link>
-          </li>
+            :document="document"
+            :depth="depth + 1"
+          />
         </ol>
 
         <ol v-if="category.children">
@@ -166,18 +126,18 @@ import { mapActions, mapGetters } from 'vuex'
 import { sortBy } from 'lodash'
 import IconBase from '@/components/icons/IconBase'
 import IconChevronRight from '@/components/icons/IconChevronRight'
-import IconFileText from '@/components/icons/IconFileText'
 import ExpandTransition from '@/components/ExpandTransition'
 import KebabMenu from '@/components/KebabMenu/KebabMenu'
 import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
+import DocumentListDocument from '@/components/Library/DocumentListDocument'
 
 export default {
   components: {
     DocumentListCategory: () => import(`./DocumentListCategory`),
+    DocumentListDocument,
+    ExpandTransition,
     IconBase,
     IconChevronRight,
-    IconFileText,
-    ExpandTransition,
     KebabMenu,
     KebabMenuAction,
   },
@@ -187,12 +147,6 @@ export default {
   },
   methods: {
     ...mapActions(`categories`, [`toggleCategoryExpansion`]),
-    isDocumentOpen (document) {
-      return this.$route.params.documentId === document._id
-    },
-    isDocumentUnnamed (document) {
-      return !document.title
-    },
   },
   computed: {
     ...mapGetters(`documents`, [`getDocumentsForCategory`]),
