@@ -1,4 +1,9 @@
 <style scoped>
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
   .category,
   .document,
   .empty-note {
@@ -59,21 +64,51 @@
   .is-expanded .category-icon {
     transform: rotate(90deg);
   }
+
+  .menu {
+    margin-right: 16px;
+  }
+
+  .container:not(:hover) .menu {
+    display: none;
+  }
 </style>
 
 <template>
   <li>
-    <button
-      class="category"
-      :class="{ 'is-expanded': isExpanded }"
-      :style="{ '--depth': depth }"
-      @click="toggleCategoryExpansion(category._id)"
-    >
-      <IconBase class="category-icon">
-        <IconChevronRight />
-      </IconBase>
-      <span class="label">{{ category.title }}</span>
-    </button>
+    <div class="container">
+      <button
+        class="category"
+        :class="{ 'is-expanded': isExpanded }"
+        :style="{ '--depth': depth }"
+        @click="toggleCategoryExpansion(category._id)"
+      >
+        <IconBase class="category-icon">
+          <IconChevronRight />
+        </IconBase>
+        <span class="label">{{ category.title }}</span>
+      </button>
+
+      <KebabMenu class="menu">
+        <template slot="actions">
+          <KebabMenuAction>
+            Delete
+          </KebabMenuAction>
+
+          <KebabMenuAction>
+            Move
+          </KebabMenuAction>
+
+          <KebabMenuAction>
+            New document
+          </KebabMenuAction>
+
+          <KebabMenuAction>
+            New category
+          </KebabMenuAction>
+        </template>
+      </KebabMenu>
+    </div>
 
     <ExpandTransition>
       <div
@@ -133,6 +168,8 @@ import IconBase from '@/components/icons/IconBase'
 import IconChevronRight from '@/components/icons/IconChevronRight'
 import IconFileText from '@/components/icons/IconFileText'
 import ExpandTransition from '@/components/ExpandTransition'
+import KebabMenu from '@/components/KebabMenu/KebabMenu'
+import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
 
 export default {
   components: {
@@ -141,6 +178,8 @@ export default {
     IconChevronRight,
     IconFileText,
     ExpandTransition,
+    KebabMenu,
+    KebabMenuAction,
   },
   props: {
     category: Object,

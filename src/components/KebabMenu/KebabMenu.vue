@@ -18,16 +18,18 @@ export default {
       class="button"
       slot="trigger"
     >
+      <slot name="icon">
         <IconBase class="icon">
           <IconEllipsisV />
         </IconBase>
+      </slot>
     </div>
 
     <div
       class="actions"
       slot="content"
     >
-      <slot />
+      <slot name="actions" />
     </div>
   </Tooltip>
 </template>
@@ -39,7 +41,7 @@ export default {
   }
 
   .icon {
-    width: 18px;
+    width: 16px;
     color: var(--color-text-light);
   }
 

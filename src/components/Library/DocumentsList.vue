@@ -20,6 +20,11 @@
     align-items: center;
   }
 
+  .kebabMenuIcon {
+    width: 16px;
+    color: var(--color-text-light);
+  }
+
   .kebabMenu {
     margin-left: 4px;
   }
@@ -37,13 +42,20 @@
 
       <div class="listActions">
         <KebabMenu class="kebabMenu">
-          <CreateDocumentButton>
-            <KebabMenuAction>
+          <template slot="icon">
+            <IconBase class="kebabMenuIcon">
+              <IconPlus />
+            </IconBase>
+          </template>
+          <template slot="actions">
+            <CreateDocumentButton>
+              <KebabMenuAction>
                 New document
-            </KebabMenuAction>
-          </CreateDocumentButton>
+              </KebabMenuAction>
+            </CreateDocumentButton>
 
-          <KebabMenuAction @click.native="openCreateCategoryModal">New category</KebabMenuAction>
+            <KebabMenuAction @click.native="openCreateCategoryModal">New category</KebabMenuAction>
+          </template>
         </KebabMenu>
       </div>
     </div>
@@ -65,6 +77,8 @@ import Category from './Category'
 import CreateDocumentButton from './CreateDocumentButton'
 import KebabMenu from '../KebabMenu/KebabMenu'
 import KebabMenuAction from '../KebabMenu/KebabMenuAction'
+import IconBase from '@/components/icons/IconBase'
+import IconPlus from '@/components/icons/IconPlus'
 
 export default {
   components: {
@@ -72,6 +86,8 @@ export default {
     CreateDocumentButton,
     KebabMenu,
     KebabMenuAction,
+    IconBase,
+    IconPlus,
   },
   computed: mapGetters(`categories`, [`categoryTree`]),
   methods: mapMutations(`library`, [`openCreateCategoryModal`]),
