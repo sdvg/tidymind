@@ -1,12 +1,12 @@
 <script>
-import EllipsisV from '../icons/EllipsisV'
+import IconEllipsisV from '../icons/IconEllipsisV'
 import IconBase from '../icons/IconBase'
 import Tooltip from '../Tooltip'
 
 export default {
   components: {
     IconBase,
-    EllipsisV,
+    IconEllipsisV,
     Tooltip,
   },
 }
@@ -18,9 +18,9 @@ export default {
       class="button"
       slot="trigger"
     >
-      <IconBase class="icon">
-        <EllipsisV />
-      </IconBase>
+        <IconBase class="icon">
+          <IconEllipsisV />
+        </IconBase>
     </div>
 
     <div
