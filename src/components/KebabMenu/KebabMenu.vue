@@ -3,11 +3,28 @@ import IconEllipsisV from '../icons/IconEllipsisV'
 import IconBase from '../icons/IconBase'
 import Tooltip from '../Tooltip'
 
+const themes = {
+  LIGHT: `light`,
+  DARK: `dark`,
+}
+
 export default {
   components: {
     IconBase,
     IconEllipsisV,
     Tooltip,
+  },
+  props: {
+    theme: {
+      type: String,
+      default: themes.LIGHT,
+      validator: value => Object.values(themes).includes(value),
+    },
+  },
+  data () {
+    return {
+      themes,
+    }
   },
 }
 </script>
@@ -15,8 +32,12 @@ export default {
 <template>
   <Tooltip>
     <div
-      class="button"
+      class="KebabMenu"
       slot="trigger"
+      :class="{
+        light: theme === themes.LIGHT,
+        dark: theme === themes.DARK,
+      }"
     >
       <slot name="icon">
         <IconBase class="icon">
@@ -35,14 +56,21 @@ export default {
 </template>
 
 <style scoped>
-  .button {
+  .KebabMenu {
     display: flex;
     align-items: center;
   }
 
   .icon {
     width: 16px;
+  }
+
+  .KebabMenu.light .icon {
     color: var(--color-text-light);
+  }
+
+  .KebabMenu.dark .icon {
+    color: var(--color-text-dark);
   }
 
   .actions {
