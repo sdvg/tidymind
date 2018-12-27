@@ -18,8 +18,9 @@
       v-if="isVisible"
       ref="content"
       class="content"
+      @click="close"
     >
-      <slot name="content"/>
+      <slot name="content" />
     </div>
   </div>
 </template>
