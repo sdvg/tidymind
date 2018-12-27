@@ -61,7 +61,7 @@
     </div>
 
     <ol class="list">
-      <Category
+      <DocumentListCategory
         v-for="category of categoryTree"
         :key="category._id"
         :category="category"
@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import Category from './Category'
+import DocumentListCategory from './DocumentListCategory'
 import CreateDocumentButton from './CreateDocumentButton'
 import KebabMenu from '../KebabMenu/KebabMenu'
 import KebabMenuAction from '../KebabMenu/KebabMenuAction'
@@ -82,7 +82,7 @@ import IconPlus from '@/components/icons/IconPlus'
 
 export default {
   components: {
-    Category,
+    DocumentListCategory,
     CreateDocumentButton,
     KebabMenu,
     KebabMenuAction,

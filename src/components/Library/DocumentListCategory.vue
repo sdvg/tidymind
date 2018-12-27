@@ -141,7 +141,7 @@
         </ol>
 
         <ol v-if="category.children">
-          <Category
+          <DocumentListCategory
             v-for="childCategory of category.children"
             :key="childCategory._id"
             :category="childCategory"
@@ -173,7 +173,7 @@ import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
 
 export default {
   components: {
-    Category: () => import(`./Category`),
+    DocumentListCategory: () => import(`./DocumentListCategory`),
     IconBase,
     IconChevronRight,
     IconFileText,
