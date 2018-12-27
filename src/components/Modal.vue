@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-  <portal to="modals">
+  <portal to="appRoot">
     <div class="Modal">
       <div
         class="modal-close-background"

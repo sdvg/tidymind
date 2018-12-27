@@ -2,7 +2,7 @@
   <div class="App">
     <router-view />
 
-    <portal-target name="modals" />
+    <portal-target name="appRoot" />
   </div>
 </template>
 
