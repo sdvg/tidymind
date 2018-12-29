@@ -5,7 +5,8 @@
   }
 
   .DocumentListDocument:hover,
-  .DocumentListDocument.has-focus {
+  .DocumentListDocument.has-focus,
+  .DocumentListDocument.has-open-menu {
     background: #d6d6d6 !important;
   }
 
@@ -28,7 +29,8 @@
   }
 
   .DocumentListDocument:hover .link,
-  .DocumentListDocument.has-focus .link {
+  .DocumentListDocument.has-focus .link,
+  .DocumentListDocument.has-open-menu .link {
     color: #3f51b5 !important;
   }
 
@@ -50,7 +52,7 @@
     margin-right: 16px;
   }
 
-  .DocumentListDocument:not(:hover) .menu {
+  .DocumentListDocument:not(:hover):not(.has-open-menu) .menu {
     display: none;
   }
 </style>
@@ -61,7 +63,8 @@
     :class="{
       'has-focus': hasLinkFocus,
       'is-open': isDocumentOpen(document),
-      'is-unnamed': isDocumentUnnamed(document)
+      'is-unnamed': isDocumentUnnamed(document),
+      'has-open-menu': isMenuOpen,
     }"
     :style="{ '--depth': depth + 1 }"
   >
@@ -84,6 +87,8 @@
     <KebabMenu
       class="menu"
       theme="dark"
+      @open="menuOpened"
+      @close="menuClosed"
     >
       <template slot="actions">
         <KebabMenuAction>
@@ -124,6 +129,7 @@ export default {
   data () {
     return {
       hasLinkFocus: false,
+      isMenuOpen: false,
     }
   },
   methods: {
@@ -138,6 +144,12 @@ export default {
     },
     onLinkBlur () {
       this.hasLinkFocus = false
+    },
+    menuOpened () {
+      this.isMenuOpen = true
+    },
+    menuClosed () {
+      this.isMenuOpen = false
     },
   },
 }

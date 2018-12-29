@@ -2,7 +2,10 @@
   <div class="App">
     <router-view />
 
-    <portal-target name="appRoot" />
+    <portal-target
+      name="appRoot"
+      multiple
+    />
   </div>
 </template>
 

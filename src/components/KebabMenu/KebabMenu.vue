@@ -30,7 +30,10 @@ export default {
 </script>
 
 <template>
-  <Tooltip>
+  <Tooltip
+    @open="$emit(`open`)"
+    @close="$emit(`close`)"
+  >
     <div
       class="KebabMenu"
       slot="trigger"

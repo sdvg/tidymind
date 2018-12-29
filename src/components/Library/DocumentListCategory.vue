@@ -44,16 +44,20 @@
 
   .menu {
     margin-right: 16px;
+    transition: 100ms opacity;
   }
 
-  .container:not(:hover) .menu {
-    display: none;
+  .container:not(:hover):not(.has-open-menu) .menu {
+    opacity: 0;
   }
 </style>
 
 <template>
   <li>
-    <div class="container">
+    <div
+      class="container"
+      :class="{ 'has-open-menu': isMenuOpen }"
+    >
       <button
         class="category"
         :class="{ 'is-expanded': isExpanded }"
@@ -66,7 +70,11 @@
         <span class="label">{{ category.title }}</span>
       </button>
 
-      <KebabMenu class="menu">
+      <KebabMenu
+        class="menu"
+        @open="menuOpened"
+        @close="menuClosed"
+      >
         <template slot="actions">
           <KebabMenuAction>
             Delete
@@ -147,6 +155,17 @@ export default {
   },
   methods: {
     ...mapActions(`categories`, [`toggleCategoryExpansion`]),
+    menuOpened () {
+      this.isMenuOpen = true
+    },
+    menuClosed () {
+      this.isMenuOpen = false
+    },
+  },
+  data () {
+    return {
+      isMenuOpen: false,
+    }
   },
   computed: {
     ...mapGetters(`documents`, [`getDocumentsForCategory`]),
