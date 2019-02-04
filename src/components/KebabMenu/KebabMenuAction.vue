@@ -1,5 +1,8 @@
 <template>
-  <button class="KebabMenuAction">
+  <button
+    class="KebabMenuAction"
+    @click="$emit(`click`)"
+  >
     <slot />
   </button>
 </template>
