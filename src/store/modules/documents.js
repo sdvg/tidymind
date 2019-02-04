@@ -6,6 +6,7 @@ import {
   documentStore,
 } from '@/lib/dataStoreClient'
 import { find, filter } from 'lodash'
+import router from '@/router'
 
 export default {
   namespaced: true,
@@ -53,6 +54,33 @@ export default {
       commit(`addDocument`, newDocument)
 
       return newDocument
+    },
+
+    async createAndOpenDocument ({ commit, dispatch }, categoryId) {
+      const newDocument = await dispatch(`createDocument`, categoryId)
+
+      commit(`categories/expandCategory`, categoryId, { root: true })
+
+      router.push({
+        name: `library.document`,
+        params: { documentId: newDocument._id },
+      })
+    },
+
+    async createAndOpenDocumentInCurrentCategory ({ dispatch, getters, rootGetters }) {
+      const getCurrentCategoryId = () => {
+        const currentDocument = getters.getDocument(router.currentRoute.params.documentId)
+
+        if (router.currentRoute.name === `library.document` && currentDocument) {
+          return currentDocument.category
+        } else {
+          const firstCategory = rootGetters[`categories/firstCategory`]
+
+          return firstCategory ? firstCategory._id : null
+        }
+      }
+
+      dispatch(`createAndOpenDocument`, getCurrentCategoryId())
     },
 
     async removeDocument ({ commit }, document) {

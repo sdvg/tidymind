@@ -48,13 +48,8 @@
             </IconBase>
           </template>
           <template slot="actions">
-            <CreateDocumentButton>
-              <KebabMenuAction>
-                New document
-              </KebabMenuAction>
-            </CreateDocumentButton>
-
-            <KebabMenuAction @click.native="openCreateCategoryModal">New category</KebabMenuAction>
+            <KebabMenuAction @click="createAndOpenDocumentInCurrentCategory">New document</KebabMenuAction>
+            <KebabMenuAction @click="openCreateCategoryModal">New category</KebabMenuAction>
           </template>
         </KebabMenu>
       </div>
@@ -72,9 +67,8 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import DocumentListCategory from './DocumentListCategory'
-import CreateDocumentButton from './CreateDocumentButton'
 import KebabMenu from '../KebabMenu/KebabMenu'
 import KebabMenuAction from '../KebabMenu/KebabMenuAction'
 import IconBase from '@/components/icons/IconBase'
@@ -83,13 +77,15 @@ import IconPlus from '@/components/icons/IconPlus'
 export default {
   components: {
     DocumentListCategory,
-    CreateDocumentButton,
     KebabMenu,
     KebabMenuAction,
     IconBase,
     IconPlus,
   },
   computed: mapGetters(`categories`, [`categoryTree`]),
-  methods: mapMutations(`library`, [`openCreateCategoryModal`]),
+  methods: {
+    ...mapMutations(`library`, [`openCreateCategoryModal`]),
+    ...mapActions(`documents`, [`createAndOpenDocumentInCurrentCategory`]),
+  },
 }
 </script>

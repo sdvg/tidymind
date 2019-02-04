@@ -84,7 +84,7 @@
             Move
           </KebabMenuAction>
 
-          <KebabMenuAction>
+          <KebabMenuAction @click="createAndOpenDocument(category._id)">
             New document
           </KebabMenuAction>
 
@@ -155,6 +155,7 @@ export default {
   },
   methods: {
     ...mapActions(`categories`, [`toggleCategoryExpansion`]),
+    ...mapActions(`documents`, [`createAndOpenDocument`]),
     menuOpened () {
       this.isMenuOpen = true
     },
