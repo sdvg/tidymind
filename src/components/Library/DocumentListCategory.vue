@@ -88,7 +88,7 @@
             New document
           </KebabMenuAction>
 
-          <KebabMenuAction>
+          <KebabMenuAction @click="openCreateCategoryModal(category._id)">
             New category
           </KebabMenuAction>
         </template>
@@ -156,6 +156,7 @@ export default {
   methods: {
     ...mapActions(`categories`, [`toggleCategoryExpansion`]),
     ...mapActions(`documents`, [`createAndOpenDocument`]),
+    ...mapActions(`library`, [`openCreateCategoryModal`]),
     menuOpened () {
       this.isMenuOpen = true
     },

@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import DocumentListCategory from './DocumentListCategory'
 import KebabMenu from '../KebabMenu/KebabMenu'
 import KebabMenuAction from '../KebabMenu/KebabMenuAction'
@@ -84,7 +84,7 @@ export default {
   },
   computed: mapGetters(`categories`, [`categoryTree`]),
   methods: {
-    ...mapMutations(`library`, [`openCreateCategoryModal`]),
+    ...mapActions(`library`, [`openCreateCategoryModal`]),
     ...mapActions(`documents`, [`createAndOpenDocumentInCurrentCategory`]),
   },
 }

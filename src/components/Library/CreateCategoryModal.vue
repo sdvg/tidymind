@@ -48,7 +48,7 @@
           <Button
             class="button-abort"
             theme="secondary"
-            @click.native="closeCreateCategoryModal"
+            @click="closeCreateCategoryModal"
           >
             Abort
           </Button>
@@ -64,10 +64,12 @@ import ModalContent from '../ModalContent'
 import Form from '../formControls/Form'
 import InputField from '../formControls/InputField'
 import Button from '../Button'
-import { mapMutations } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import { addCategory } from '../../lib/dataStoreClient'
+
+const { mapActions, mapState } = createNamespacedHelpers(`library`)
 
 export default {
   mixins: [validationMixin],
@@ -79,10 +81,10 @@ export default {
     Button,
   },
   methods: {
-    ...mapMutations(`library`, [`closeCreateCategoryModal`]),
+    ...mapActions([`closeCreateCategoryModal`]),
     async createCategory () {
       const category = {
-        parent: null,
+        parent: this.createCategoryParentId,
         title: this.categoryTitle,
       }
 
@@ -113,6 +115,7 @@ export default {
     }
   },
   computed: {
+    ...mapState([`createCategoryParentId`]),
     isInvalid () {
       return this.$v.categoryTitle.$dirty && this.$v.categoryTitle.$invalid
     },
