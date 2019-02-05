@@ -1,17 +1,33 @@
 <script>
 export default {
   props: {
-    label: String,
-    type: String,
-    hideLabel: Boolean,
-    hasError: Boolean,
-    errorMessage: String,
-    value: String,
+    label: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      default: `text`,
+    },
+    hideLabel: {
+      type: Boolean,
+      default: false,
+    },
+    hasError: {
+      type: Boolean,
+      default: false,
+    },
+    errorMessage: {
+      type: String,
+      default: null,
+    },
+    value: {
+      type: String,
+      default: ``,
+    },
     attributes: {
       type: Object,
-      default () {
-        return {}
-      },
+      default: () => ({}),
     },
   },
   methods: {

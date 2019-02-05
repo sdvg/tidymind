@@ -45,7 +45,10 @@ import { handleKeydownEvent } from '../../mixins/shortcuts'
 
 export default {
   props: {
-    document: Object,
+    document: {
+      type: Object,
+      required: true,
+    },
   },
   mounted () {
     tinymce.init({

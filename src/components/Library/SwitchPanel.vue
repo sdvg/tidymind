@@ -144,18 +144,6 @@ export default {
       focusedIndex: null,
     }
   },
-  watch: {
-    searchQuery () {
-      this.resetFocusedIndex()
-    },
-  },
-  mounted () {
-    setTimeout(() => {
-      if (this.$refs.input) { // prevent exceptions when HMR
-        this.$refs.input.focus()
-      }
-    })
-  },
   computed: {
     ...mapState(`categories`, [`categories`]),
     ...mapState(`documents`, [`documents`]),
@@ -179,6 +167,18 @@ export default {
     hasResults () {
       return Boolean(this.results.length)
     },
+  },
+  watch: {
+    searchQuery () {
+      this.resetFocusedIndex()
+    },
+  },
+  mounted () {
+    setTimeout(() => {
+      if (this.$refs.input) { // prevent exceptions when HMR
+        this.$refs.input.focus()
+      }
+    })
   },
   methods: {
     ...mapActions(`categories`, {

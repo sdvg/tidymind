@@ -33,10 +33,6 @@ export default {
     AccountStatus,
     DocumentsList,
   },
-  methods: {
-    ...mapActions(`documents`, [`createDocument`]),
-    ...mapActions(`categories`, [`expandCategoriesForDocumentId`]),
-  },
   computed: {
     ...mapGetters(`documents`, [`documentsLoaded`]),
     ...mapGetters(`categories`, [`categoriesLoaded`]),
@@ -50,6 +46,10 @@ export default {
         this.expandCategoriesForDocumentId(this.$route.params.documentId)
       }
     },
+  },
+  methods: {
+    ...mapActions(`documents`, [`createDocument`]),
+    ...mapActions(`categories`, [`expandCategoriesForDocumentId`]),
   },
 }
 </script>

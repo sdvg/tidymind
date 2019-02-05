@@ -38,16 +38,6 @@ export default {
     CreateCategoryModal,
   },
   mixins: [shortcuts],
-  methods: {
-    ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
-    ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),
-    closeSwitchPanel () {
-      this.hasSwitchPanel = false
-    },
-    toggleSwitchPanel () {
-      this.hasSwitchPanel = !this.hasSwitchPanel
-    },
-  },
   data () {
     return {
       hasSwitchPanel: false,
@@ -59,6 +49,16 @@ export default {
   mounted () {
     this.fetchAndSubscribeCategories()
     this.fetchAndSubscribeDocuments()
+  },
+  methods: {
+    ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
+    ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),
+    closeSwitchPanel () {
+      this.hasSwitchPanel = false
+    },
+    toggleSwitchPanel () {
+      this.hasSwitchPanel = !this.hasSwitchPanel
+    },
   },
   shortcuts: {
     switchPanel () {

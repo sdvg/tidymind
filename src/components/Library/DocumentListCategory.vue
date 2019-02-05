@@ -150,18 +150,13 @@ export default {
     KebabMenuAction,
   },
   props: {
-    category: Object,
-    depth: Number,
-  },
-  methods: {
-    ...mapActions(`categories`, [`toggleCategoryExpansion`]),
-    ...mapActions(`documents`, [`createAndOpenDocument`]),
-    ...mapActions(`library`, [`openCreateCategoryModal`]),
-    menuOpened () {
-      this.isMenuOpen = true
+    category: {
+      type: Object,
+      required: true,
     },
-    menuClosed () {
-      this.isMenuOpen = false
+    depth: {
+      type: Number,
+      required: true,
     },
   },
   data () {
@@ -183,6 +178,17 @@ export default {
     },
     isExpanded () {
       return this.isCategoryExpanded(this.category._id)
+    },
+  },
+  methods: {
+    ...mapActions(`categories`, [`toggleCategoryExpansion`]),
+    ...mapActions(`documents`, [`createAndOpenDocument`]),
+    ...mapActions(`library`, [`openCreateCategoryModal`]),
+    menuOpened () {
+      this.isMenuOpen = true
+    },
+    menuClosed () {
+      this.isMenuOpen = false
     },
   },
 }

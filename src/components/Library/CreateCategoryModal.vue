@@ -78,6 +78,23 @@ export default {
     Button,
   },
   mixins: [validationMixin],
+  data () {
+    return {
+      categoryTitle: ``,
+      isRequestPending: false,
+    }
+  },
+  computed: {
+    ...mapState(`library`, [`createCategoryParentId`]),
+    isInvalid () {
+      return this.$v.categoryTitle.$dirty && this.$v.categoryTitle.$invalid
+    },
+  },
+  mounted () {
+    setTimeout(() => {
+      this.$refs.inputField && this.$refs.inputField.focusInput()
+    })
+  },
   methods: {
     ...mapActions(`library`, [`closeCreateCategoryModal`]),
     ...mapActions(`categories`, [`expandCategoriesRecursively`]),
@@ -101,23 +118,6 @@ export default {
       if (!this.$v.$invalid) {
         this.createCategory()
       }
-    },
-  },
-  mounted () {
-    setTimeout(() => {
-      this.$refs.inputField && this.$refs.inputField.focusInput()
-    })
-  },
-  data () {
-    return {
-      categoryTitle: ``,
-      isRequestPending: false,
-    }
-  },
-  computed: {
-    ...mapState(`library`, [`createCategoryParentId`]),
-    isInvalid () {
-      return this.$v.categoryTitle.$dirty && this.$v.categoryTitle.$invalid
     },
   },
   validations: {

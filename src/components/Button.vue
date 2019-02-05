@@ -123,8 +123,14 @@ export default {
       default: `primary`,
       validator: value => Object.values(themes).includes(value),
     },
-    isDisabled: Boolean,
-    isLoading: Boolean,
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data () {
     return { themes }

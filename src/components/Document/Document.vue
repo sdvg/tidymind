@@ -99,6 +99,15 @@ const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
 
 export default {
   components: { Button, RichTextEditor },
+  computed: {
+    ...mapGetters([
+      `getDocument`,
+      `documentsLoaded`,
+    ]),
+    document () {
+      return this.getDocument(this.$route.params.documentId)
+    },
+  },
   methods: {
     ...mapActions([
       `updateDocument`,
@@ -119,15 +128,6 @@ export default {
     async remove () {
       await this.removeDocument(this.document)
       this.$router.push({ name: `library` })
-    },
-  },
-  computed: {
-    ...mapGetters([
-      `getDocument`,
-      `documentsLoaded`,
-    ]),
-    document () {
-      return this.getDocument(this.$route.params.documentId)
     },
   },
 }
