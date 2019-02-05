@@ -64,12 +64,10 @@ import ModalContent from '../ModalContent'
 import Form from '../formControls/Form'
 import InputField from '../formControls/InputField'
 import Button from '../Button'
-import { createNamespacedHelpers } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import { addCategory } from '../../lib/dataStoreClient'
-
-const { mapActions, mapState } = createNamespacedHelpers(`library`)
 
 export default {
   mixins: [validationMixin],
@@ -81,7 +79,8 @@ export default {
     Button,
   },
   methods: {
-    ...mapActions([`closeCreateCategoryModal`]),
+    ...mapActions(`library`, [`closeCreateCategoryModal`]),
+    ...mapActions(`categories`, [`expandCategoriesRecursively`]),
     async createCategory () {
       const category = {
         parent: this.createCategoryParentId,
@@ -90,10 +89,11 @@ export default {
 
       this.isRequestPending = true
 
-      await addCategory(category)
+      const addedCategory = await addCategory(category)
 
-      this.closeCreateCategoryModal()
       this.isRequestPending = false
+      this.closeCreateCategoryModal()
+      this.expandCategoriesRecursively(addedCategory)
     },
     handleSubmit () {
       this.$v.$touch()
@@ -115,7 +115,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([`createCategoryParentId`]),
+    ...mapState(`library`, [`createCategoryParentId`]),
     isInvalid () {
       return this.$v.categoryTitle.$dirty && this.$v.categoryTitle.$invalid
     },
