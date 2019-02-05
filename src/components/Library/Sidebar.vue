@@ -24,32 +24,32 @@
 </template>
 
 <script>
-import DocumentsList from './DocumentsList'
-import AccountStatus from './AccountStatus'
-import { mapActions, mapGetters } from 'vuex'
+  import DocumentsList from './DocumentsList'
+  import AccountStatus from './AccountStatus'
+  import { mapActions, mapGetters } from 'vuex'
 
-export default {
-  components: {
-    AccountStatus,
-    DocumentsList,
-  },
-  computed: {
-    ...mapGetters(`documents`, [`documentsLoaded`]),
-    ...mapGetters(`categories`, [`categoriesLoaded`]),
-    isDataLoaded () {
-      return this.documentsLoaded && this.categoriesLoaded
+  export default {
+    components: {
+      AccountStatus,
+      DocumentsList,
     },
-  },
-  watch: {
-    isDataLoaded (isLoaded) {
-      if (isLoaded && this.$route.params.documentId) {
-        this.expandCategoriesForDocumentId(this.$route.params.documentId)
-      }
+    computed: {
+      ...mapGetters(`documents`, [`documentsLoaded`]),
+      ...mapGetters(`categories`, [`categoriesLoaded`]),
+      isDataLoaded () {
+        return this.documentsLoaded && this.categoriesLoaded
+      },
     },
-  },
-  methods: {
-    ...mapActions(`documents`, [`createDocument`]),
-    ...mapActions(`categories`, [`expandCategoriesForDocumentId`]),
-  },
-}
+    watch: {
+      isDataLoaded (isLoaded) {
+        if (isLoaded && this.$route.params.documentId) {
+          this.expandCategoriesForDocumentId(this.$route.params.documentId)
+        }
+      },
+    },
+    methods: {
+      ...mapActions(`documents`, [`createDocument`]),
+      ...mapActions(`categories`, [`expandCategoriesForDocumentId`]),
+    },
+  }
 </script>

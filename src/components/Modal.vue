@@ -1,19 +1,19 @@
 <script>
-import shortcuts from '../mixins/shortcuts'
+  import shortcuts from '../mixins/shortcuts'
 
-export default {
-  mixins: [shortcuts],
-  methods: {
-    closeModal () {
-      this.$emit(`closeModal`)
+  export default {
+    mixins: [shortcuts],
+    methods: {
+      closeModal () {
+        this.$emit(`closeModal`)
+      },
     },
-  },
-  shortcuts: {
-    esc () {
-      this.closeModal()
+    shortcuts: {
+      esc () {
+        this.closeModal()
+      },
     },
-  },
-}
+  }
 </script>
 
 <template>

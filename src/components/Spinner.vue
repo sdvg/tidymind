@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import IconBase from './icons/IconBase'
-import IconSpinner from './icons/IconSpinner'
+  import IconBase from './icons/IconBase'
+  import IconSpinner from './icons/IconSpinner'
 
-export default {
-  components: {
-    IconBase,
-    IconSpinner,
-  },
-}
+  export default {
+    components: {
+      IconBase,
+      IconSpinner,
+    },
+  }
 </script>

@@ -95,45 +95,45 @@
 </template>
 
 <script>
-import Spinner from '../components/Spinner'
+  import Spinner from '../components/Spinner'
 
-const themes = {
-  PRIMARY: `primary`,
-  SECONDARY: `secondary`,
-  ACCENT: `accent`,
-  ACCENT_FULL: `accent-full`,
-  PLAIN: `plain`,
-}
+  const themes = {
+    PRIMARY: `primary`,
+    SECONDARY: `secondary`,
+    ACCENT: `accent`,
+    ACCENT_FULL: `accent-full`,
+    PLAIN: `plain`,
+  }
 
-export default {
-  components: {
-    Spinner,
-  },
-  props: {
-    type: {
-      type: String,
-      default: `button`,
+  export default {
+    components: {
+      Spinner,
     },
-    title: {
-      type: String,
-      default: ``,
+    props: {
+      type: {
+        type: String,
+        default: `button`,
+      },
+      title: {
+        type: String,
+        default: ``,
+      },
+      theme: {
+        type: String,
+        default: `primary`,
+        validator: value => Object.values(themes).includes(value),
+      },
+      isDisabled: {
+        type: Boolean,
+        default: false,
+      },
+      isLoading: {
+        type: Boolean,
+        default: false,
+      },
     },
-    theme: {
-      type: String,
-      default: `primary`,
-      validator: value => Object.values(themes).includes(value),
+    data () {
+      return { themes }
     },
-    isDisabled: {
-      type: Boolean,
-      default: false,
-    },
-    isLoading: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data () {
-    return { themes }
-  },
-}
+  }
 </script>

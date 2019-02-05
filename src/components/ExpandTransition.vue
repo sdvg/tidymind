@@ -32,43 +32,43 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    enter (element) {
-      element.style.width = getComputedStyle(element).width
-      element.style.position = `absolute`
-      element.style.visibility = `hidden`
-      element.style.height = `auto`
+  export default {
+    methods: {
+      enter (element) {
+        element.style.width = getComputedStyle(element).width
+        element.style.position = `absolute`
+        element.style.visibility = `hidden`
+        element.style.height = `auto`
 
-      setTimeout(() => {
-        const height = getComputedStyle(element).height
+        setTimeout(() => {
+          const height = getComputedStyle(element).height
 
-        element.style.width = null
-        element.style.position = null
-        element.style.visibility = null
-        element.style.height = 0
+          element.style.width = null
+          element.style.position = null
+          element.style.visibility = null
+          element.style.height = 0
+
+          /* Force repaint */
+          getComputedStyle(element).height // eslint-disable-line no-unused-expressions
+
+          requestAnimationFrame(() => {
+            element.style.height = height
+          })
+        })
+      },
+      afterEnter (element) {
+        element.style.height = `auto`
+      },
+      leave (element) {
+        element.style.height = getComputedStyle(element).height
 
         /* Force repaint */
         getComputedStyle(element).height // eslint-disable-line no-unused-expressions
 
         requestAnimationFrame(() => {
-          element.style.height = height
+          element.style.height = 0
         })
-      })
+      },
     },
-    afterEnter (element) {
-      element.style.height = `auto`
-    },
-    leave (element) {
-      element.style.height = getComputedStyle(element).height
-
-      /* Force repaint */
-      getComputedStyle(element).height // eslint-disable-line no-unused-expressions
-
-      requestAnimationFrame(() => {
-        element.style.height = 0
-      })
-    },
-  },
-}
+  }
 </script>

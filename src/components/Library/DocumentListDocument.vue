@@ -104,53 +104,53 @@
 </template>
 
 <script>
-import KebabMenu from '@/components/KebabMenu/KebabMenu'
-import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
-import IconBase from '@/components/icons/IconBase'
-import IconFileText from '@/components/icons/IconFileText'
+  import KebabMenu from '@/components/KebabMenu/KebabMenu'
+  import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
+  import IconBase from '@/components/icons/IconBase'
+  import IconFileText from '@/components/icons/IconFileText'
 
-export default {
-  components: {
-    IconBase,
-    IconFileText,
-    KebabMenu,
-    KebabMenuAction,
-  },
-  props: {
-    document: {
-      type: Object,
-      required: true,
+  export default {
+    components: {
+      IconBase,
+      IconFileText,
+      KebabMenu,
+      KebabMenuAction,
     },
-    depth: {
-      type: Number,
-      required: true,
+    props: {
+      document: {
+        type: Object,
+        required: true,
+      },
+      depth: {
+        type: Number,
+        required: true,
+      },
     },
-  },
-  data () {
-    return {
-      hasLinkFocus: false,
-      isMenuOpen: false,
-    }
-  },
-  methods: {
-    isDocumentOpen (document) {
-      return this.$route.params.documentId === document._id
+    data () {
+      return {
+        hasLinkFocus: false,
+        isMenuOpen: false,
+      }
     },
-    isDocumentUnnamed (document) {
-      return !document.title
+    methods: {
+      isDocumentOpen (document) {
+        return this.$route.params.documentId === document._id
+      },
+      isDocumentUnnamed (document) {
+        return !document.title
+      },
+      onLinkFocus () {
+        this.hasLinkFocus = true
+      },
+      onLinkBlur () {
+        this.hasLinkFocus = false
+      },
+      menuOpened () {
+        this.isMenuOpen = true
+      },
+      menuClosed () {
+        this.isMenuOpen = false
+      },
     },
-    onLinkFocus () {
-      this.hasLinkFocus = true
-    },
-    onLinkBlur () {
-      this.hasLinkFocus = false
-    },
-    menuOpened () {
-      this.isMenuOpen = true
-    },
-    menuClosed () {
-      this.isMenuOpen = false
-    },
-  },
-}
+  }
 </script>

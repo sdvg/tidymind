@@ -90,45 +90,45 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import { debounce } from 'lodash'
-import Button from '@/components/Button'
-import RichTextEditor from '@/components/editors/RichTextEditor'
+  import { createNamespacedHelpers } from 'vuex'
+  import { debounce } from 'lodash'
+  import Button from '@/components/Button'
+  import RichTextEditor from '@/components/editors/RichTextEditor'
 
-const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
+  const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
 
-export default {
-  components: { Button, RichTextEditor },
-  computed: {
-    ...mapGetters([
-      `getDocument`,
-      `documentsLoaded`,
-    ]),
-    document () {
-      return this.getDocument(this.$route.params.documentId)
+  export default {
+    components: { Button, RichTextEditor },
+    computed: {
+      ...mapGetters([
+        `getDocument`,
+        `documentsLoaded`,
+      ]),
+      document () {
+        return this.getDocument(this.$route.params.documentId)
+      },
     },
-  },
-  methods: {
-    ...mapActions([
-      `updateDocument`,
-      `removeDocument`,
-    ]),
-    persistChange (field, newValue) {
-      this.updateDocument({
-        ...this.document,
-        [field]: newValue,
-      })
+    methods: {
+      ...mapActions([
+        `updateDocument`,
+        `removeDocument`,
+      ]),
+      persistChange (field, newValue) {
+        this.updateDocument({
+          ...this.document,
+          [field]: newValue,
+        })
+      },
+      handleTitleChange: debounce(function (event) {
+        this.persistChange(`title`, event.target.value)
+      }, 500),
+      handleContentChange: debounce(function (content) {
+        this.persistChange(`content`, content)
+      }, 500),
+      async remove () {
+        await this.removeDocument(this.document)
+        this.$router.push({ name: `library` })
+      },
     },
-    handleTitleChange: debounce(function (event) {
-      this.persistChange(`title`, event.target.value)
-    }, 500),
-    handleContentChange: debounce(function (content) {
-      this.persistChange(`content`, content)
-    }, 500),
-    async remove () {
-      await this.removeDocument(this.document)
-      this.$router.push({ name: `library` })
-    },
-  },
-}
+  }
 </script>

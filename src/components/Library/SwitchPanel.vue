@@ -121,109 +121,109 @@
 </template>
 
 <script>
-import Modal from '../Modal'
-import ModalContent from '../ModalContent'
-import { mapState, mapActions } from 'vuex'
-import shortcuts from '@/mixins/shortcuts'
-import IconBase from '@/components/icons/IconBase'
-import IconFolder from '@/components/icons/IconFolder'
-import IconFileText from '@/components/icons/IconFileText'
+  import Modal from '../Modal'
+  import ModalContent from '../ModalContent'
+  import { mapState, mapActions } from 'vuex'
+  import shortcuts from '@/mixins/shortcuts'
+  import IconBase from '@/components/icons/IconBase'
+  import IconFolder from '@/components/icons/IconFolder'
+  import IconFileText from '@/components/icons/IconFileText'
 
-export default {
-  components: {
-    IconBase,
-    IconFolder,
-    IconFileText,
-    Modal,
-    ModalContent,
-  },
-  mixins: [shortcuts],
-  data () {
-    return {
-      searchQuery: ``,
-      focusedIndex: null,
-    }
-  },
-  computed: {
-    ...mapState(`categories`, [`categories`]),
-    ...mapState(`documents`, [`documents`]),
-    results () {
-      return [
-        ...this.categories || [],
-        ...this.documents || [],
-      ]
-        .filter(entity => entity.title.trim() !== ``) // don't show entities without title
-        .filter(entity => entity.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
-        .sort(({ title: titleA }, { title: titleB }) => {
-          if (titleA < titleB) return -1
-          else if (titleB > titleA) return 1
-          else return 0
-        })
-        .slice(0, 15) // limit to 15 visible results
+  export default {
+    components: {
+      IconBase,
+      IconFolder,
+      IconFileText,
+      Modal,
+      ModalContent,
     },
-    resultsLength () {
-      return this.results.length
-    },
-    hasResults () {
-      return Boolean(this.results.length)
-    },
-  },
-  watch: {
-    searchQuery () {
-      this.resetFocusedIndex()
-    },
-  },
-  mounted () {
-    setTimeout(() => {
-      if (this.$refs.input) { // prevent exceptions when HMR
-        this.$refs.input.focus()
+    mixins: [shortcuts],
+    data () {
+      return {
+        searchQuery: ``,
+        focusedIndex: null,
       }
-    })
-  },
-  methods: {
-    ...mapActions(`categories`, {
-      openCategory: `expandCategoriesRecursively`,
-      expandCategoriesForDocumentId: `expandCategoriesForDocumentId`,
-    }),
-    resetFocusedIndex () {
-      this.focusedIndex = this.searchQuery.length ? 0 : null
     },
-    openFocusedResult () {
-      const focusedResult = this.results[this.focusedIndex]
+    computed: {
+      ...mapState(`categories`, [`categories`]),
+      ...mapState(`documents`, [`documents`]),
+      results () {
+        return [
+          ...this.categories || [],
+          ...this.documents || [],
+        ]
+          .filter(entity => entity.title.trim() !== ``) // don't show entities without title
+          .filter(entity => entity.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+          .sort(({ title: titleA }, { title: titleB }) => {
+            if (titleA < titleB) return -1
+            else if (titleB > titleA) return 1
+            else return 0
+          })
+          .slice(0, 15) // limit to 15 visible results
+      },
+      resultsLength () {
+        return this.results.length
+      },
+      hasResults () {
+        return Boolean(this.results.length)
+      },
+    },
+    watch: {
+      searchQuery () {
+        this.resetFocusedIndex()
+      },
+    },
+    mounted () {
+      setTimeout(() => {
+        if (this.$refs.input) { // prevent exceptions when HMR
+          this.$refs.input.focus()
+        }
+      })
+    },
+    methods: {
+      ...mapActions(`categories`, {
+        openCategory: `expandCategoriesRecursively`,
+        expandCategoriesForDocumentId: `expandCategoriesForDocumentId`,
+      }),
+      resetFocusedIndex () {
+        this.focusedIndex = this.searchQuery.length ? 0 : null
+      },
+      openFocusedResult () {
+        const focusedResult = this.results[this.focusedIndex]
 
-      if (focusedResult._id.startsWith(`category`)) {
-        this.openCategory(focusedResult)
-      } else if (focusedResult._id.startsWith(`document`)) {
-        this.$router.push({
-          name: `library.document`,
-          params: { documentId: focusedResult._id },
-        })
-      }
+        if (focusedResult._id.startsWith(`category`)) {
+          this.openCategory(focusedResult)
+        } else if (focusedResult._id.startsWith(`document`)) {
+          this.$router.push({
+            name: `library.document`,
+            params: { documentId: focusedResult._id },
+          })
+        }
 
-      this.$emit(`closePanel`)
+        this.$emit(`closePanel`)
+      },
     },
-  },
-  shortcuts: {
-    down () {
-      if (this.focusedIndex === null || this.focusedIndex === this.resultsLength - 1) {
-        this.focusedIndex = 0
-      } else {
-        this.focusedIndex = this.focusedIndex + 1
-      }
+    shortcuts: {
+      down () {
+        if (this.focusedIndex === null || this.focusedIndex === this.resultsLength - 1) {
+          this.focusedIndex = 0
+        } else {
+          this.focusedIndex = this.focusedIndex + 1
+        }
+      },
+      up () {
+        if (this.focusedIndex === null || this.focusedIndex === 0) {
+          this.focusedIndex = this.resultsLength - 1
+        } else {
+          this.focusedIndex = this.focusedIndex - 1
+        }
+      },
+      enter () {
+        this.openFocusedResult()
+      },
+      space () {
+        this.openFocusedResult()
+      },
     },
-    up () {
-      if (this.focusedIndex === null || this.focusedIndex === 0) {
-        this.focusedIndex = this.resultsLength - 1
-      } else {
-        this.focusedIndex = this.focusedIndex - 1
-      }
-    },
-    enter () {
-      this.openFocusedResult()
-    },
-    space () {
-      this.openFocusedResult()
-    },
-  },
-}
+  }
 </script>

@@ -57,13 +57,13 @@
 </template>
 
 <script>
-import IconBase from '../icons/IconBase'
-import IconExclamationCircle from '../icons/IconExclamationCircle'
+  import IconBase from '../icons/IconBase'
+  import IconExclamationCircle from '../icons/IconExclamationCircle'
 
-export default {
-  components: {
-    IconBase,
-    IconExclamationCircle,
-  },
-}
+  export default {
+    components: {
+      IconBase,
+      IconExclamationCircle,
+    },
+  }
 </script>

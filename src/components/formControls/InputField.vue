@@ -1,45 +1,45 @@
 <script>
-export default {
-  props: {
-    label: {
-      type: String,
-      required: true,
+  export default {
+    props: {
+      label: {
+        type: String,
+        required: true,
+      },
+      type: {
+        type: String,
+        default: `text`,
+      },
+      hideLabel: {
+        type: Boolean,
+        default: false,
+      },
+      hasError: {
+        type: Boolean,
+        default: false,
+      },
+      errorMessage: {
+        type: String,
+        default: null,
+      },
+      value: {
+        type: String,
+        default: ``,
+      },
+      attributes: {
+        type: Object,
+        default: () => ({}),
+      },
     },
-    type: {
-      type: String,
-      default: `text`,
-    },
-    hideLabel: {
-      type: Boolean,
-      default: false,
-    },
-    hasError: {
-      type: Boolean,
-      default: false,
-    },
-    errorMessage: {
-      type: String,
-      default: null,
-    },
-    value: {
-      type: String,
-      default: ``,
-    },
-    attributes: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  methods: {
+    methods: {
 
-    /**
-     * @public
-     */
-    focusInput () {
-      this.$refs.inputElement.focus()
+      /**
+       * @public
+       */
+      focusInput () {
+        this.$refs.inputElement.focus()
+      },
     },
-  },
-}
+  }
 </script>
 
 <template>

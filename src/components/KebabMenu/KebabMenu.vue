@@ -1,32 +1,32 @@
 <script>
-import IconEllipsisV from '../icons/IconEllipsisV'
-import IconBase from '../icons/IconBase'
-import Tooltip from '../Tooltip'
+  import IconEllipsisV from '../icons/IconEllipsisV'
+  import IconBase from '../icons/IconBase'
+  import Tooltip from '../Tooltip'
 
-const themes = {
-  LIGHT: `light`,
-  DARK: `dark`,
-}
+  const themes = {
+    LIGHT: `light`,
+    DARK: `dark`,
+  }
 
-export default {
-  components: {
-    IconBase,
-    IconEllipsisV,
-    Tooltip,
-  },
-  props: {
-    theme: {
-      type: String,
-      default: themes.LIGHT,
-      validator: value => Object.values(themes).includes(value),
+  export default {
+    components: {
+      IconBase,
+      IconEllipsisV,
+      Tooltip,
     },
-  },
-  data () {
-    return {
-      themes,
-    }
-  },
-}
+    props: {
+      theme: {
+        type: String,
+        default: themes.LIGHT,
+        validator: value => Object.values(themes).includes(value),
+      },
+    },
+    data () {
+      return {
+        themes,
+      }
+    },
+  }
 </script>
 
 <template>

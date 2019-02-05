@@ -28,5 +28,14 @@ module.exports = {
     'quotes': ['error', 'backtick'],
     'object-curly-spacing': ['error', 'always'],
     'comma-dangle': ['error', 'always-multiline'],
-  }
+    "vue/script-indent": ["error", 2, { "baseIndent": 1 }]
+  },
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ]
 }

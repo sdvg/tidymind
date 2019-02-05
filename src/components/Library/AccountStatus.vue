@@ -19,22 +19,22 @@
 </template>
 
 <script>
-import hoodie from '../../lib/hoodie'
-import AccountStatusNotSignedIn from './AccountStatusNotSignedIn'
-import AccountStatusSignedIn from './AccountStatusSignedIn'
+  import hoodie from '../../lib/hoodie'
+  import AccountStatusNotSignedIn from './AccountStatusNotSignedIn'
+  import AccountStatusSignedIn from './AccountStatusSignedIn'
 
-export default {
-  components: {
-    AccountStatusNotSignedIn,
-    AccountStatusSignedIn,
-  },
-  data () {
-    return {
-      account: null,
-    }
-  },
-  async mounted () {
-    this.account = await hoodie.account.get()
-  },
-}
+  export default {
+    components: {
+      AccountStatusNotSignedIn,
+      AccountStatusSignedIn,
+    },
+    data () {
+      return {
+        account: null,
+      }
+    },
+    async mounted () {
+      this.account = await hoodie.account.get()
+    },
+  }
 </script>

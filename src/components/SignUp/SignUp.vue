@@ -1,60 +1,60 @@
 <script>
-import router from '../../router'
-import Button from '@/components/Button'
-import ErrorMessage from '@/components/ErrorMessage'
-import Form from '@/components/formControls/Form'
-import hoodie from '@/lib/hoodie'
-import IconAngleLeft from '@/components/icons/IconAngleLeft'
-import IconBase from '@/components/icons/IconBase'
-import InputField from '@/components/formControls/InputField'
-import { signInAndDeriveEncryptionKey } from '../../lib/account'
-import { validationMixin } from 'vuelidate'
-import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+  import router from '../../router'
+  import Button from '@/components/Button'
+  import ErrorMessage from '@/components/ErrorMessage'
+  import Form from '@/components/formControls/Form'
+  import hoodie from '@/lib/hoodie'
+  import IconAngleLeft from '@/components/icons/IconAngleLeft'
+  import IconBase from '@/components/icons/IconBase'
+  import InputField from '@/components/formControls/InputField'
+  import { signInAndDeriveEncryptionKey } from '../../lib/account'
+  import { validationMixin } from 'vuelidate'
+  import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 
-export default {
-  components: {
-    Button,
-    ErrorMessage,
-    Form,
-    IconAngleLeft,
-    IconBase,
-    InputField,
-  },
-  mixins: [validationMixin],
-  async beforeRouteEnter (to, from, next) {
-    const isSignedIn = Boolean(await hoodie.account.get(`session`))
-
-    next(isSignedIn ? `library` : true)
-  },
-  data () {
-    return {
-      username: ``,
-      password: ``,
-      repeatedPassword: ``,
-      isRequestPending: false,
-      formErrorMessage: null,
-    }
-  },
-  validations: {
-    username: { required },
-    password: {
-      required,
-      minLength: minLength(10),
+  export default {
+    components: {
+      Button,
+      ErrorMessage,
+      Form,
+      IconAngleLeft,
+      IconBase,
+      InputField,
     },
-    repeatedPassword: {
-      required,
-      sameAsPassword: sameAs(`password`),
-    },
-  },
-  methods: {
-    hasError (fieldName) {
-      const fieldValidation = this.$v[fieldName]
+    mixins: [validationMixin],
+    async beforeRouteEnter (to, from, next) {
+      const isSignedIn = Boolean(await hoodie.account.get(`session`))
 
-      return fieldValidation.$dirty && fieldValidation.$invalid
+      next(isSignedIn ? `library` : true)
     },
+    data () {
+      return {
+        username: ``,
+        password: ``,
+        repeatedPassword: ``,
+        isRequestPending: false,
+        formErrorMessage: null,
+      }
+    },
+    validations: {
+      username: { required },
+      password: {
+        required,
+        minLength: minLength(10),
+      },
+      repeatedPassword: {
+        required,
+        sameAsPassword: sameAs(`password`),
+      },
+    },
+    methods: {
+      hasError (fieldName) {
+        const fieldValidation = this.$v[fieldName]
 
-    getErrorMessage (fieldName) {
-      switch (fieldName) {
+        return fieldValidation.$dirty && fieldValidation.$invalid
+      },
+
+      getErrorMessage (fieldName) {
+        switch (fieldName) {
         case `username`:
           return `Please choose a username.`
         case `password`:
@@ -67,42 +67,42 @@ export default {
             : `Please repeat your password.`
         default:
           return `Field is required.`
-      }
-    },
-
-    async handleSubmit () {
-      this.$v.$touch()
-
-      if (!this.$v.$invalid) {
-        const credentials = {
-          username: this.username,
-          password: this.password,
         }
+      },
 
-        this.formErrorMessage = null
-        this.isRequestPending = true
-        this.signUpAndSignIn(credentials)
-      }
+      async handleSubmit () {
+        this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+          const credentials = {
+            username: this.username,
+            password: this.password,
+          }
+
+          this.formErrorMessage = null
+          this.isRequestPending = true
+          this.signUpAndSignIn(credentials)
+        }
+      },
+
+      async signUpAndSignIn (credentials) {
+        try {
+          await hoodie.account.signUp(credentials)
+          await signInAndDeriveEncryptionKey(credentials)
+
+          router.push({ name: `library` })
+        } catch (error) {
+          this.handleError(error)
+        } finally {
+          this.isRequestPending = false
+        }
+      },
+
+      handleError (error) {
+        this.formErrorMessage = error.message
+      },
     },
-
-    async signUpAndSignIn (credentials) {
-      try {
-        await hoodie.account.signUp(credentials)
-        await signInAndDeriveEncryptionKey(credentials)
-
-        router.push({ name: `library` })
-      } catch (error) {
-        this.handleError(error)
-      } finally {
-        this.isRequestPending = false
-      }
-    },
-
-    handleError (error) {
-      this.formErrorMessage = error.message
-    },
-  },
-}
+  }
 </script>
 
 <template>

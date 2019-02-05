@@ -67,25 +67,25 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import DocumentListCategory from './DocumentListCategory'
-import KebabMenu from '../KebabMenu/KebabMenu'
-import KebabMenuAction from '../KebabMenu/KebabMenuAction'
-import IconBase from '@/components/icons/IconBase'
-import IconPlus from '@/components/icons/IconPlus'
+  import { mapActions, mapGetters } from 'vuex'
+  import DocumentListCategory from './DocumentListCategory'
+  import KebabMenu from '../KebabMenu/KebabMenu'
+  import KebabMenuAction from '../KebabMenu/KebabMenuAction'
+  import IconBase from '@/components/icons/IconBase'
+  import IconPlus from '@/components/icons/IconPlus'
 
-export default {
-  components: {
-    DocumentListCategory,
-    KebabMenu,
-    KebabMenuAction,
-    IconBase,
-    IconPlus,
-  },
-  computed: mapGetters(`categories`, [`categoryTree`]),
-  methods: {
-    ...mapActions(`library`, [`openCreateCategoryModal`]),
-    ...mapActions(`documents`, [`createAndOpenDocumentInCurrentCategory`]),
-  },
-}
+  export default {
+    components: {
+      DocumentListCategory,
+      KebabMenu,
+      KebabMenuAction,
+      IconBase,
+      IconPlus,
+    },
+    computed: mapGetters(`categories`, [`categoryTree`]),
+    methods: {
+      ...mapActions(`library`, [`openCreateCategoryModal`]),
+      ...mapActions(`documents`, [`createAndOpenDocumentInCurrentCategory`]),
+    },
+  }
 </script>

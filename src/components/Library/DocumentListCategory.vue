@@ -130,66 +130,66 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import { sortBy } from 'lodash'
-import IconBase from '@/components/icons/IconBase'
-import IconChevronRight from '@/components/icons/IconChevronRight'
-import ExpandTransition from '@/components/ExpandTransition'
-import KebabMenu from '@/components/KebabMenu/KebabMenu'
-import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
-import DocumentListDocument from '@/components/Library/DocumentListDocument'
+  import { mapActions, mapGetters } from 'vuex'
+  import { sortBy } from 'lodash'
+  import IconBase from '@/components/icons/IconBase'
+  import IconChevronRight from '@/components/icons/IconChevronRight'
+  import ExpandTransition from '@/components/ExpandTransition'
+  import KebabMenu from '@/components/KebabMenu/KebabMenu'
+  import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
+  import DocumentListDocument from '@/components/Library/DocumentListDocument'
 
-export default {
-  components: {
-    DocumentListCategory: () => import(`./DocumentListCategory`),
-    DocumentListDocument,
-    ExpandTransition,
-    IconBase,
-    IconChevronRight,
-    KebabMenu,
-    KebabMenuAction,
-  },
-  props: {
-    category: {
-      type: Object,
-      required: true,
+  export default {
+    components: {
+      DocumentListCategory: () => import(`./DocumentListCategory`),
+      DocumentListDocument,
+      ExpandTransition,
+      IconBase,
+      IconChevronRight,
+      KebabMenu,
+      KebabMenuAction,
     },
-    depth: {
-      type: Number,
-      required: true,
+    props: {
+      category: {
+        type: Object,
+        required: true,
+      },
+      depth: {
+        type: Number,
+        required: true,
+      },
     },
-  },
-  data () {
-    return {
-      isMenuOpen: false,
-    }
-  },
-  computed: {
-    ...mapGetters(`documents`, [`getDocumentsForCategory`]),
-    ...mapGetters(`categories`, [`isCategoryExpanded`]),
-    documents () {
-      return this.getDocumentsForCategory(this.category._id)
+    data () {
+      return {
+        isMenuOpen: false,
+      }
     },
-    sortedDocuments () {
-      return sortBy(this.documents, document => document.title.toLowerCase())
+    computed: {
+      ...mapGetters(`documents`, [`getDocumentsForCategory`]),
+      ...mapGetters(`categories`, [`isCategoryExpanded`]),
+      documents () {
+        return this.getDocumentsForCategory(this.category._id)
+      },
+      sortedDocuments () {
+        return sortBy(this.documents, document => document.title.toLowerCase())
+      },
+      isEmpty () {
+        return !this.category.children && this.documents.length === 0
+      },
+      isExpanded () {
+        return this.isCategoryExpanded(this.category._id)
+      },
     },
-    isEmpty () {
-      return !this.category.children && this.documents.length === 0
+    methods: {
+      ...mapActions(`categories`, [`toggleCategoryExpansion`]),
+      ...mapActions(`documents`, [`createAndOpenDocument`]),
+      ...mapActions(`library`, [`openCreateCategoryModal`]),
+      menuOpened () {
+        this.isMenuOpen = true
+      },
+      menuClosed () {
+        this.isMenuOpen = false
+      },
     },
-    isExpanded () {
-      return this.isCategoryExpanded(this.category._id)
-    },
-  },
-  methods: {
-    ...mapActions(`categories`, [`toggleCategoryExpansion`]),
-    ...mapActions(`documents`, [`createAndOpenDocument`]),
-    ...mapActions(`library`, [`openCreateCategoryModal`]),
-    menuOpened () {
-      this.isMenuOpen = true
-    },
-    menuClosed () {
-      this.isMenuOpen = false
-    },
-  },
-}
+  }
 </script>
