@@ -33,7 +33,7 @@
   <textarea
     ref="textarea"
     :value="document.content"
-  ></textarea>
+  />
 </template>
 
 <script>

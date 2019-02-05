@@ -32,18 +32,18 @@ export default {
     class="InputField"
   >
     <span
-      class="label"
       :class="{ 'visually-hidden': hideLabel }"
+      class="label"
     >
       {{ label }}
     </span>
 
     <input
+      ref="inputElement"
       :type="type"
-      class="input"
       :value="value"
       v-bind="attributes"
-      ref="inputElement"
+      class="input"
       @input="$emit(`input`, $event.target.value)"
       @blur="$emit(`blur`, $event)"
     >

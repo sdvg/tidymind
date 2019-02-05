@@ -63,23 +63,23 @@
       >
         <div class="input-container">
           <input
+            ref="input"
             v-model="searchQuery"
             class="input"
             placeholder="Switch to…"
-            ref="input"
           >
         </div>
 
         <p
-          class="no-results"
           v-if="!hasResults"
+          class="no-results"
         >
           No results 😕
         </p>
 
         <ol
-          class="results"
           v-if="hasResults"
+          class="results"
         >
           <li
             v-for="(result, index) in results"
@@ -89,9 +89,9 @@
           >
             <router-link
               v-if="result._id.startsWith(`document`)"
-              class="result-item"
               :class="{ 'is-active': index === focusedIndex }"
               :to="{ name: 'library.document', params: { documentId: result._id } }"
+              class="result-item"
               @click.native="expandCategoriesForDocumentId(result._id)"
             >
               <IconBase class="result-icon">
@@ -103,8 +103,8 @@
 
             <button
               v-if="result._id.startsWith(`category`)"
-              class="result-item"
               :class="{ 'is-active': index === focusedIndex }"
+              class="result-item"
               @click="openCategory(result)"
             >
               <IconBase class="result-icon">
@@ -130,7 +130,6 @@ import IconFolder from '@/components/icons/IconFolder'
 import IconFileText from '@/components/icons/IconFileText'
 
 export default {
-  mixins: [shortcuts],
   components: {
     IconBase,
     IconFolder,
@@ -138,13 +137,7 @@ export default {
     Modal,
     ModalContent,
   },
-  mounted () {
-    setTimeout(() => {
-      if (this.$refs.input) { // prevent exceptions when HMR
-        this.$refs.input.focus()
-      }
-    })
-  },
+  mixins: [shortcuts],
   data () {
     return {
       searchQuery: ``,
@@ -155,6 +148,13 @@ export default {
     searchQuery () {
       this.resetFocusedIndex()
     },
+  },
+  mounted () {
+    setTimeout(() => {
+      if (this.$refs.input) { // prevent exceptions when HMR
+        this.$refs.input.focus()
+      }
+    })
   },
   computed: {
     ...mapState(`categories`, [`categories`]),

@@ -12,7 +12,6 @@ import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
-  mixins: [validationMixin],
   components: {
     Button,
     ErrorMessage,
@@ -21,6 +20,7 @@ export default {
     IconBase,
     InputField,
   },
+  mixins: [validationMixin],
   async beforeRouteEnter (to, from, next) {
     const isSignedIn = Boolean(await hoodie.account.get(`session`))
 
@@ -107,29 +107,29 @@ export default {
         @submit="handleSubmit"
       >
         <InputField
-          label="Username"
           v-model="username"
-          @blur="$v.username.$touch()"
           :attributes="{ autofocus: true }"
-          :hasError="hasError(`username`)"
-          :errorMessage="getErrorMessage(`username`)"
+          :has-error="hasError(`username`)"
+          :error-message="getErrorMessage(`username`)"
+          label="Username"
+          @blur="$v.username.$touch()"
         />
 
         <InputField
+          v-model="password"
+          :has-error="hasError(`password`)"
+          :error-message="getErrorMessage(`password`)"
           label="Password"
           type="password"
           @blur="$v.password.$touch()"
-          v-model="password"
-          :hasError="hasError(`password`)"
-          :errorMessage="getErrorMessage(`password`)"
         />
 
         <Button
+          :isDisabled="isRequestPending"
+          :isLoading="isRequestPending"
           class="button"
           theme="accent-full"
           type="submit"
-          :isDisabled="isRequestPending"
-          :isLoading="isRequestPending"
         >
           Sign in
         </Button>

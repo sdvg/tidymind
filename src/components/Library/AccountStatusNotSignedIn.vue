@@ -38,16 +38,16 @@
     <ul class="links">
       <li class="link-wrapper">
         <router-link
-          class="link"
           :to="{ name: 'signIn' }"
+          class="link"
         >
           Sign In
         </router-link>
       </li>
       <li class="link-wrapper">
         <router-link
-          class="link"
           :to="{ name: 'signUp' }"
+          class="link"
         >
           Sign Up
         </router-link>

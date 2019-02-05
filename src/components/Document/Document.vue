@@ -54,15 +54,15 @@
 
     <template v-if="document">
       <input
+        :value="document.title"
         class="title"
         placeholder="Document Title"
-        :value="document.title"
         @keyup="handleTitleChange"
       >
 
       <div
-        class="editors"
         :key="document._id"
+        class="editors"
       >
         <RichTextEditor
           :document="document"

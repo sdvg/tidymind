@@ -55,13 +55,13 @@
 <template>
   <li>
     <div
-      class="container"
       :class="{ 'has-open-menu': isMenuOpen }"
+      class="container"
     >
       <button
-        class="category"
         :class="{ 'is-expanded': isExpanded }"
         :style="{ '--depth': depth }"
+        class="category"
         @click="toggleCategoryExpansion(category._id)"
       >
         <IconBase class="category-icon">
@@ -119,8 +119,8 @@
 
         <div
           v-if="isEmpty"
-          class="empty-note"
           :style="{ '--depth': depth + 1 }"
+          class="empty-note"
         >
           empty
         </div>

@@ -22,7 +22,7 @@ export default {
       <div
         class="modal-close-background"
         @click="closeModal"
-      ></div>
+      />
       <div class="modal-content">
         <slot />
       </div>

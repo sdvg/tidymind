@@ -59,7 +59,6 @@
 
 <template>
   <li
-    class="DocumentListDocument"
     :class="{
       'has-focus': hasLinkFocus,
       'is-open': isDocumentOpen(document),
@@ -67,10 +66,11 @@
       'has-open-menu': isMenuOpen,
     }"
     :style="{ '--depth': depth + 1 }"
+    class="DocumentListDocument"
   >
     <router-link
-      class="link"
       :to="{ name: 'library.document', params: { documentId: document._id } }"
+      class="link"
       @focus.native="onLinkFocus"
       @blur.native="onLinkBlur"
     >

@@ -26,21 +26,21 @@
 
         <form @submit.prevent="handleSubmit">
           <InputField
-            label="Category Name"
-            v-model="categoryTitle"
             ref="inputField"
-            :hideLabel="true"
-            :hasError="isInvalid"
-            errorMessage="Please enter a category name."
+            v-model="categoryTitle"
+            :hide-label="true"
+            :has-error="isInvalid"
+            label="Category Name"
+            error-message="Please enter a category name."
             @blur="$v.categoryTitle.$touch()"
           />
 
           <Button
+            :isDisabled="isRequestPending"
+            :isLoading="isRequestPending"
             class="button-create"
             theme="accent"
             type="submit"
-            :isDisabled="isRequestPending"
-            :isLoading="isRequestPending"
           >
             Create
           </Button>
@@ -70,7 +70,6 @@ import { required } from 'vuelidate/lib/validators'
 import { addCategory } from '../../lib/dataStoreClient'
 
 export default {
-  mixins: [validationMixin],
   components: {
     Modal,
     ModalContent,
@@ -78,6 +77,7 @@ export default {
     InputField,
     Button,
   },
+  mixins: [validationMixin],
   methods: {
     ...mapActions(`library`, [`closeCreateCategoryModal`]),
     ...mapActions(`categories`, [`expandCategoriesRecursively`]),

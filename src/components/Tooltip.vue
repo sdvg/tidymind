@@ -17,8 +17,8 @@
     <portal to="appRoot">
       <div
         v-if="isVisible"
-        :key="key"
         ref="content"
+        :key="key"
         class="content"
         @click="close"
         @mouseleave="close"
@@ -45,6 +45,15 @@ export default {
     key () {
       return uuidv4()
     },
+  },
+  mounted () {
+    window.addEventListener(`resize`, this.onResize, { passive: true })
+    window.addEventListener(`scroll`, this.onScroll, { passive: true })
+  },
+  beforeDestroy () {
+    window.removeEventListener(`resize`, this.onResize)
+    window.removeEventListener(`scroll`, this.onScroll)
+    eventBus.$off(OPENED_EVENT_NAME, this.close)
   },
   methods: {
     open () {
@@ -85,15 +94,6 @@ export default {
     onScroll () {
       this.close()
     },
-  },
-  mounted () {
-    window.addEventListener(`resize`, this.onResize, { passive: true })
-    window.addEventListener(`scroll`, this.onScroll, { passive: true })
-  },
-  beforeDestroy () {
-    window.removeEventListener(`resize`, this.onResize)
-    window.removeEventListener(`scroll`, this.onScroll)
-    eventBus.$off(OPENED_EVENT_NAME, this.close)
   },
 }
 </script>

@@ -35,12 +35,12 @@ export default {
     @close="$emit(`close`)"
   >
     <div
-      class="KebabMenu"
       slot="trigger"
       :class="{
         light: theme === themes.LIGHT,
         dark: theme === themes.DARK,
       }"
+      class="KebabMenu"
     >
       <slot name="icon">
         <IconBase class="icon">
@@ -50,8 +50,8 @@ export default {
     </div>
 
     <div
-      class="actions"
       slot="content"
+      class="actions"
     >
       <slot name="actions" />
     </div>

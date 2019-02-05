@@ -32,12 +32,12 @@ import shortcuts from '../../mixins/shortcuts'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-  mixins: [shortcuts],
   components: {
     Sidebar,
     SwitchPanel,
     CreateCategoryModal,
   },
+  mixins: [shortcuts],
   methods: {
     ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
     ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),

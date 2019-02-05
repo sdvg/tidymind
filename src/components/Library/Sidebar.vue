@@ -17,8 +17,8 @@
     <p v-if="!isDataLoaded">Loading...</p>
 
     <DocumentsList
-      class="documentList"
       v-if="isDataLoaded"
+      class="documentList"
     />
   </aside>
 </template>
