@@ -16,7 +16,7 @@
     <router-view />
 
     <SwitchPanel
-      v-if="hasSwitchPanel"
+      v-if="isSwitchPanelOpen"
       @closePanel="closeSwitchPanel"
     />
 
@@ -38,13 +38,8 @@
       CreateCategoryModal,
     },
     mixins: [shortcuts],
-    data () {
-      return {
-        hasSwitchPanel: false,
-      }
-    },
     computed: {
-      ...mapState(`library`, [`isCreateCategoryModalOpen`]),
+      ...mapState(`library`, [`isSwitchPanelOpen`, `isCreateCategoryModalOpen`]),
     },
     mounted () {
       this.fetchAndSubscribeCategories()
@@ -53,12 +48,7 @@
     methods: {
       ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
       ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),
-      closeSwitchPanel () {
-        this.hasSwitchPanel = false
-      },
-      toggleSwitchPanel () {
-        this.hasSwitchPanel = !this.hasSwitchPanel
-      },
+      ...mapActions(`library`, [`toggleSwitchPanel`, `closeSwitchPanel`]),
     },
     shortcuts: {
       switchPanel () {

@@ -1,10 +1,20 @@
 export default {
   namespaced: true,
   state: {
+    isSwitchPanelOpen: false,
     isCreateCategoryModalOpen: false,
     createCategoryParentId: null,
   },
   actions: {
+    openSwitchPanel ({ commit }) {
+      commit(`setIsSwitchPanelOpen`, true)
+    },
+    closeSwitchPanel ({ commit }) {
+      commit(`setIsSwitchPanelOpen`, false)
+    },
+    toggleSwitchPanel ({ commit, state }) {
+      commit(`setIsSwitchPanelOpen`, !state.setIsSwitchPanelOpen)
+    },
     openCreateCategoryModal ({ commit }, createCategoryParentId = null) {
       commit(`setIsCreateCategoryModalOpen`, true)
       commit(`setCreateCategoryParentId`, createCategoryParentId)
@@ -20,6 +30,9 @@ export default {
     },
     setCreateCategoryParentId (state, createCategoryParentId) {
       state.createCategoryParentId = createCategoryParentId
+    },
+    setIsSwitchPanelOpen (state, isSwitchPanelOpen) {
+      state.isSwitchPanelOpen = isSwitchPanelOpen
     },
   },
 }
