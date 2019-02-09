@@ -55,7 +55,7 @@
 </style>
 
 <template>
-  <Modal @closeModal="$emit(`closePanel`)">
+  <Modal @closeModal="closeSwitchPanel">
     <ModalContent>
       <div
         class="SwitchPanel"
@@ -84,7 +84,7 @@
           <li
             v-for="(result, index) in results"
             :key="result._id"
-            @click="$emit(`closePanel`)"
+            @click="closeSwitchPanel"
             @mouseover="focusedIndex = index"
           >
             <router-link
@@ -181,6 +181,7 @@
       })
     },
     methods: {
+      ...mapActions(`library`, [`closeSwitchPanel`]),
       ...mapActions(`categories`, {
         openCategory: `expandCategoriesRecursively`,
         expandCategoriesForDocumentId: `expandCategoriesForDocumentId`,
@@ -200,7 +201,7 @@
           })
         }
 
-        this.$emit(`closePanel`)
+        this.closeSwitchPanel()
       },
     },
     shortcuts: {

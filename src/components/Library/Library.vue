@@ -15,11 +15,7 @@
 
     <router-view />
 
-    <SwitchPanel
-      v-if="isSwitchPanelOpen"
-      @closePanel="closeSwitchPanel"
-    />
-
+    <SwitchPanel v-if="isSwitchPanelOpen" />
     <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
     <RemoveDocumentModal v-if="isRemoveDocumentModalOpen" />
   </div>
@@ -55,7 +51,7 @@
     methods: {
       ...mapActions(`documents`, { fetchAndSubscribeDocuments: `fetchAndSubscribe` }),
       ...mapActions(`categories`, { fetchAndSubscribeCategories: `fetchAndSubscribe` }),
-      ...mapActions(`library`, [`toggleSwitchPanel`, `closeSwitchPanel`]),
+      ...mapActions(`library`, [`toggleSwitchPanel`]),
     },
     shortcuts: {
       switchPanel () {

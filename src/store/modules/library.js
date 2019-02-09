@@ -15,7 +15,7 @@ export default {
       commit(`setIsSwitchPanelOpen`, false)
     },
     toggleSwitchPanel ({ commit, state }) {
-      commit(`setIsSwitchPanelOpen`, !state.setIsSwitchPanelOpen)
+      commit(`setIsSwitchPanelOpen`, !state.isSwitchPanelOpen)
     },
     openCreateCategoryModal ({ commit }, createCategoryParentId = null) {
       commit(`setIsCreateCategoryModalOpen`, true)
