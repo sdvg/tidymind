@@ -48,7 +48,7 @@
           <Button
             class="button-abort"
             theme="secondary"
-            @click="closeCreateCategoryModal"
+            @onClick="closeCreateCategoryModal"
           >
             Abort
           </Button>
