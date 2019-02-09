@@ -21,25 +21,32 @@
     />
 
     <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
+    <RemoveDocumentModal v-if="isRemoveDocumentModalOpen" />
   </div>
 </template>
 
 <script>
+  import { mapActions, mapState } from 'vuex'
+  import CreateCategoryModal from './CreateCategoryModal'
+  import RemoveDocumentModal from './RemoveDocumentModal'
   import Sidebar from './Sidebar'
   import SwitchPanel from './SwitchPanel'
-  import CreateCategoryModal from './CreateCategoryModal'
   import shortcuts from '../../mixins/shortcuts'
-  import { mapActions, mapState } from 'vuex'
 
   export default {
     components: {
+      CreateCategoryModal,
+      RemoveDocumentModal,
       Sidebar,
       SwitchPanel,
-      CreateCategoryModal,
     },
     mixins: [shortcuts],
     computed: {
-      ...mapState(`library`, [`isSwitchPanelOpen`, `isCreateCategoryModalOpen`]),
+      ...mapState(`library`, [
+        `isSwitchPanelOpen`,
+        `isCreateCategoryModalOpen`,
+        `isRemoveDocumentModalOpen`,
+      ]),
     },
     mounted () {
       this.fetchAndSubscribeCategories()

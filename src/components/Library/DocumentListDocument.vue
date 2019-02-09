@@ -91,7 +91,7 @@
       @close="menuClosed"
     >
       <template slot="actions">
-        <KebabMenuAction>
+        <KebabMenuAction @click="openRemoveDocumentModal(document._id)">
           Delete
         </KebabMenuAction>
 
@@ -104,6 +104,7 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   import KebabMenu from '@/components/KebabMenu/KebabMenu'
   import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
   import IconBase from '@/components/icons/IconBase'
@@ -133,6 +134,7 @@
       }
     },
     methods: {
+      ...mapActions(`library`, [`openRemoveDocumentModal`]),
       isDocumentOpen (document) {
         return this.$route.params.documentId === document._id
       },

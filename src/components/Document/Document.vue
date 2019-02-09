@@ -81,7 +81,7 @@
         <div>
           <Button
             title="Delete"
-            @onClick="remove(document)"
+            @onClick="openRemoveDocumentModal(document._id)"
           />
         </div>
       </footer>
@@ -90,17 +90,15 @@
 </template>
 
 <script>
-  import { createNamespacedHelpers } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import { debounce } from 'lodash'
   import Button from '@/components/Button'
   import RichTextEditor from '@/components/editors/RichTextEditor'
 
-  const { mapActions, mapGetters } = createNamespacedHelpers(`documents`)
-
   export default {
     components: { Button, RichTextEditor },
     computed: {
-      ...mapGetters([
+      ...mapGetters(`documents`, [
         `getDocument`,
         `documentsLoaded`,
       ]),
@@ -109,10 +107,8 @@
       },
     },
     methods: {
-      ...mapActions([
-        `updateDocument`,
-        `removeDocument`,
-      ]),
+      ...mapActions(`documents`, [`updateDocument`]),
+      ...mapActions(`library`, [`openRemoveDocumentModal`]),
       persistChange (field, newValue) {
         this.updateDocument({
           ...this.document,
@@ -125,10 +121,6 @@
       handleContentChange: debounce(function (content) {
         this.persistChange(`content`, content)
       }, 500),
-      async remove () {
-        await this.removeDocument(this.document)
-        this.$router.push({ name: `library` })
-      },
     },
   }
 </script>

@@ -3,7 +3,9 @@ export default {
   state: {
     isSwitchPanelOpen: false,
     isCreateCategoryModalOpen: false,
+    isRemoveDocumentModalOpen: false,
     createCategoryParentId: null,
+    removeDocumentDocumentId: null,
   },
   actions: {
     openSwitchPanel ({ commit }) {
@@ -23,6 +25,14 @@ export default {
       commit(`setIsCreateCategoryModalOpen`, false)
       commit(`setCreateCategoryParentId`, null)
     },
+    openRemoveDocumentModal ({ commit }, documentId) {
+      commit(`setIsRemoveDocumentModalOpen`, true)
+      commit(`setRemoveDocumentDocumentId`, documentId)
+    },
+    closeRemoveDocumentModal ({ commit }) {
+      commit(`setIsRemoveDocumentModalOpen`, false)
+      commit(`setRemoveDocumentDocumentId`, null)
+    },
   },
   mutations: {
     setIsCreateCategoryModalOpen (state, isCreateCategoryModalOpen) {
@@ -33,6 +43,12 @@ export default {
     },
     setIsSwitchPanelOpen (state, isSwitchPanelOpen) {
       state.isSwitchPanelOpen = isSwitchPanelOpen
+    },
+    setIsRemoveDocumentModalOpen (state, isRemoveDocumentModalOpen) {
+      state.isRemoveDocumentModalOpen = isRemoveDocumentModalOpen
+    },
+    setRemoveDocumentDocumentId (state, removeDocumentDocumentId) {
+      state.removeDocumentDocumentId = removeDocumentDocumentId
     },
   },
 }
