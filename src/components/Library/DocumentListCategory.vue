@@ -15,6 +15,7 @@
     text-align: left;
     font-size: var(--font-size);
     outline: none;
+    overflow: hidden;
     white-space: nowrap;
   }
 
