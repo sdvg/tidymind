@@ -10,10 +10,6 @@
     background: #d6d6d6 !important;
   }
 
-  .DocumentListDocument.is-unnamed {
-    font-style: italic;
-  }
-
   .DocumentListDocument.is-open {
     background: var(--color-dark);
     color: #d6d6d6;
@@ -60,7 +56,6 @@
     :class="{
       'has-focus': hasLinkFocus,
       'is-open': isDocumentOpen(document),
-      'is-unnamed': isDocumentUnnamed(document),
       'has-open-menu': isMenuOpen,
     }"
     :style="{ '--depth': depth + 1 }"
@@ -77,8 +72,7 @@
         <IconFileText />
       </IconBase>
 
-      <template v-if="document.title">{{ document.title }}</template>
-      <template v-else>Unnamed document</template>
+      <DocumentTitle :title="document.title" />
     </router-link>
 
     <KebabMenu
@@ -102,13 +96,15 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import KebabMenu from '@/components/KebabMenu/KebabMenu'
-  import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
+  import DocumentTitle from './DocumentTitle'
   import IconBase from '@/components/icons/IconBase'
   import IconFileText from '@/components/icons/IconFileText'
+  import KebabMenu from '@/components/KebabMenu/KebabMenu'
+  import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
 
   export default {
     components: {
+      DocumentTitle,
       IconBase,
       IconFileText,
       KebabMenu,
@@ -134,9 +130,6 @@
       ...mapActions(`library`, [`openRemoveDocumentModal`]),
       isDocumentOpen (document) {
         return this.$route.params.documentId === document._id
-      },
-      isDocumentUnnamed (document) {
-        return !document.title
       },
       onLinkFocus () {
         this.hasLinkFocus = true

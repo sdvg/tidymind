@@ -1,12 +1,14 @@
 <script>
   import { mapActions, mapState, mapGetters } from 'vuex'
   import Button from '../Button'
+  import DocumentTitle from './DocumentTitle'
   import Modal from '../Modal'
   import ModalContent from '../ModalContent'
 
   export default {
     components: {
       Button,
+      DocumentTitle,
       Modal,
       ModalContent,
     },
@@ -40,8 +42,7 @@
         <p class="inquiry">
           Do you really want to delete
           <em class="document-title">
-            <template v-if="documentToRemove.title">{{ documentToRemove.title }}</template>
-            <template v-else><i>Unnamed document</i></template>
+            <DocumentTitle :title="documentToRemove.title" />
           </em>?
         </p>
 
