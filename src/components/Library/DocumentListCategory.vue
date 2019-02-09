@@ -89,6 +89,10 @@
             Delete
           </KebabMenuAction>
 
+          <KebabMenuAction @click="openRenameCategoryModal(category._id)">
+            Rename
+          </KebabMenuAction>
+
           <KebabMenuAction>
             Move
           </KebabMenuAction>
@@ -190,7 +194,7 @@
     methods: {
       ...mapActions(`categories`, [`toggleCategoryExpansion`]),
       ...mapActions(`documents`, [`createAndOpenDocument`]),
-      ...mapActions(`library`, [`openCreateCategoryModal`]),
+      ...mapActions(`library`, [`openCreateCategoryModal`, `openRenameCategoryModal`]),
       menuOpened () {
         this.isMenuOpen = true
       },

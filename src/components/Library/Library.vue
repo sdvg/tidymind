@@ -16,8 +16,9 @@
     <router-view />
 
     <SwitchPanel v-if="isSwitchPanelOpen" />
-    <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
     <RemoveDocumentModal v-if="isRemoveDocumentModalOpen" />
+    <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
+    <RenameCategoryModal v-if="isRenameCategoryModalOpen" />
   </div>
 </template>
 
@@ -25,14 +26,16 @@
   import { mapActions, mapState } from 'vuex'
   import CreateCategoryModal from './CreateCategoryModal'
   import RemoveDocumentModal from './RemoveDocumentModal'
+  import RenameCategoryModal from './RenameCategoryModal'
   import Sidebar from './Sidebar'
   import SwitchPanel from './SwitchPanel'
-  import shortcuts from '../../mixins/shortcuts'
+  import shortcuts from '@/mixins/shortcuts'
 
   export default {
     components: {
       CreateCategoryModal,
       RemoveDocumentModal,
+      RenameCategoryModal,
       Sidebar,
       SwitchPanel,
     },
@@ -40,8 +43,9 @@
     computed: {
       ...mapState(`library`, [
         `isSwitchPanelOpen`,
-        `isCreateCategoryModalOpen`,
         `isRemoveDocumentModalOpen`,
+        `isCreateCategoryModalOpen`,
+        `isRenameCategoryModalOpen`,
       ]),
     },
     mounted () {

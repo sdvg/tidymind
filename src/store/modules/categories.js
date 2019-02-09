@@ -87,5 +87,6 @@ export default {
     },
     isCategoryExpanded: state => categoryId => state.expandedCategories.includes(categoryId),
     firstCategory: state => get(state, `categories[0]`, null),
+    getCategory: state => categoryId => state.categories && find(state.categories, { _id: categoryId }),
   },
 }

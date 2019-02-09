@@ -4,8 +4,10 @@ export default {
     isSwitchPanelOpen: false,
     isCreateCategoryModalOpen: false,
     isRemoveDocumentModalOpen: false,
+    isRenameCategoryModalOpen: false,
     createCategoryParentId: null,
     removeDocumentDocumentId: null,
+    renameCategoryCategoryId: null,
   },
   actions: {
     openSwitchPanel ({ commit }) {
@@ -33,6 +35,14 @@ export default {
       commit(`setIsRemoveDocumentModalOpen`, false)
       commit(`setRemoveDocumentDocumentId`, null)
     },
+    openRenameCategoryModal ({ commit }, categoryId) {
+      commit(`setIsRenameCategoryModalOpen`, true)
+      commit(`setRenameCategoryCategoryId`, categoryId)
+    },
+    closeRenameCategoryModal ({ commit }) {
+      commit(`setIsRenameCategoryModalOpen`, false)
+      commit(`setRenameCategoryCategoryId`, null)
+    },
   },
   mutations: {
     setIsCreateCategoryModalOpen (state, isCreateCategoryModalOpen) {
@@ -44,11 +54,17 @@ export default {
     setIsSwitchPanelOpen (state, isSwitchPanelOpen) {
       state.isSwitchPanelOpen = isSwitchPanelOpen
     },
+    setIsRenameCategoryModalOpen (state, isRenameCategoryModalOpen) {
+      state.isRenameCategoryModalOpen = isRenameCategoryModalOpen
+    },
     setIsRemoveDocumentModalOpen (state, isRemoveDocumentModalOpen) {
       state.isRemoveDocumentModalOpen = isRemoveDocumentModalOpen
     },
     setRemoveDocumentDocumentId (state, removeDocumentDocumentId) {
       state.removeDocumentDocumentId = removeDocumentDocumentId
+    },
+    setRenameCategoryCategoryId (state, renameCategoryCategoryId) {
+      state.renameCategoryCategoryId = renameCategoryCategoryId
     },
   },
 }
