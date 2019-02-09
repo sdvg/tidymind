@@ -8,13 +8,14 @@
   .empty-note {
     display: flex;
     align-items: center;
-    padding: 4px calc(8px + var(--depth) * 16px);
+    padding: 4px 4px 4px calc(8px + var(--depth) * 16px);
     color: #d6d6d6;
     text-decoration: none;
     width: 100%;
     text-align: left;
     font-size: var(--font-size);
     outline: none;
+    white-space: nowrap;
   }
 
   .category {
@@ -36,10 +37,16 @@
     width: 10px;
     height: 10px;
     margin-right: 6px;
+    transition: transform 200ms ease-in-out;
   }
 
   .is-expanded .category-icon {
     transform: rotate(90deg);
+  }
+
+  .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .menu {
@@ -61,6 +68,7 @@
       <button
         :class="{ 'is-expanded': isExpanded }"
         :style="{ '--depth': depth }"
+        :title="category.title"
         class="category"
         @click="toggleCategoryExpansion(category._id)"
       >
@@ -96,9 +104,7 @@
     </div>
 
     <ExpandTransition>
-      <div
-        v-if="isExpanded"
-      >
+      <div v-if="isExpanded">
         <ol>
           <DocumentListDocument
             v-for="document in sortedDocuments"

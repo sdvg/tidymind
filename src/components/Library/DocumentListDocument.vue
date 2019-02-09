@@ -24,20 +24,17 @@
     text-decoration: none;
     font-size: var(--font-size);
     outline: none;
-    padding: 4px calc(8px + var(--depth) * 16px);
+    padding: 4px 4px 4px calc(8px + var(--depth) * 16px);
     width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .DocumentListDocument:hover .link,
   .DocumentListDocument.has-focus .link,
   .DocumentListDocument.has-open-menu .link {
     color: #3f51b5 !important;
-  }
-
-  .label {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
 
   .icon {
@@ -50,10 +47,11 @@
   .menu {
     display: flex;
     margin-right: 16px;
+    transition: 100ms opacity;
   }
 
   .DocumentListDocument:not(:hover):not(.has-open-menu) .menu {
-    display: none;
+    opacity: 0;
   }
 </style>
 
@@ -70,6 +68,7 @@
   >
     <router-link
       :to="{ name: 'library.document', params: { documentId: document._id } }"
+      :title="document.title"
       class="link"
       @focus.native="onLinkFocus"
       @blur.native="onLinkBlur"
@@ -78,10 +77,8 @@
         <IconFileText />
       </IconBase>
 
-      <span class="label">
-        <template v-if="document.title">{{ document.title }}</template>
-        <template v-else>Unnamed document</template>
-      </span>
+      <template v-if="document.title">{{ document.title }}</template>
+      <template v-else>Unnamed document</template>
     </router-link>
 
     <KebabMenu
