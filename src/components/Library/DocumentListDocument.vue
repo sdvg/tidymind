@@ -86,7 +86,7 @@
           Delete
         </KebabMenuAction>
 
-        <KebabMenuAction>
+        <KebabMenuAction @click="openMoveDocumentOrCategoryModal({ id: document._id, type: `document` })">
           Move
         </KebabMenuAction>
       </template>
@@ -127,7 +127,7 @@
       }
     },
     methods: {
-      ...mapActions(`library`, [`openRemoveDocumentModal`]),
+      ...mapActions(`library`, [`openRemoveDocumentModal`, `openMoveDocumentOrCategoryModal`]),
       isDocumentOpen (document) {
         return this.$route.params.documentId === document._id
       },

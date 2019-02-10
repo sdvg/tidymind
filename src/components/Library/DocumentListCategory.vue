@@ -93,7 +93,7 @@
             Rename
           </KebabMenuAction>
 
-          <KebabMenuAction>
+          <KebabMenuAction @click="openMoveDocumentOrCategoryModal({ id: category._id, type: `category` })">
             Move
           </KebabMenuAction>
 
@@ -194,7 +194,11 @@
     methods: {
       ...mapActions(`categories`, [`toggleCategoryExpansion`]),
       ...mapActions(`documents`, [`createAndOpenDocument`]),
-      ...mapActions(`library`, [`openCreateCategoryModal`, `openRenameCategoryModal`]),
+      ...mapActions(`library`, [
+        `openCreateCategoryModal`,
+        `openRenameCategoryModal`,
+        `openMoveDocumentOrCategoryModal`,
+      ]),
       menuOpened () {
         this.isMenuOpen = true
       },

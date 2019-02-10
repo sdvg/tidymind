@@ -19,12 +19,14 @@
     <RemoveDocumentModal v-if="isRemoveDocumentModalOpen" />
     <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
     <RenameCategoryModal v-if="isRenameCategoryModalOpen" />
+    <MoveDocumentOrCategoryModal v-if="isMoveDocumentOrCategoryModalOpen" />
   </div>
 </template>
 
 <script>
   import { mapActions, mapState } from 'vuex'
   import CreateCategoryModal from './CreateCategoryModal'
+  import MoveDocumentOrCategoryModal from './MoveDocumentOrCategoryModal'
   import RemoveDocumentModal from './RemoveDocumentModal'
   import RenameCategoryModal from './RenameCategoryModal'
   import Sidebar from './Sidebar'
@@ -34,6 +36,7 @@
   export default {
     components: {
       CreateCategoryModal,
+      MoveDocumentOrCategoryModal,
       RemoveDocumentModal,
       RenameCategoryModal,
       Sidebar,
@@ -46,6 +49,7 @@
         `isRemoveDocumentModalOpen`,
         `isCreateCategoryModalOpen`,
         `isRenameCategoryModalOpen`,
+        `isMoveDocumentOrCategoryModalOpen`,
       ]),
     },
     mounted () {
