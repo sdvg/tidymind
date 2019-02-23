@@ -31,7 +31,7 @@
   .accent:not([disabled]):hover,
   .accent:not([disabled]):focus,
   .accent-full:not([disabled]):hover,
-  .accent-full:not([disabled]):focus,{
+  .accent-full:not([disabled]):focus {
     background: var(--color-accent-dark);
   }
 
