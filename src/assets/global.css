@@ -88,7 +88,8 @@ html {
 
 body {
   height: 100vh;
-  font: var(--font-size) Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
+  font-size: var(--font-size);
 }
 
 ol,
