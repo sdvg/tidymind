@@ -1,5 +1,2 @@
-/build/
-/config/
-/dist/
-/*.js
-/test/unit/coverage/
+dist
+!.*.js # also lint hidden config files
