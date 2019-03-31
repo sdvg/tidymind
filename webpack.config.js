@@ -21,7 +21,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isProduction ? `[name].[hash].css` : `[name].css`,
     }),
-    new CleanWebpackPlugin([`dist`]),
+    new CleanWebpackPlugin(),
   ],
   module: {
     rules: [
