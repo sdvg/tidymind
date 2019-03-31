@@ -14,19 +14,18 @@
 </style>
 
 <template>
-  <IconBase class="icon">
-    <IconSpinner />
-  </IconBase>
+  <Icon
+    name="spinnerSolid"
+    class="icon"
+  />
 </template>
 
 <script>
-  import IconBase from './icons/IconBase'
-  import IconSpinner from './icons/IconSpinner'
+  import Icon from '@/components/Icon/Icon'
 
   export default {
     components: {
-      IconBase,
-      IconSpinner,
+      Icon,
     },
   }
 </script>

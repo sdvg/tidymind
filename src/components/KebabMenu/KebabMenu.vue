@@ -1,7 +1,6 @@
 <script>
-  import IconEllipsisV from '../icons/IconEllipsisV'
-  import IconBase from '../icons/IconBase'
   import Tooltip from '../Tooltip'
+  import Icon from '@/components/Icon/Icon'
 
   const themes = {
     LIGHT: `light`,
@@ -10,8 +9,7 @@
 
   export default {
     components: {
-      IconBase,
-      IconEllipsisV,
+      Icon,
       Tooltip,
     },
     props: {
@@ -43,9 +41,10 @@
       class="KebabMenu"
     >
       <slot name="icon">
-        <IconBase class="icon">
-          <IconEllipsisV />
-        </IconBase>
+        <Icon
+          name="ellipsisVSolid"
+          class="icon"
+        />
       </slot>
     </div>
 
@@ -65,7 +64,8 @@
   }
 
   .icon {
-    width: 16px;
+    width: 13px;
+    height: 13px;
   }
 
   .KebabMenu.light .icon {

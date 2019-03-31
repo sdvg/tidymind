@@ -63,6 +63,11 @@
     width: 16px;
     height: 16px;
   }
+
+  .spinner {
+    width: 100%;
+    height: 100%;
+  }
 </style>
 
 <template>
@@ -85,7 +90,7 @@
       v-if="isLoading"
       class="spinner-wrapper"
     >
-      <Spinner />
+      <Spinner class="spinner" />
     </div>
 
     <slot>

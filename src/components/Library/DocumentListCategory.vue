@@ -73,9 +73,10 @@
         class="category"
         @click="toggleCategoryExpansion(category._id)"
       >
-        <IconBase class="category-icon">
-          <IconChevronRight />
-        </IconBase>
+        <Icon
+          name="chevronRightSolid"
+          class="category-icon"
+        />
         <span class="label">{{ category.title }}</span>
       </button>
 
@@ -143,8 +144,7 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import { sortBy } from 'lodash'
-  import IconBase from '@/components/icons/IconBase'
-  import IconChevronRight from '@/components/icons/IconChevronRight'
+  import Icon from '@/components/Icon/Icon'
   import ExpandTransition from '@/components/ExpandTransition'
   import KebabMenu from '@/components/KebabMenu/KebabMenu'
   import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
@@ -155,8 +155,7 @@
       DocumentListCategory: () => import(`./DocumentListCategory`),
       DocumentListDocument,
       ExpandTransition,
-      IconBase,
-      IconChevronRight,
+      Icon,
       KebabMenu,
       KebabMenuAction,
     },

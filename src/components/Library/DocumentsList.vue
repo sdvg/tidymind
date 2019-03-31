@@ -22,6 +22,7 @@
 
   .kebabMenuIcon {
     width: 16px;
+    height: 16px;
     color: var(--color-text-light);
   }
 
@@ -43,9 +44,10 @@
       <div class="listActions">
         <KebabMenu class="kebabMenu">
           <template slot="icon">
-            <IconBase class="kebabMenuIcon">
-              <IconPlus />
-            </IconBase>
+            <Icon
+              class="kebabMenuIcon"
+              name="plusSolid"
+            />
           </template>
           <template slot="actions">
             <KebabMenuAction @click="createAndOpenDocumentInCurrentCategory">New document</KebabMenuAction>
@@ -71,16 +73,14 @@
   import DocumentListCategory from './DocumentListCategory'
   import KebabMenu from '../KebabMenu/KebabMenu'
   import KebabMenuAction from '../KebabMenu/KebabMenuAction'
-  import IconBase from '@/components/icons/IconBase'
-  import IconPlus from '@/components/icons/IconPlus'
+  import Icon from '@/components/Icon/Icon'
 
   export default {
     components: {
       DocumentListCategory,
       KebabMenu,
       KebabMenuAction,
-      IconBase,
-      IconPlus,
+      Icon,
     },
     computed: mapGetters(`categories`, [`categoryTree`]),
     methods: {

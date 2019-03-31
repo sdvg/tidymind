@@ -68,9 +68,10 @@
       @focus.native="onLinkFocus"
       @blur.native="onLinkBlur"
     >
-      <IconBase class="icon">
-        <IconFileText />
-      </IconBase>
+      <Icon
+        name="fileAltRegular"
+        class="icon"
+      />
 
       <DocumentTitle :title="document.title" />
     </router-link>
@@ -97,16 +98,14 @@
 <script>
   import { mapActions } from 'vuex'
   import DocumentTitle from './DocumentTitle'
-  import IconBase from '@/components/icons/IconBase'
-  import IconFileText from '@/components/icons/IconFileText'
+  import Icon from '@/components/Icon/Icon'
   import KebabMenu from '@/components/KebabMenu/KebabMenu'
   import KebabMenuAction from '@/components/KebabMenu/KebabMenuAction'
 
   export default {
     components: {
       DocumentTitle,
-      IconBase,
-      IconFileText,
+      Icon,
       KebabMenu,
       KebabMenuAction,
     },

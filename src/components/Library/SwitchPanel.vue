@@ -94,9 +94,10 @@
               class="result-item"
               @click.native="expandCategoriesForDocumentId(result._id)"
             >
-              <IconBase class="result-icon">
-                <IconFileText />
-              </IconBase>
+              <Icon
+                name="fileAltRegular"
+                class="result-icon"
+              />
 
               {{ result.title }}
             </router-link>
@@ -107,9 +108,10 @@
               class="result-item"
               @click="openCategory(result)"
             >
-              <IconBase class="result-icon">
-                <IconFolder />
-              </IconBase>
+              <Icon
+                name="folderSolid"
+                class="result-icon"
+              />
 
               {{ result.title }}
             </button>
@@ -125,15 +127,11 @@
   import ModalContent from '../ModalContent'
   import { mapState, mapActions } from 'vuex'
   import shortcuts from '@/mixins/shortcuts'
-  import IconBase from '@/components/icons/IconBase'
-  import IconFolder from '@/components/icons/IconFolder'
-  import IconFileText from '@/components/icons/IconFileText'
+  import Icon from '@/components/Icon/Icon'
 
   export default {
     components: {
-      IconBase,
-      IconFolder,
-      IconFileText,
+      Icon,
       Modal,
       ModalContent,
     },

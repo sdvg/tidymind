@@ -4,8 +4,7 @@
   import ErrorMessage from '@/components/ErrorMessage'
   import Form from '@/components/formControls/Form'
   import hoodie from '@/lib/hoodie'
-  import IconAngleLeft from '@/components/icons/IconAngleLeft'
-  import IconBase from '@/components/icons/IconBase'
+  import Icon from '@/components/Icon/Icon'
   import InputField from '@/components/formControls/InputField'
   import { signInAndDeriveEncryptionKey } from '../../lib/account'
   import { validationMixin } from 'vuelidate'
@@ -16,8 +15,7 @@
       Button,
       ErrorMessage,
       Form,
-      IconAngleLeft,
-      IconBase,
+      Icon,
       InputField,
     },
     mixins: [validationMixin],
@@ -163,9 +161,10 @@
         :to="{ name: 'signIn' }"
         class="sign-in-link"
       >
-        <IconBase class="sign-in-link-icon">
-          <IconAngleLeft />
-        </IconBase>
+        <Icon
+          name="angleLeftSolid"
+          class="sign-in-link-icon"
+        />
 
         Already signed up?
       </router-link>
@@ -200,6 +199,7 @@
 
   .sign-in-link {
     display: flex;
+    align-items: center;
     margin-top: var(--space);
     text-decoration: none;
     color: var(--color-accent);
@@ -207,7 +207,7 @@
   }
 
   .sign-in-link-icon {
+    width: 22px;
     height: 22px;
-    margin-top: -1px;
   }
 </style>

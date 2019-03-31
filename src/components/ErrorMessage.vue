@@ -17,22 +17,21 @@
 
 <template>
   <div class="ErrorMessage">
-    <IconBase class="icon">
-      <IconExclamationCircle />
-    </IconBase>
+    <Icon
+      name="exclamationCircleSolid"
+      class="icon"
+    />
 
     <slot />
   </div>
 </template>
 
 <script>
-  import IconBase from './icons/IconBase'
-  import IconExclamationCircle from './icons/IconExclamationCircle'
+  import Icon from '@/components/Icon/Icon'
 
   export default {
     components: {
-      IconBase,
-      IconExclamationCircle,
+      Icon,
     },
   }
 </script>

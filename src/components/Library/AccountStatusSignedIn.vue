@@ -19,7 +19,7 @@
 <template>
   <div class="AccountStatusSignedIn">
     <Icon
-      name="userCircleO"
+      name="userCircleRegular"
       class="icon"
     />
     Hello, {{ username }}

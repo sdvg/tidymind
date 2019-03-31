@@ -29,9 +29,10 @@
 
 <template>
   <div class="AccountStatusNotSignedIn">
-    <IconBase class="icon">
-      <IconExclamationCircle />
-    </IconBase>
+    <Icon
+      class="icon"
+      name="exclamationCircleSolid"
+    />
 
     Not signed in.
 
@@ -57,13 +58,11 @@
 </template>
 
 <script>
-  import IconBase from '../icons/IconBase'
-  import IconExclamationCircle from '../icons/IconExclamationCircle'
+  import Icon from '@/components/Icon/Icon'
 
   export default {
     components: {
-      IconBase,
-      IconExclamationCircle,
+      Icon,
     },
   }
 </script>

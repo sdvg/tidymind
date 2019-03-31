@@ -4,8 +4,7 @@
   import ErrorMessage from '@/components/ErrorMessage'
   import Form from '@/components/formControls/Form'
   import hoodie from '@/lib/hoodie'
-  import IconAngleLeft from '@/components/icons/IconAngleLeft'
-  import IconBase from '@/components/icons/IconBase'
+  import Icon from '@/components/Icon/Icon'
   import InputField from '@/components/formControls/InputField'
   import { signInAndDeriveEncryptionKey } from '../../lib/account'
   import { validationMixin } from 'vuelidate'
@@ -16,8 +15,7 @@
       Button,
       ErrorMessage,
       Form,
-      IconAngleLeft,
-      IconBase,
+      Icon,
       InputField,
     },
     mixins: [validationMixin],
@@ -126,7 +124,6 @@
 
         <Button
           :isDisabled="isRequestPending"
-          :isLoading="isRequestPending"
           class="button"
           theme="accent-full"
           type="submit"
@@ -139,9 +136,10 @@
         :to="{ name: 'signUp' }"
         class="sign-up-link"
       >
-        <IconBase class="sign-up-link-icon">
-          <IconAngleLeft />
-        </IconBase>
+        <Icon
+          name="angleLeftSolid"
+          class="sign-up-link-icon"
+        />
 
         Create new account
       </router-link>
@@ -176,6 +174,7 @@
 
   .sign-up-link {
     display: flex;
+    align-items: center;
     margin-top: var(--space);
     text-decoration: none;
     color: var(--color-accent);
@@ -183,7 +182,7 @@
   }
 
   .sign-up-link-icon {
+    width: 22px;
     height: 22px;
-    margin-top: -1px;
   }
 </style>
