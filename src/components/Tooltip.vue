@@ -11,7 +11,7 @@
       ref="trigger"
       @mouseover="open"
     >
-      <slot name="trigger"/>
+      <slot name="trigger" />
     </button>
 
     <portal to="appRoot">

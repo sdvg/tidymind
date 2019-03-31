@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import Icon from '@/components/Icon/Icon';
+  import Icon from '@/components/Icon/Icon'
   import Button from '../Button'
   import hoodie from '../../lib/hoodie'
   import router from '../../router'

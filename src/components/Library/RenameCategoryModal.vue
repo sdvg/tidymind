@@ -4,7 +4,6 @@
   import { required } from 'vuelidate/lib/validators'
   import Modal from '../Modal'
   import ModalContent from '../ModalContent'
-  import Form from '../formControls/Form'
   import InputField from '../formControls/InputField'
   import Button from '../Button'
   import { updateCategory } from '@/lib/dataStoreClient'
@@ -13,7 +12,6 @@
     components: {
       Modal,
       ModalContent,
-      Form,
       InputField,
       Button,
     },
@@ -67,16 +65,18 @@
   <Modal @closeModal="closeRenameCategoryModal">
     <ModalContent>
       <div class="RenameCategoryModal">
-        <h2 class="title">Rename Category</h2>
+        <h2 class="title">
+          Rename Category
+        </h2>
 
         <form @submit.prevent="handleSubmit">
           <InputField
             ref="inputField"
             v-model="categoryTitle"
-            :hide-label="true"
-            :has-error="isInvalid"
+            :hideLabel="true"
+            :hasError="isInvalid"
             label="Category Name"
-            error-message="Please enter a category name."
+            errorMessage="Please enter a category name."
             @blur="$v.categoryTitle.$touch()"
           />
 

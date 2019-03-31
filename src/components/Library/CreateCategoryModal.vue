@@ -22,16 +22,18 @@
   <Modal @closeModal="closeCreateCategoryModal">
     <ModalContent>
       <div class="CreateCategoryModal">
-        <h2 class="title">Create Category</h2>
+        <h2 class="title">
+          Create Category
+        </h2>
 
         <form @submit.prevent="handleSubmit">
           <InputField
             ref="inputField"
             v-model="categoryTitle"
-            :hide-label="true"
-            :has-error="isInvalid"
+            :hideLabel="true"
+            :hasError="isInvalid"
             label="Category Name"
-            error-message="Please enter a category name."
+            errorMessage="Please enter a category name."
             @blur="$v.categoryTitle.$touch()"
           />
 
@@ -61,7 +63,6 @@
 <script>
   import Modal from '../Modal'
   import ModalContent from '../ModalContent'
-  import Form from '../formControls/Form'
   import InputField from '../formControls/InputField'
   import Button from '../Button'
   import { mapActions, mapState } from 'vuex'
@@ -73,7 +74,6 @@
     components: {
       Modal,
       ModalContent,
-      Form,
       InputField,
       Button,
     },

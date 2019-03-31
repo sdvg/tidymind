@@ -50,8 +50,12 @@
             />
           </template>
           <template slot="actions">
-            <KebabMenuAction @click="createAndOpenDocumentInCurrentCategory">New document</KebabMenuAction>
-            <KebabMenuAction @click="openCreateCategoryModal">New category</KebabMenuAction>
+            <KebabMenuAction @click="createAndOpenDocumentInCurrentCategory">
+              New document
+            </KebabMenuAction>
+            <KebabMenuAction @click="openCreateCategoryModal">
+              New category
+            </KebabMenuAction>
           </template>
         </KebabMenu>
       </div>

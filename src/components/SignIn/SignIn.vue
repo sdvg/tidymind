@@ -91,7 +91,9 @@
 <template>
   <div class="SignIn">
     <div class="content-container">
-      <h1 class="headline">Welcome back!</h1>
+      <h1 class="headline">
+        Welcome back!
+      </h1>
 
       <ErrorMessage
         v-if="formErrorMessage"
@@ -107,16 +109,16 @@
         <InputField
           v-model="username"
           :attributes="{ autofocus: true }"
-          :has-error="hasError(`username`)"
-          :error-message="getErrorMessage(`username`)"
+          :hasError="hasError(`username`)"
+          :errorMessage="getErrorMessage(`username`)"
           label="Username"
           @blur="$v.username.$touch()"
         />
 
         <InputField
           v-model="password"
-          :has-error="hasError(`password`)"
-          :error-message="getErrorMessage(`password`)"
+          :hasError="hasError(`password`)"
+          :errorMessage="getErrorMessage(`password`)"
           label="Password"
           type="password"
           @blur="$v.password.$touch()"

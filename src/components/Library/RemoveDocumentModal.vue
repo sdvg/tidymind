@@ -37,7 +37,9 @@
   <Modal @closeModal="closeRemoveDocumentModal">
     <ModalContent>
       <div class="RemoveDocumentModal">
-        <h2 class="title">Please confirm</h2>
+        <h2 class="title">
+          Please confirm
+        </h2>
 
         <p class="inquiry">
           Do you really want to delete

@@ -24,6 +24,7 @@ module.exports = {
     'object-curly-spacing': [`error`, `always`],
     'comma-dangle': [`error`, `always-multiline`],
     'vue/script-indent': [`error`, 2, { baseIndent: 1 }],
+    'vue/attribute-hyphenation': [`error`, `never`],
   },
   overrides: [
     {

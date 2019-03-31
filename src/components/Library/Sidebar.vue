@@ -14,7 +14,9 @@
   <aside class="Sidebar">
     <AccountStatus />
 
-    <p v-if="!isDataLoaded">Loading...</p>
+    <p v-if="!isDataLoaded">
+      Loading...
+    </p>
 
     <DocumentsList
       v-if="isDataLoaded"

@@ -98,11 +98,17 @@
       <div class="MoveDocumentOrCategoryModal">
         <h2 class="title">
           Move
-          <template v-if="moveDocumentOrCategoryType === `document`">Document</template>
-          <template v-if="moveDocumentOrCategoryType === `category`">Category</template>
+          <template v-if="moveDocumentOrCategoryType === `document`">
+            Document
+          </template>
+          <template v-if="moveDocumentOrCategoryType === `category`">
+            Category
+          </template>
         </h2>
 
-        <p class="inquiry">Select new parent category:</p>
+        <p class="inquiry">
+          Select new parent category:
+        </p>
 
         <form @submit.prevent="handleSubmit">
           <select
@@ -112,11 +118,13 @@
           >
             <option
               v-for="option in categoryOptions"
-              :value="option.categoryId"
               :key="option.categoryId"
+              :value="option.categoryId"
             >
               <!-- eslint-disable-next-line vue/no-unused-vars -->
-              <template v-for="depth in option.depth">&nbsp;&nbsp;&nbsp;&nbsp;</template>
+              <template v-for="depth in option.depth">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </template>
               {{ option.label }}
             </option>
           </select>
