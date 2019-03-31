@@ -4,6 +4,7 @@ import PortalVue from 'portal-vue'
 import router from './router'
 import store from './store'
 import './filters'
+import './icon-setup'
 import '@/assets/global.css'
 
 Vue.config.productionTip = false

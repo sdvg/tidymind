@@ -18,9 +18,10 @@
 
 <template>
   <div class="AccountStatusSignedIn">
-    <IconBase class="icon">
-      <IconUserCircleO />
-    </IconBase>
+    <Icon
+      name="userCircleO"
+      class="icon"
+    />
     Hello, {{ username }}
 
     <Button
@@ -34,8 +35,7 @@
 </template>
 
 <script>
-  import IconBase from '../icons/IconBase'
-  import IconUserCircleO from '../icons/IconUserCircleO'
+  import Icon from '@/components/Icon/Icon';
   import Button from '../Button'
   import hoodie from '../../lib/hoodie'
   import router from '../../router'
@@ -43,8 +43,7 @@
   export default {
     components: {
       Button,
-      IconBase,
-      IconUserCircleO,
+      Icon,
     },
     props: {
       username: {
