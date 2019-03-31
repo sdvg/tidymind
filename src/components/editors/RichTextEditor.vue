@@ -41,7 +41,8 @@
   import 'tinymce/themes/modern/theme'
   import 'tinymce/skins/lightgray/skin.min.css'
   import 'tinymce/skins/lightgray/content.min.css'
-  import { handleKeydownEvent } from '../../mixins/shortcuts'
+  import { handleKeydownEvent } from '@/mixins/shortcuts'
+  import eventBus, { events } from '@/lib/eventBus'
 
   export default {
     props: {
@@ -62,6 +63,9 @@
           editor.on(`keydown`, handleKeydownEvent)
           editor.on(`keyup`, () => {
             this.$emit(`contentChanged`, editor.getContent())
+          })
+          editor.on(`click`, () => {
+            eventBus.$emit(events.IFRAME_CLICK)
           })
         },
       }).then(editors => {

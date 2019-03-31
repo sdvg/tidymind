@@ -9,7 +9,7 @@
   <div>
     <button
       ref="trigger"
-      @mouseover="open"
+      @click="open"
     >
       <slot name="trigger" />
     </button>
@@ -20,8 +20,6 @@
         ref="content"
         :key="key"
         class="content"
-        @click="close"
-        @mouseleave="close"
       >
         <slot name="content" />
       </div>
@@ -31,9 +29,7 @@
 
 <script>
   import uuidv4 from 'uuid/v4'
-  import eventBus from '@/lib/eventBus'
-
-  const OPENED_EVENT_NAME = `Tooltip:opened`
+  import eventBus, { events } from '@/lib/eventBus'
 
   export default {
     data () {
@@ -49,11 +45,13 @@
     mounted () {
       window.addEventListener(`resize`, this.onResize, { passive: true })
       window.addEventListener(`scroll`, this.onScroll, { passive: true })
+      eventBus.$on(events.IFRAME_CLICK, this.onIframeClick)
     },
     beforeDestroy () {
       window.removeEventListener(`resize`, this.onResize)
       window.removeEventListener(`scroll`, this.onScroll)
-      eventBus.$off(OPENED_EVENT_NAME, this.close)
+      window.removeEventListener(`click`, this.onDocumentClick)
+      eventBus.$off(events.IFRAME_CLICK, this.onIframeClick)
     },
     methods: {
       open () {
@@ -61,14 +59,12 @@
         this.setPosition()
         this.$emit(`open`)
 
-        /* Close when another tooltip opens */
-        eventBus.$off(OPENED_EVENT_NAME, this.close)
-        eventBus.$emit(OPENED_EVENT_NAME)
-        eventBus.$on(OPENED_EVENT_NAME, this.close)
+        window.addEventListener(`click`, this.onDocumentClick)
       },
       close () {
         this.isVisible = false
         this.$emit(`close`)
+        window.removeEventListener(`click`, this.onDocumentClick)
       },
       setPosition () {
         setTimeout(() => {
@@ -87,6 +83,14 @@
           contentElement.style.left = `${contentLeft}px`
           contentElement.style.padding = `${height}px 0 0 ${width}px`
         })
+      },
+      onIframeClick() {
+        this.close()
+      },
+      onDocumentClick (event) {
+        if (!this.$refs.trigger.contains(event.target)) {
+          this.close()
+        }
       },
       onResize () {
         this.close()
