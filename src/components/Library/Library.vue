@@ -20,6 +20,7 @@
     <CreateCategoryModal v-if="isCreateCategoryModalOpen" />
     <RenameCategoryModal v-if="isRenameCategoryModalOpen" />
     <MoveDocumentOrCategoryModal v-if="isMoveDocumentOrCategoryModalOpen" />
+    <RemoveCategoryModal v-if="isRemoveCategoryModalOpen" />
   </div>
 </template>
 
@@ -29,6 +30,7 @@
   import MoveDocumentOrCategoryModal from './MoveDocumentOrCategoryModal'
   import RemoveDocumentModal from './RemoveDocumentModal'
   import RenameCategoryModal from './RenameCategoryModal'
+  import RemoveCategoryModal from './RemoveCategoryModal'
   import Sidebar from './Sidebar'
   import SwitchPanel from './SwitchPanel'
   import shortcuts from '@/mixins/shortcuts'
@@ -39,6 +41,7 @@
       MoveDocumentOrCategoryModal,
       RemoveDocumentModal,
       RenameCategoryModal,
+      RemoveCategoryModal,
       Sidebar,
       SwitchPanel,
     },
@@ -50,6 +53,7 @@
         `isCreateCategoryModalOpen`,
         `isRenameCategoryModalOpen`,
         `isMoveDocumentOrCategoryModalOpen`,
+        `isRemoveCategoryModalOpen`,
       ]),
     },
     mounted () {

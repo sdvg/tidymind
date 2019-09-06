@@ -1,8 +1,9 @@
 import {
-  getAllCategories,
   categoryStore,
+  getAllCategories,
+  removeCategory,
 } from '@/lib/dataStoreClient'
-import { cloneDeep, find, get, without } from 'lodash'
+import { cloneDeep, find, filter, get, without } from 'lodash'
 
 export default {
   namespaced: true,
@@ -21,6 +22,9 @@ export default {
     },
     collapseCategory (state, categoryId) {
       state.expandedCategories = without(state.expandedCategories, categoryId)
+    },
+    removeCategory (state, categoryId) {
+      state.categories = state.categories.filter(category => category._id !== categoryId)
     },
   },
   actions: {
@@ -65,6 +69,11 @@ export default {
         commit(`expandCategory`, categoryId)
       }
     },
+    async removeCategory ({ commit }, category) {
+      await removeCategory(category)
+
+      return commit(`removeCategory`, category._id)
+    },
   },
   getters: {
     categoriesLoaded: state => state.categories !== null,
@@ -88,5 +97,26 @@ export default {
     isCategoryExpanded: state => categoryId => state.expandedCategories.includes(categoryId),
     firstCategory: state => get(state, `categories[0]`, null),
     getCategory: state => categoryId => state.categories && find(state.categories, { _id: categoryId }),
+    getAllChildren: ({ categories }, getters, state, rootGetters) => category => {
+      const childCategories = []
+      const collectChildren = parentCategory => {
+        const children = filter(categories, { parent: parentCategory._id }, [])
+
+        childCategories.push(...children)
+
+        children.forEach(collectChildren)
+      }
+
+      collectChildren(category)
+
+      const documents = rootGetters[`documents/documents`]
+      const childCategoryIds = childCategories.map(category => category._id)
+      const childDocuments = documents.filter(document => [category._id, ...childCategoryIds].includes(document.category))
+
+      return {
+        categories: childCategories,
+        documents: childDocuments,
+      }
+    },
   },
 }

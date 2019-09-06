@@ -69,10 +69,8 @@ export default {
 
     async createAndOpenDocumentInCurrentCategory ({ dispatch, getters, rootGetters }) {
       const getCurrentCategoryId = () => {
-        const currentDocument = getters.getDocument(router.currentRoute.params.documentId)
-
-        if (router.currentRoute.name === `library.document` && currentDocument) {
-          return currentDocument.category
+        if (getters.currentlyOpenDocument) {
+          return getters.currentlyOpenDocument.category
         } else {
           const firstCategory = rootGetters[`categories/firstCategory`]
 
@@ -92,6 +90,13 @@ export default {
   getters: {
     documents: state => state.documents,
     documentsLoaded: state => state.documents !== null,
+    currentlyOpenDocument: (state, getters) => {
+      if (router.currentRoute.name !== `library.document`) {
+        return null
+      }
+
+      return getters.getDocument(router.currentRoute.params.documentId)
+    },
     getDocument: state => documentId => state.documents && find(state.documents, { _id: documentId }),
     getDocumentsForCategory: state => categoryId => state.documents && filter(state.documents, { category: categoryId }),
   },

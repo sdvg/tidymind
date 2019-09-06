@@ -86,7 +86,7 @@
         @close="menuClosed"
       >
         <template slot="actions">
-          <KebabMenuAction>
+          <KebabMenuAction @click="openRemoveCategoryModal(category._id)">
             Delete
           </KebabMenuAction>
 
@@ -197,6 +197,7 @@
         `openCreateCategoryModal`,
         `openRenameCategoryModal`,
         `openMoveDocumentOrCategoryModal`,
+        `openRemoveCategoryModal`,
       ]),
       menuOpened () {
         this.isMenuOpen = true

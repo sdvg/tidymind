@@ -13,6 +13,7 @@ export const getDocument = documentId => documentStore.find(documentId)
 
 export const addCategory = category => categoryStore.add(category)
 export const updateCategory = category => categoryStore.update(category)
+export const removeCategory = category => categoryStore.remove(category)
 
 export const getAllDocuments = () => documentStore.findAll()
 export const getAllCategories = () => categoryStore.findAll()
